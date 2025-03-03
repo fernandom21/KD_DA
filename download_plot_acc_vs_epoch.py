@@ -1,10 +1,99 @@
 import os
 import argparse
+import wandb
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-from utils import filter_df, rename_vars, drop_na
+# from utils import standarize_df, rename_vars
+from utils import preprocess_df, drop_na, rename_vars
+
+
+def get_wandb_project_runs(project='nycu_pcs/KD_DA', serials=[0, 1, 2, 3, 4, 5]):
+    api = wandb.Api()
+
+    runs = api.runs(path=project, per_page=2000, filters={'$and': [
+        {'config.serial': {'$in': serials}},
+        # lr != 0.0005, square_resize_random_crop: False, cont_loss: True
+        # move to different serials later (different lr are stage 1)
+        {'config.lr': 0.0005},
+        {'config.square_resize_random_crop': True},
+        {'config.cont_loss': False},
+    ]})
+
+    # 330: 11 runs per serial (ce, 3 kd, 3 kd+cal, 3 tgda) * 6 serials * 5 datasets
+    print('Downloaded runs: ', len(runs))
+    return runs
+
+
+def get_train_progress_df(runs, samples=10000):
+    run = runs[0]
+    # history_cols = [c for c in run.history().columns if 'val' in c] + ['_step']
+    history_cols = ['val_acc', 'epoch']
+    cfg_cols = ['serial', 'dataset_name', 'model_name',
+                'model_name_teacher', 'selector', 'tgda', 'pretrained']
+
+    df = []
+
+    for i, run in enumerate(runs):
+        # history() samples from all steps but can result in inconsistent behavior
+        # https://docs.wandb.ai/ref/python/public-api/run/#scan_history
+        # https://github.com/wandb/wandb/issues/5994
+        # https://community.wandb.ai/t/run-history-returns-different-values-on-almost-each-call/2431
+        # history_temp = [row for row in run.scan_history(keys=[history_cols])]
+        history_temp = run.history(samples=samples)[history_cols].dropna()
+        cfg = {col: run.config.get(col, None) for col in cfg_cols}
+        # summary = {col: run.summary.get(col, None) for col in ['best_acc']}
+
+        history_temp = history_temp.assign(**cfg)
+        # history_temp = history_temp.assign(**summary)
+
+        df.append(history_temp)
+
+        if i % 10 == 0:
+            print(f'{i} / {len(runs)}')
+            # print(history_temp)
+
+    df = pd.concat(df, ignore_index=True)
+
+    print(f'DF length: {len(df)}\n', df.head())
+    return df
+
+
+def modify_df(df, args):
+
+    # df = standarize_df(df)
+    df = preprocess_df(
+        df,
+        'all',
+        getattr(args, 'keep_datasets', None),
+        getattr(args, 'keep_methods', None),
+        getattr(args, 'keep_serials', None),
+        
+        getattr(args, 'filter_datasets', None),
+        getattr(args, 'filter_methods', None),
+        getattr(args, 'filter_serials', None),
+    )
+
+    # df = df[df['pt'] == args.model_name]
+    # if hasattr(args, 'method_subset') and args.method_subset:
+    #     df = df[df['method'].isin(args.method_subset)]
+    #     df['method_order'] = pd.Categorical(df['method'], categories=args.method_subset, ordered=True)
+    #     df = df.sort_values(by=['method_order'], ascending=True)
+
+    # df['acc'] = df['acc'].round(decimals=1).astype(str)
+
+    df = drop_na(df, args)
+
+    df = rename_vars(df, var_rename=True, args=args)
+
+    # df = rename_vars(df, var_rename=False, args=args)
+
+    # df['Method: Top-1 Accuracy (%)'] = df['tr'] + df['method'] + ': ' + df['acc']
+    # df[args.hue_var_name] = df['method'] + ': ' + df['acc']
+    print(f'DF length: {len(df)}\n', df.head())
+
+    return df
 
 
 def make_plot(args, df):
@@ -16,22 +105,11 @@ def make_plot(args, df):
             "figure.figsize": args.fig_size,
         })
 
-    if args.type_plot == 'bar':
-        ax = sns.barplot(x=args.x_var_name, y=args.y_var_name, hue=args.hue_var_name, data=df)
-    elif args.type_plot == 'box':
-        ax = sns.boxplot(x=args.x_var_name, y=args.y_var_name, hue=args.hue_var_name, data=df)
-    elif args.type_plot == 'violin':
-        ax = sns.violinplot(x=args.x_var_name, y=args.y_var_name, hue=args.hue_var_name, data=df)
-    elif args.type_plot == 'line':
-        ax = sns.lineplot(x=args.x_var_name, y=args.y_var_name, marker=args.marker,
-                          hue=args.hue_var_name, style=args.style_var_name,
-                          markers=True, linewidth=args.line_width, data=df)
-    elif args.type_plot == 'scatter':
-        ax = sns.scatterplot(x=args.x_var_name, y=args.y_var_name, hue=args.hue_var_name,
-                             style=args.style_var_name, size=args.size_var_name,
-                             sizes=tuple(args.sizes), legend='brief', data=df)
-    else:
-        raise NotImplementedError
+    # ax = sns.lineplot(x=args.x_var_name, y=args.y_var_name, hue=args.hue_var_name,
+    #                   linewidth=args.line_width, data=df)
+    ax = sns.lineplot(x=args.x_var_name, y=args.y_var_name,
+                      hue=args.hue_var_name, style=args.style_var_name,
+                      markers=False, linewidth=args.line_width, data=df)
 
     if args.despine_top_right:
     # Remove top, right border
@@ -67,52 +145,49 @@ def make_plot(args, df):
 
     return 0
 
+    return 0
+
 
 def parse_args():
     parser = argparse.ArgumentParser()
 
-    # Subset models and datasets
-    parser.add_argument('--input_file', type=str,
-                        default=os.path.join('results_all', 'cost', 'cost.csv'),
-                        help='filename for input .csv file')
+    # input
+    parser.add_argument('--project_name', type=str, default='nycu_pcs/KD_DA',
+                        help='project_entity/project_name')
+    # filters
+    parser.add_argument('--serials', nargs='+', type=int,
+                        default=[0, 1, 2, 3, 4, 5])
 
+    # Subset models and datasets
     parser.add_argument('--keep_datasets', nargs='+', type=str, default=None)
     parser.add_argument('--keep_methods', nargs='+', type=str, default=None)
     parser.add_argument('--keep_serials', nargs='+', type=int, default=None)
-    # parser.add_argument('--keep_lr', nargs='+', type=float, default=None)
-    # parser.add_argument('--keep_epochs', nargs='+', type=int, default=None)
 
     parser.add_argument('--filter_datasets', nargs='+', type=str, default=None)
     parser.add_argument('--filter_methods', nargs='+', type=str, default=None)
     parser.add_argument('--filter_serials', nargs='+', type=int, default=None)
-    # parser.add_argument('--filter_lr', nargs='+', type=float, default=None)
-    # parser.add_argument('--filter_epochs', nargs='+', type=int, default=None)
 
-    parser.add_argument('--keep_lr', nargs='+', type=float, default=None)
-    # parser.add_argument('--keep_epochs', nargs='+', type=int, default=None)
-
-    parser.add_argument('--square_resize_random_crop', action='store_false')
-    parser.add_argument('--pretrained', action='store_true')
-    parser.add_argument('--cont_loss', action='store_true')
+    # parser.add_argument('--model', type=str,
+    #                     default='deit3_base_patch16_224.fb_in1k',
+    #                     help='name of the variable for x')
+    # parser.add_argument('--method_subset', type=str, nargs='+',
+    #                     default=['bl', 'cla', 'clca'])
 
     # output
-    parser.add_argument('--output_file', default='acc_vs_method', type=str,
+    parser.add_argument('--output_file', default='acc_vs_epoch', type=str,
                         help='File path')
     parser.add_argument('--results_dir', type=str,
-                        default=os.path.join('results_all', 'plots'),
+                        default=os.path.join('results_all', 'train_progress'),
                         help='The directory where results will be stored')
     parser.add_argument('--save_format', choices=['pdf', 'png', 'jpg'], default='png', type=str,
                         help='Print stats on word level if use this command')
 
     # Make a plot
-    parser.add_argument('--type_plot', choices=['bar', 'line', 'box', 'violin', 'scatter'],
-                        default='bar', help='the type of plot (line, bar)')
-
-    parser.add_argument('--x_var_name', type=str, default='method',
+    parser.add_argument('--x_var_name', type=str, default='epoch',
                         help='name of the variable for x')
     parser.add_argument('--y_var_name', type=str, default='acc',
                         help='name of the variable for y')
-    parser.add_argument('--hue_var_name', type=str, default=None,
+    parser.add_argument('--hue_var_name', type=str, default='method',
                         help='legend of this bar plot')
     parser.add_argument('--style_var_name', type=str, default=None,
                         help='legend of this bar plot')
@@ -126,7 +201,7 @@ def parse_args():
                         help='''affects plot bg color, grid and ticks
                         # whitegrid (white bg with grids), 'white', 'darkgrid', 'ticks'
                         ''')
-    parser.add_argument('--palette', type=str, default='colorblind',
+    parser.add_argument('--palette', type=str, nargs='+', default='colorblind',
                         help='''
                         color palette (overwritten by color)
                         # None (def), 'pastel', 'Blues' (blue tones), 'colorblind'
@@ -138,16 +213,15 @@ def parse_args():
     parser.add_argument('--color', type=str, default=None)
     parser.add_argument('--font_family', type=str, default='serif',
                         help='font family (sans-serif or serif)')
-    parser.add_argument('--font_scale', type=int, default=1.0,
+    parser.add_argument('--font_scale', type=int, default=1.0, # 0.8 originally
                         help='adjust the scale of the fonts')
     parser.add_argument('--bg_line_width', type=int, default=0.25,
                         help='adjust the scale of the line widths')
-    parser.add_argument('--line_width', type=int, default=0.75,
+    parser.add_argument('--line_width', type=float, default=0.75, # 0.75 originally
                         help='adjust the scale of the line widths')
-    parser.add_argument('--fig_size', nargs='+', type=float, default=[6, 4],
+    parser.add_argument('--fig_size', nargs='+', type=float, default=[6, 4], # [6, 4]
                         help='size of the plot')
-    parser.add_argument('--sizes', type=int, nargs='+', default=[40, 1600])
-    parser.add_argument('--marker', type=str, default='o',
+    parser.add_argument('--marker', type=str, default='.',
                         help='type of marker for line plot ".", "o", "^", "x", "*"')
     parser.add_argument('--dpi', type=int, default=300)
 
@@ -159,9 +233,10 @@ def parse_args():
 
     # Set title, labels and ticks
     parser.add_argument('--title', type=str,
-                        default='Accuracy for Different Methods',
+                        default='Top-1 Accuracy vs Epoch',
+                        # on SoyLocal for DeiT3 EViT with KR=10%
                         help='title of the plot')
-    parser.add_argument('--x_label', type=str, default='Data Augmentation',
+    parser.add_argument('--x_label', type=str, default='Epoch',
                         help='x label of the plot')
     parser.add_argument('--y_label', type=str, default='Accuracy (%)',
                         help='y label of the plot')
@@ -176,46 +251,27 @@ def parse_args():
                         help='rotation of y-axis lables')
 
     # Change location of legend
-    parser.add_argument('--loc_legend', type=str, default='upper right',
+    parser.add_argument('--loc_legend', type=str, default='lower right',
                         help='location of legend options are upper, lower, left right, center')
 
     args= parser.parse_args()
     return args
 
 
-def read_filter_clean(args):
-    df = pd.read_csv(args.input_file)
-
-    df = filter_df(
-        df,
-        getattr(args, 'keep_datasets', None),
-        getattr(args, 'keep_methods', None),
-        getattr(args, 'keep_serials', None),
-        
-        getattr(args, 'filter_datasets', None),
-        getattr(args, 'filter_methods', None),
-        getattr(args, 'filter_serials', None),
-
-        getattr(args, 'keep_lr', None),
-        # getattr(args, 'keep_epochs', None),
-    )
-
-    df = drop_na(df, args)
-
-    df = rename_vars(df, var_rename=True, args=args)
-    return df
-
-
 def main():
     args = parse_args()
-    args.title = args.title.replace("\\n", "\n")
+    args.title = args.title.replace('\\n', '\n')
     os.makedirs(args.results_dir, exist_ok=True)
 
     if args.color:
         # single color for whole palette (sns defaults to 6 colors)
         args.palette = [args.color for _ in range(len(args.subset_models))]
 
-    df = read_filter_clean(args)
+    runs = get_wandb_project_runs(args.project_name, args.serials)
+
+    df = get_train_progress_df(runs)
+
+    df = modify_df(df, args)
 
     make_plot(args, df)
 
@@ -223,3 +279,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+

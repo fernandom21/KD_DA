@@ -5,13 +5,14 @@ import pandas as pd
 
 
 CONFIG_COLS = [
-    'serial', 'dataset_name', 'model_name',
+    'serial', 'dataset_name', 'model_name', 'freeze_backbone',
 
-    'model_name_teacher', 'selector', 'tgda', 'pretrained', 'square_resize_random_crop',
+    'model_name_teacher', 'selector', 'tgda', 'pretrained',  'ckpt_path_teacher',
+    'square_resize_random_crop',
     'cont_loss', 'cont_temp', 'loss_cont_weight', 'pooling_function',
 
     'lr', 'base_lr', 'opt', 'weight_decay', 'seed', 'epochs', 'image_size',
-    'batch_size', 'num_images_train', 'num_images_val', 'ckpt_path_teacher',
+    'batch_size', 'num_images_train', 'num_images_val',
 ]
 
 SUMMARY_COLS = [
@@ -25,10 +26,26 @@ SORT_COLS = [
 ]
 
 
-def get_wandb_project_runs(project, serials=None):
+def get_wandb_project_runs(project, serials=None, teachers_data=False, da_data=False):
     api = wandb.Api()
 
-    if serials:
+    if teachers_data:
+        runs = api.runs(path=project, per_page=2000, filters={'$and': [
+            {'config.serial': {'$in': serials}},
+            {'config.test_only': False},
+        ]})
+
+    elif da_data:
+        runs = api.runs(path=project, per_page=2000, filters={'$and': [
+            {'config.serial': {'$in': serials}},
+            # lr != 0.0005, square_resize_random_crop: False, cont_loss: True
+            # move to different serials later (different lr are stage 1)
+            {'config.lr': 0.0005},
+            {'config.square_resize_random_crop': True},
+            {'config.cont_loss': False},
+        ]})
+
+    elif serials:
         # runs = api.runs(path=project, per_page=2000,
         #                filters={'$or': [{'config.serial': s} for s in serials]})
         runs = api.runs(path=project, per_page=2000,
@@ -82,15 +99,18 @@ def parse_args():
     parser = argparse.ArgumentParser()
 
     # input
-    parser.add_argument('--project_name', type=str, default='nycu_pcs/KD_DA',
+    parser.add_argument('--project_name', type=str, default='nycu_pcs/KD_TGDA',
                         help='project_entity/project_name')
     # filters
     parser.add_argument('--serials', nargs='+', type=int,
-                        default=[0,1])
+                        default=[20, 21, 22, 23, 24, 25, 31, 32,
+                                 41, 42, 43, 44, 51, 52, 53, 54, 61])
+    parser.add_argument('--teachers_data', action='store_true')
+    parser.add_argument('--da_data', action='store_true')
     parser.add_argument('--config_cols', nargs='+', type=str, default=CONFIG_COLS)
     parser.add_argument('--summary_cols', nargs='+', type=str, default=SUMMARY_COLS)
     # output
-    parser.add_argument('--output_file', default='kd_da_download.csv', type=str,
+    parser.add_argument('--output_file', default='kd_tgda_stage2.csv', type=str,
                         help='File path')
     parser.add_argument('--results_dir', type=str, default='data',
                         help='The directory where results will be stored')
@@ -105,7 +125,8 @@ def main():
     os.makedirs(args.results_dir, exist_ok=True)
     args.output_file = os.path.join(args.results_dir, args.output_file)
 
-    runs = get_wandb_project_runs(args.project_name, args.serials)
+    runs = get_wandb_project_runs(args.project_name, args.serials,
+                                  args.teachers_data, args.da_data)
 
     df = make_df(runs, args.config_cols, args.summary_cols)
 
