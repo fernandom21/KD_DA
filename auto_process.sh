@@ -20,14 +20,17 @@ python stack_two_df.py --input_df_1 data/kd_da_tgda_stage2.csv --input_df_2 data
 python compute_seen_images.py
 
 
+# preprocess raw data
+python preprocess_raw_wandb_data.py
+
+
+
+
 # tgda improves with longer training: plot acc vs epochs
 # can make many plots for this
 python download_plot_acc_vs_epoch.py --project_name nycu_pcs/KD_DA --serials 0 --keep_datasets cub --keep_methods vit_t16_ce_noaug vit_t16_resnet101_kd_noaug vit_t16_resnet101_kdct_noaug vit_t16_resnet101_tgda_noaug --output_file acc_vs_epoch_serial0_cub_vit_rn
 python download_plot_acc_vs_epoch.py --project_name nycu_pcs/KD_DA --serials 0 --keep_datasets cub --keep_methods resnet18_ce_noaug resnet18_resnet101_kd_noaug resnet18_resnet101_kdct_noaug resnet18_resnet101_tgda_noaug --output_file acc_vs_epoch_serial0_cub_rn
 
-
-# preprocess raw data
-python preprocess_raw_wandb_data.py
 
 
 

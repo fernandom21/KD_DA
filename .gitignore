@@ -26,6 +26,9 @@
 !**/data/**/**/*.csv
 !**/results/**/*.csv
 
+# windows files
+*.ini
+
 # temp nfs files
 *.nfs*
 

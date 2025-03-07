@@ -4,7 +4,8 @@ import pandas as pd
 
 SERIALS_EXPLANATIONS = [
     'teacher_224',
-    'teacher_'
+    'teacher_cal_224',
+    'teacher_cal_448',
 
     # Data augmentation method (standard resolution: 224, 800 epochs) and train framework
     # 'ce',
@@ -23,13 +24,13 @@ SERIALS_EXPLANATIONS = [
     'kd_mu',
     'kd_cmmu',
 
-    # 'kdct',
-    'kdct_noaug',
-    'kdct_re',
-    'kdct_ta',
-    'kdct_cm',
-    'kdct_mu',
-    'kdct_cmmu',
+    # 'kdst',
+    'kdst_noaug',
+    'kdst_re',
+    'kdst_ta',
+    'kdst_cm',
+    'kdst_mu',
+    'kdst_cmmu',
 
     # 'tgda',
     'tgda_noaug',
@@ -41,7 +42,7 @@ SERIALS_EXPLANATIONS = [
 
     # high-resolution no pt
     'hr_ce_200',
-    'hr_kdct_200',
+    'hr_kdst_200',
     'hr_tgda_200',
     'hr_tgda_800',
 
@@ -53,7 +54,7 @@ SERIALS_EXPLANATIONS = [
     'hr_vitfs_ce',
 
     # high-resolution with pt
-    'hr_kdct_pt_200',
+    'hr_kdst_pt_200',
     'hr_tgda_pt_200',
 
     # cost metrics (time, vram/memory, flops, params)
@@ -93,7 +94,7 @@ SERIALS_EXPLANATIONS = [
 # SETTING_EXPLANATIONS = [
 #     'ce', 
 #     'kd', 
-#     'kdct', 
+#     'kdst', 
 #     'tgda',
 # ]
 
@@ -114,13 +115,13 @@ SETTINGS_DIC = {
     'kd_mu': 'KD (Mixup)',
     'kd_cmmu': 'KD (CutMix+Mixup)',
 
-    'kdct': 'KDCT',
-    'kdct_noaug': 'TGDA (No Aug.)',
-    'kdct_re': 'KDCT (Random Erasing)',
-    'kdct_ta': 'KDCT (Trivial Aug.)',
-    'kdct_cm': 'KDCT (CutMix)',
-    'kdct_mu': 'KDCT (Mixup)',
-    'kdct_cmmu': 'KDCT (CutMix+Mixup)',
+    'kdst': 'KDST',
+    'kdst_noaug': 'TGDA (No Aug.)',
+    'kdst_re': 'KDST (Random Erasing)',
+    'kdst_ta': 'KDST (Trivial Aug.)',
+    'kdst_cm': 'KDST (CutMix)',
+    'kdst_mu': 'KDST (Mixup)',
+    'kdst_cmmu': 'KDST (CutMix+Mixup)',
 
     'tgda': 'TGDA',
     'tgda_noaug': 'TGDA (No Aug.)',
@@ -132,7 +133,7 @@ SETTINGS_DIC = {
 
     # high-resolution no pt
     'hr_ce_200': 'CE',
-    'hr_kdct_200': 'KDCT',
+    'hr_kdst_200': 'KDST',
     'hr_tgda_200': 'TGDA',
     'hr_tgda_800': 'TGDA',
 
@@ -142,7 +143,7 @@ SETTINGS_DIC = {
     'sr_vits_tgdahr_ta_ls_sd_800': 'TGDA',
 
     # high-resolution with pt
-    'hr_kdct_pt_200': 'TGDA',
+    'hr_kdst_pt_200': 'TGDA',
     'hr_tgda_pt_200': 'TGDA',
 
     # cost metrics (time, vram/memory, flops, params)
@@ -179,9 +180,9 @@ METHODS_DIC = {
     'vit_t16_resnet101_tgda': 'ViT T/16-RN101 (TGDA)',
     'vit_t16_vit_b16_tgda': 'ViT T/16-ViT B/16 (TGDA)',
 
-    'resnet18_resnet101_kdct': 'RN18-RN101 (KDCT)',
-    'vit_t16_resnet101_kdct': 'ViT T/16-RN101 (KDCT)',
-    'vit_t16_vit_b16_kdct': 'ViT T/16-ViT B/16 (KDCT)',
+    'resnet18_resnet101_kdst': 'RN18-RN101 (KDST)',
+    'vit_t16_resnet101_kdst': 'ViT T/16-RN101 (KDST)',
+    'vit_t16_vit_b16_kdst': 'ViT T/16-ViT B/16 (KDST)',
 
     'resnet18_resnet101_kd': 'RN18-RN101 (KD)',
     'vit_t16_resnet101_kd': 'ViT T/16-RN101 (KD)',
@@ -275,8 +276,8 @@ def rename_vars(df, var_rename=False, args=None):
 def add_setting(df):
     conditions = [
         ((df['project_name'].isin(['Backbones', 'CALBackbones', 'ParamEfficientBackbones', 'PEFGIR'])) & (df['selector'] == '') & (df['serial'] == 1)),
-        ((df['project_name'].isin(['Backbones', 'FGIRViT'])) & (df['selector'] == 'cal') & (df['serial'] == 1)),
-        ((df['project_name'].isin(['Backbones'])) & (df['serial'] == 15)),
+        ((df['project_name'].isin(['Backbones', 'CALBackbones', 'ParamEfficientBackbones', 'PEFGIR'])) & (df['selector'] == 'cal') & (df['serial'] == 1)),
+        ((df['project_name'].isin(['Backbones', 'CALBackbones', 'ParamEfficientBackbones', 'PEFGIR'])) & (df['serial'] == 15)),
 
         ((df['model_name_teacher'] == '') & (df['serial'] == 0)),
         ((df['model_name_teacher'] == '') & (df['serial'] == 1)),
@@ -315,6 +316,8 @@ def add_setting(df):
         (df['serial'] == 25),
         (df['serial'] == 26),
         (df['serial'] == 27),
+        (df['serial'] == 28),
+        (df['serial'] == 29),
 
         (df['serial'] == 31),
         (df['serial'] == 32),
@@ -323,6 +326,8 @@ def add_setting(df):
         (df['serial'] == 42),
         (df['serial'] == 43),
         (df['serial'] == 44),
+        (df['serial'] == 45),
+        (df['serial'] == 46),
 
         (df['serial'] == 51),
         (df['serial'] == 52),
