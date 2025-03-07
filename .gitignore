@@ -18,10 +18,12 @@
 **/ckpts/
 **/flagged/
 **/wandb/
-**/data/*/*
+**/results/*
 **/results_all/*
 # exception
+# **/data/*/*
 !**/data/**/*.csv
+!**/data/**/**/*.csv
 !**/results/**/*.csv
 
 # temp nfs files

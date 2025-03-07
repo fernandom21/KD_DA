@@ -5,7 +5,7 @@ import pandas as pd
 
 
 CONFIG_COLS = [
-    'serial', 'dataset_name', 'model_name', 'freeze_backbone',
+    'project_name', 'serial', 'dataset_name', 'model_name', 'freeze_backbone',
 
     'model_name_teacher', 'selector', 'tgda', 'pretrained',  'ckpt_path_teacher',
     'square_resize_random_crop',
@@ -26,6 +26,10 @@ SORT_COLS = [
 ]
 
 
+DATASETS = ['aircraft', 'cars', 'cub', 'soygene', 'soylocal']
+TEACHERS = ['vit_b16', 'resnet101', 'resnet101', 'tv_resnet101']
+
+
 def get_wandb_project_runs(project, serials=None, teachers_data=False, da_data=False):
     api = wandb.Api()
 
@@ -33,6 +37,9 @@ def get_wandb_project_runs(project, serials=None, teachers_data=False, da_data=F
         runs = api.runs(path=project, per_page=2000, filters={'$and': [
             {'config.serial': {'$in': serials}},
             {'config.test_only': False},
+            {'config.freeze_backbone': False},
+            {'config.dataset_name': {'$in': DATASETS}},
+            {'config.model_name': {'$in': TEACHERS}},
         ]})
 
     elif da_data:
@@ -67,9 +74,9 @@ def make_df(runs, config_cols, summary_cols):
     for i, run in enumerate(runs):
         run_data = {}
         try:
-            host = {'host': run.metadata.get('host')}
+            host = {'host': run.metadata.get('host', None)}
         except:
-            print(run)
+            # print(run)
             host = {'host': None}
         cfg = {col: run.config.get(col, None) for col in config_cols}
         summary = {col: run.summary.get(col, None) for col in summary_cols}
@@ -103,8 +110,8 @@ def parse_args():
                         help='project_entity/project_name')
     # filters
     parser.add_argument('--serials', nargs='+', type=int,
-                        default=[20, 21, 22, 23, 24, 25, 31, 32,
-                                 41, 42, 43, 44, 51, 52, 53, 54, 61])
+                        default=[20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 31, 32,
+                                 41, 42, 43, 44, 45, 46, 51, 52, 53, 54, 61])
     parser.add_argument('--teachers_data', action='store_true')
     parser.add_argument('--da_data', action='store_true')
     parser.add_argument('--config_cols', nargs='+', type=str, default=CONFIG_COLS)

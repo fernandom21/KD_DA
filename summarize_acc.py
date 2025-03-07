@@ -5,10 +5,10 @@ import pandas as pd
 
 from utils import preprocess_df, add_all_cols_group, \
     round_combine_str_mean_std, sort_df, rename_var, \
-    DATASETS_UFGIR, DATASETS_DIC, METHODS_DIC
+    DATASETS_DIC, METHODS_DIC
 
 
-def aggregate_results_main(df, fp=None, serials=[1, 3],
+def aggregate_results_main(df, fp=None, serials=None,
                            add_method_avg=True, add_dataset_avg=False):
     df = df[df['serial'].isin(serials)]
 
@@ -35,42 +35,14 @@ def aggregate_results_main(df, fp=None, serials=[1, 3],
     return df
 
 
-def aggregate_results_ablations(df, fp=None):
-    df_bl = df[(df['serial'].isin([1]) & (df['method'].str.contains('ila'))) &
-               (df['dataset_name'].isin(['soyglobal', 'soylocal']))]
-    df_bl_saw = df[(df['serial'].isin([61, 71, 81, 91, 211, 221, 231, 241, 251, 261])
-                    & (df['method'].str.contains('ila'))) &
-               (df['dataset_name'].isin(['soyglobal', 'soylocal']))]
-    df = df[df['serial'].isin([4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18,
-                               20, 21, 22, 23, 24, 25, 27])]
 
-    df = pd.concat([df_bl, df_bl_saw, df], ignore_index=True)
-
-
-    df_std = df.groupby(['serial', 'setting', 'dataset_name', 'method'], as_index=False).agg({'acc': 'std'})
-    df = df.groupby(['serial', 'setting', 'dataset_name', 'method'], as_index=False).agg({'acc': 'mean'})
-    df['acc_std'] = df_std['acc']
-
-
-    df = sort_df(df)
-
-
-    df = round_combine_str_mean_std(df, col='acc')
-
-
-    # to do:
-    # compute the absolute differences to all of this similar to pivot_table compute_diffs
-
-
-    if fp:
-        df.to_csv(fp, header=True, index=False)
-
-    return df
-
-
-def compute_diffs(df):
-    ours_list = [m for m in df.index if 'ila' in m]
-    methods = [m for m in df.index if 'ila' not in m]
+def compute_diffs(df, vits_diff=False, lrresnets_diff=False):
+    if vits_diff:
+        ours_list = [m for m in df.index if 'vitfs' in m]
+        methods = [m for m in df.index if 'vit_t16' not in m]
+    elif lrresnets_diff:
+        ours_list = [m for m in df.index if 'lrresnet' in m]
+        methods = [m for m in df.index if m.startswith('resnet')]        
 
     for ours in ours_list:
         for i, (index, row) in enumerate(df.iterrows()):
@@ -146,10 +118,7 @@ def summarize_acc(args):
                                  var='acc_mean_std_latex')
 
 
-    # aggregate and save ablations results
-    df_ablations = aggregate_results_ablations(df, f'{fp}_ablations.csv')
-
-    return df, df_main, df_ablations
+    return df, df_main
 
 
 def parse_args():
@@ -157,12 +126,18 @@ def parse_args():
 
     # input
     parser.add_argument('--input_file', type=str, 
-                        default=os.path.join('data', 'saw_stage2.csv'),
+                        default=os.path.join('data', 'kd_da_tgda_backbones_stage2.csv'),
                         help='filename for input .csv file from wandb')
 
-    parser.add_argument('--keep_datasets', nargs='+', type=str, default=DATASETS_UFGIR)
+    parser.add_argument('--keep_datasets', nargs='+', type=str, default=DATASETS_DIC.keys())
     parser.add_argument('--keep_methods', nargs='+', type=str, default=METHODS_DIC.keys())
-    parser.add_argument('--main_serials', nargs='+', type=int, default=[1, 3])
+    parser.add_argument('--main_serials', nargs='+', type=int,
+                        default=[0, 1, 2, 3, 4, 5, 6,
+                                 20, 21, 22, 23,
+                                 24, 25, 26, 27, 28, 29,
+                                 31, 32,
+                                 51, 52, 53, 54,
+                                 61])
 
     # output
     parser.add_argument('--output_file', type=str, default='acc',
@@ -179,8 +154,9 @@ def main():
     args = parse_args()
     os.makedirs(args.results_dir, exist_ok=True)
 
-    df = summarize_acc(args)
-    return df
+    df, df_main = summarize_acc(args)
+
+    return df_main
 
 
 if __name__ == '__main__':

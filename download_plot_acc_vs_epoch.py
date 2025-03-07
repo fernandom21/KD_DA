@@ -42,7 +42,15 @@ def get_train_progress_df(runs, samples=10000):
         # https://community.wandb.ai/t/run-history-returns-different-values-on-almost-each-call/2431
         # history_temp = [row for row in run.scan_history(keys=[history_cols])]
         history_temp = run.history(samples=samples)[history_cols].dropna()
+
+        # config hyperparameter arguments
         cfg = {col: run.config.get(col, None) for col in cfg_cols}
+
+        # system metrics
+        # https://docs.wandb.ai/guides/models/app/settings-page/system-metrics/
+        # max(runs[0].history(stream='events')['system.proc.memory.rssMB'].dropna())
+
+        # summary metrics wandb.summary() calls
         # summary = {col: run.summary.get(col, None) for col in ['best_acc']}
 
         history_temp = history_temp.assign(**cfg)
@@ -62,7 +70,6 @@ def get_train_progress_df(runs, samples=10000):
 
 def modify_df(df, args):
 
-    # df = standarize_df(df)
     df = preprocess_df(
         df,
         'all',
@@ -75,22 +82,10 @@ def modify_df(df, args):
         getattr(args, 'filter_serials', None),
     )
 
-    # df = df[df['pt'] == args.model_name]
-    # if hasattr(args, 'method_subset') and args.method_subset:
-    #     df = df[df['method'].isin(args.method_subset)]
-    #     df['method_order'] = pd.Categorical(df['method'], categories=args.method_subset, ordered=True)
-    #     df = df.sort_values(by=['method_order'], ascending=True)
-
-    # df['acc'] = df['acc'].round(decimals=1).astype(str)
-
     df = drop_na(df, args)
 
     df = rename_vars(df, var_rename=True, args=args)
 
-    # df = rename_vars(df, var_rename=False, args=args)
-
-    # df['Method: Top-1 Accuracy (%)'] = df['tr'] + df['method'] + ': ' + df['acc']
-    # df[args.hue_var_name] = df['method'] + ': ' + df['acc']
     print(f'DF length: {len(df)}\n', df.head())
 
     return df
@@ -105,8 +100,6 @@ def make_plot(args, df):
             "figure.figsize": args.fig_size,
         })
 
-    # ax = sns.lineplot(x=args.x_var_name, y=args.y_var_name, hue=args.hue_var_name,
-    #                   linewidth=args.line_width, data=df)
     ax = sns.lineplot(x=args.x_var_name, y=args.y_var_name,
                       hue=args.hue_var_name, style=args.style_var_name,
                       markers=False, linewidth=args.line_width, data=df)
@@ -166,12 +159,6 @@ def parse_args():
     parser.add_argument('--filter_datasets', nargs='+', type=str, default=None)
     parser.add_argument('--filter_methods', nargs='+', type=str, default=None)
     parser.add_argument('--filter_serials', nargs='+', type=int, default=None)
-
-    # parser.add_argument('--model', type=str,
-    #                     default='deit3_base_patch16_224.fb_in1k',
-    #                     help='name of the variable for x')
-    # parser.add_argument('--method_subset', type=str, nargs='+',
-    #                     default=['bl', 'cla', 'clca'])
 
     # output
     parser.add_argument('--output_file', default='acc_vs_epoch', type=str,

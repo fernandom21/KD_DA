@@ -3,6 +3,9 @@ import pandas as pd
 
 
 SERIALS_EXPLANATIONS = [
+    'teacher_224',
+    'teacher_'
+
     # Data augmentation method (standard resolution: 224, 800 epochs) and train framework
     # 'ce',
     'ce_noaug',
@@ -44,18 +47,22 @@ SERIALS_EXPLANATIONS = [
 
     'hr_vits_tgda_ta_ls_sd_800',
     'sr_vits_tgda_ta_ls_sd_800',
-    'sr_vits_tgdahr_ta_sd_800',
-    'sr_vits_tgdahr_ta_ls_sd_800',
+    'hr_vitfs_tgda_tl_aircraft',
+    'hr_vitfs_tgda_tl_cars',
+    'hr_vitfs_tgda_tl_cub',
+    'hr_vitfs_ce',
 
     # high-resolution with pt
     'hr_kdct_pt_200',
     'hr_tgda_pt_200',
 
     # cost metrics (time, vram/memory, flops, params)
-    'lr_rn18like_cost',
-    'lr_rn34like_cost',
-    'lr_rn50like_cost',
-    'lr_rn101like_cost',
+    'lr_rn18like_train_cost',
+    'lr_rn34like_train_cost',
+    'lr_rn50like_train_cost',
+    'lr_rn101like_train_cost',
+    'lr_inference_cost_gpu',
+    'lr_inference_cost_cpu',    
 
     # low-resolution with no pt
     'lr_rn18like',
@@ -267,6 +274,9 @@ def rename_vars(df, var_rename=False, args=None):
 
 def add_setting(df):
     conditions = [
+        ((df['project_name'].isin(['Backbones', 'CALBackbones', 'ParamEfficientBackbones', 'PEFGIR'])) & (df['selector'] == '') & (df['serial'] == 1)),
+        ((df['project_name'].isin(['Backbones', 'FGIRViT'])) & (df['selector'] == 'cal') & (df['serial'] == 1)),
+        ((df['project_name'].isin(['Backbones'])) & (df['serial'] == 15)),
 
         ((df['model_name_teacher'] == '') & (df['serial'] == 0)),
         ((df['model_name_teacher'] == '') & (df['serial'] == 1)),

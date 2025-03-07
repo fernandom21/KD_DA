@@ -1,0 +1,17 @@
+model_name,release,pt,recipe,augreg,patchifier_input,patchifier_output,acc_in1k,params_1k,gmacs,operator,long_range,hierarchical,ssl
+vgg19_bn,2014/09,in1k,simple,weak,3,32,74.21,143.678248,19.64691866,conv,x,o,x
+resnetv2_101x3_bitm_in21k,2019/12,in21k,simple,weak,7,32,84.44,387.93,69.66271642,conv,x,o,x
+vit_b16,2020/10,in21k,simple,weak,16,16,81.79,86.567656,17.56761063,sa,o,x,x
+swin_large_patch4_window7_224_in22k,2021/03,in21k,elaborate,strong,4,32,86.31,196.532476,34.4914898,sa,o,o,x
+swin_base_patch4_window7_224_in22k,2021/03,in21k,elaborate,strong,4,32,85.27,87.768224,15.4414336,sa,o,o,x
+swin_base_patch4_window7_224,2021/03,in21k,elaborate,strong,4,32,83.61,87.768224,15.4414336,sa,o,o,x
+resnet101,2021/10,in1k,elaborate,strong,7,32,81.93,44.54916,7.81763943,conv,x,o,x
+resnetv2_101,2021/10,in1k,elaborate,strong,7,32,82.05,44.54148,7.815529988,conv,x,o,x
+convnext_large_in22k,2022/01,in21k,elaborate,strong,4,32,86.6,197.767336,34.37716378,conv,x,o,x
+convnext_base_in22k,2022/01,in21k,elaborate,strong,4,32,85.82,88.591464,15.36521626,conv,x,o,x
+convnext_base,2022/01,in21k,elaborate,strong,4,32,84.43,88.591464,15.36521626,conv,x,o,x
+van_b3,2022/02,in1k,elaborate,strong,7,32,83.9,44.765608,8.94043264,conv,o,o,x
+deit3_large_patch16_224_in21ft1k,2022/04,in21k_in1k,elaborate,strong,16,16,87,304.37476,61.58918285,sa,o,x,x
+deit3_base_patch16_224_in21ft1k,2022/04,in21k_in1k,elaborate,strong,16,16,85.7,86.58532,17.57683022,sa,o,x,x
+deit3_base_patch16_224,2022/04,in1k,elaborate,strong,16,16,83.8,86.58532,17.57683022,sa,o,x,x
+beitv2_base_patch16_224_in22k,2022/08,in1k_in21k,elaborate,weak,16,16,86.47,86.530984,17.57305728,sa,o,x,o
