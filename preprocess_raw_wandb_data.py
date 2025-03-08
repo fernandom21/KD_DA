@@ -77,7 +77,7 @@ def parse_args():
 
     # input
     parser.add_argument('--input_file', type=str, 
-                        default=os.path.join('data', 'kd_da_tgda_backbones_stage2.csv'),
+                        default=os.path.join('data', 'kd_da_tgda_backbones_prev.csv'),
                         help='filename for input .csv file from wandb')
 
     parser.add_argument('--keep_datasets', nargs='+', type=str, default=None)
@@ -103,7 +103,7 @@ def parse_args():
     # parser.add_argument('--cont_loss', action='store_true')
 
     # output
-    parser.add_argument('--output_file', type=str, default='kd_da_tgda_backbones_preprocessed.csv',
+    parser.add_argument('--output_file', type=str, default='kd_da_tgda_backbones_prev_preprocessed.csv',
                         help='filename for output .csv file')
     parser.add_argument('--results_dir', type=str,
                         default=os.path.join('results_all'),

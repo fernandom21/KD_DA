@@ -1,45 +1,6 @@
-# extract tables from pdf
-python extract_table_from_pdf.py --input_pdf papers/idmm.pdf --pdf_page_number 9
-
-
-# reassign serials from wandb
-# python update_wandb_project_serialx_to_serialy --project_name nycu_pcs/KD_TGDA --serial_x 33 --serial_y 53
-# python update_wandb_project_serialx_to_serialy --project_name nycu_pcs/KD_TGDA --serial_x 34 --serial_y 54
-# python update_wandb_project_serialx_to_serialy_based_on_substr_in_field.py
-
-
-# download raw data from wandb
-# stage2 focused on accuracy since stage1 usually focuses on hparam search (if exists)
-python download_save_wandb_data.py --project_name nycu_pcs/Backbones --serials 1 15 --teachers_data --output_file backbones_stage2.csv
-python download_save_wandb_data.py --project_name nycu_pcs/KD_DA --serials 0 1 2 3 4 5 --da_data --output_file kd_da_stage2.csv
-python download_save_wandb_data.py --project_name nycu_pcs/KD_TGDA --serials 20 21 22 23 24 25 26 27 28 29 31 32 41 42 43 44 45 46 51 52 53 54 61 --output_file kd_tgda_stage2.csv
-
-# combine into one single dataframe with all data
-python stack_two_df.py --input_df_1 data/kd_da_stage2.csv --input_df_2 data/kd_tgda_stage2.csv --output_file kd_da_tgda_stage2.csv
-python stack_two_df.py --input_df_1 data/kd_da_tgda_stage2.csv --input_df_2 data/backbones_stage2.csv --output_file kd_da_tgda_backbones_stage2.csv
-
-
 # motivation: pt+ft train data (and cost) >> directly train on target datasets
 # also allows to train custom architectures for task / resource constraints
 python compute_seen_images.py
-
-
-# preprocess raw data
-python preprocess_raw_wandb_data.py
-
-
-# summarize acc
-python summarize_acc.py --main_serials 1 15 --keep_settings teacher_ft_224 teacher_cal_224 teacher_cal_448 --output_file acc_teachers
-python summarize_acc.py --main_serials 0 1 2 3 4 5 --keep_settings ce_noaug ce_re ce_ta ce_cm ce_mu ce_cmmu kd_noaug kd_re kd_ta kd_cm kd_mu kd_cmmu sod_noaug sod_re sod_ta sod_cm sod_mu sod_cmmu tgda_noaug tgda_re tgda_ta tgda_cm tgda_mu tgda_cmmu --output_file acc_dataaug
-python summarize_acc.py --main_serials 20 21 22 23 24 25 26 27 28 29 31 32 51 52 53 54 61 --output_file acc_tgda
-
-
-
-
-# tgda improves with longer training: plot acc vs epochs
-# can make many plots for this
-python download_plot_acc_vs_epoch.py --project_name nycu_pcs/KD_DA --serials 0 --keep_datasets cub --keep_methods vit_t16_ce_noaug vit_t16_resnet101_kd_noaug vit_t16_resnet101_kdct_noaug vit_t16_resnet101_tgda_noaug --output_file acc_vs_epoch_serial0_cub_vit_rn
-python download_plot_acc_vs_epoch.py --project_name nycu_pcs/KD_DA --serials 0 --keep_datasets cub --keep_methods resnet18_ce_noaug resnet18_resnet101_kd_noaug resnet18_resnet101_kdct_noaug resnet18_resnet101_tgda_noaug --output_file acc_vs_epoch_serial0_cub_rn
 
 
 
@@ -65,6 +26,76 @@ python vis_attention.py --number_images_per_ds 8 --subfolder cars_8 --vis_all_ma
 
 # test images
 python vis_attention.py --vis_all_masks --test_images --save_name attention_all_cub_test
+
+
+
+# extract tables from pdf
+python extract_table_from_pdf.py --input_file papers/idmm.pdf --pdf_page_number 9
+
+# make tables from previous papers into our format
+python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/vits_is224_scratch_vs_ssl.csv --serial 25
+python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/vits_is448_scratch_vs_pt.csv --serial 24
+python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/sota_is128.csv --serial 53
+python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/sota_is448.csv --serial 23
+python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/fgir_is128_rn18.csv --serial 51
+python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/fgir_is128_rn34.csv --serial 52
+python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/fgir_is128_rn50.csv --serial 53
+python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/fgir_is128_rn101.csv --serial 54
+python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/fgir_is448_rn18.csv --serial 23 --suffix "_rn18"
+python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/fgir_is448_rn34.csv --serial 23 --suffix "_rn34"
+python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/fgir_is448_rn50.csv --serial 23 --suffix "_rn50"
+python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/fgir_is448_rn101.csv --serial 23 --suffix "_rn101"
+
+python stack_two_df.py --input_df_1 results_all/melted_tables/vits_is224_scratch_vs_ssl.csv --input_df_2 results_all/melted_tables/vits_is448_scratch_vs_pt.csv --output_file prev_papers.csv
+python stack_two_df.py --input_df_1 data/prev_papers.csv --input_df_2 results_all/melted_tables/vits_is448_scratch_vs_pt.csv --output_file prev_papers.csv
+python stack_two_df.py --input_df_1 data/prev_papers.csv --input_df_2 results_all/melted_tables/sota_is128.csv --output_file prev_papers.csv
+python stack_two_df.py --input_df_1 data/prev_papers.csv --input_df_2 results_all/melted_tables/sota_is448.csv --output_file prev_papers.csv
+python stack_two_df.py --input_df_1 data/prev_papers.csv --input_df_2 results_all/melted_tables/sota_is128.csv --output_file prev_papers.csv
+python stack_two_df.py --input_df_1 data/prev_papers.csv --input_df_2 results_all/melted_tables/fgir_is128_rn18.csv --output_file prev_papers.csv
+python stack_two_df.py --input_df_1 data/prev_papers.csv --input_df_2 results_all/melted_tables/fgir_is128_rn34.csv --output_file prev_papers.csv
+python stack_two_df.py --input_df_1 data/prev_papers.csv --input_df_2 results_all/melted_tables/fgir_is128_rn50.csv --output_file prev_papers.csv
+python stack_two_df.py --input_df_1 data/prev_papers.csv --input_df_2 results_all/melted_tables/fgir_is128_rn101.csv --output_file prev_papers.csv
+python stack_two_df.py --input_df_1 data/prev_papers.csv --input_df_2 results_all/melted_tables/fgir_is448_rn18.csv --output_file prev_papers.csv
+python stack_two_df.py --input_df_1 data/prev_papers.csv --input_df_2 results_all/melted_tables/fgir_is448_rn34.csv --output_file prev_papers.csv
+python stack_two_df.py --input_df_1 data/prev_papers.csv --input_df_2 results_all/melted_tables/fgir_is448_rn50.csv --output_file prev_papers.csv
+python stack_two_df.py --input_df_1 data/prev_papers.csv --input_df_2 results_all/melted_tables/fgir_is448_rn101.csv --output_file prev_papers.csv
+
+
+# reassign serials from wandb
+# python update_wandb_project_serialx_to_serialy --project_name nycu_pcs/KD_TGDA --serial_x 33 --serial_y 53
+# python update_wandb_project_serialx_to_serialy --project_name nycu_pcs/KD_TGDA --serial_x 34 --serial_y 54
+# python update_wandb_project_serialx_to_serialy_based_on_substr_in_field.py
+
+
+# download raw data from wandb
+# stage2 focused on accuracy since stage1 usually focuses on hparam search (if exists)
+python download_save_wandb_data.py --project_name nycu_pcs/Backbones --serials 1 15 --teachers_data --output_file backbones_stage2.csv
+python download_save_wandb_data.py --project_name nycu_pcs/KD_DA --serials 0 1 2 3 4 5 --da_data --output_file kd_da_stage2.csv
+python download_save_wandb_data.py --project_name nycu_pcs/KD_TGDA --serials 20 21 22 23 24 25 26 27 28 29 31 32 41 42 43 44 45 46 51 52 53 54 61 --output_file kd_tgda_stage2.csv
+
+# combine into one single dataframe with all data
+python stack_two_df.py --input_df_1 data/kd_da_stage2.csv --input_df_2 data/kd_tgda_stage2.csv --output_file kd_da_tgda_stage2.csv
+python stack_two_df.py --input_df_1 data/kd_da_tgda_stage2.csv --input_df_2 data/backbones_stage2.csv --output_file kd_da_tgda_backbones_stage2.csv
+python stack_two_df.py --input_df_1 data/kd_da_tgda_backbones_stage2.csv --input_df_2 data/prev_papers.csv --output_file kd_da_tgda_backbones_prev.csv
+
+
+# preprocess raw data
+python preprocess_raw_wandb_data.py
+
+
+# summarize acc
+python summarize_acc.py --main_serials 1 15 --keep_settings teacher_ft_224 teacher_cal_224 teacher_cal_448 --output_file acc_teachers
+python summarize_acc.py --main_serials 0 1 2 3 4 5 --keep_settings ce_noaug ce_re ce_ta ce_cm ce_mu ce_cmmu kd_noaug kd_re kd_ta kd_cm kd_mu kd_cmmu sod_noaug sod_re sod_ta sod_cm sod_mu sod_cmmu tgda_noaug tgda_re tgda_ta tgda_cm tgda_mu tgda_cmmu --output_file acc_dataaug
+python summarize_acc.py --main_serials 20 21 22 23 24 25 26 27 28 29 31 32 51 52 53 54 61 --output_file acc_tgda
+
+
+
+
+# tgda improves with longer training: plot acc vs epochs
+# can make many plots for this
+python download_plot_acc_vs_epoch.py --project_name nycu_pcs/KD_DA --serials 0 --keep_datasets cub --keep_methods vit_t16_ce_noaug vit_t16_resnet101_kd_noaug vit_t16_resnet101_kdct_noaug vit_t16_resnet101_tgda_noaug --output_file acc_vs_epoch_serial0_cub_vit_rn
+python download_plot_acc_vs_epoch.py --project_name nycu_pcs/KD_DA --serials 0 --keep_datasets cub --keep_methods resnet18_ce_noaug resnet18_resnet101_kd_noaug resnet18_resnet101_kdct_noaug resnet18_resnet101_tgda_noaug --output_file acc_vs_epoch_serial0_cub_rn
+
 
 
 

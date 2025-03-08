@@ -1,4 +1,4 @@
-method,Aircraft,Cars,CUB
+model_name,aircraft,cars,cub
 Baseline,90.31,92.94,85.72
 Mixup,90.1,92.74,86.26
 CutMix,91.12,93.42,86.78

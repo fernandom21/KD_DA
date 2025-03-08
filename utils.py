@@ -3,6 +3,8 @@ import pandas as pd
 
 
 SERIALS_EXPLANATIONS = [
+    '',
+
     'teacher_224',
     'teacher_cal_224',
     'teacher_cal_448',
@@ -377,6 +379,8 @@ def rename_vars(df, var_rename=False, args=None):
 
 def add_setting(df):
     conditions = [
+        (df['project_name'] == 'previous'),
+
         ((df['project_name'].isin(['Backbones', 'CALBackbones', 'ParamEfficientBackbones', 'PEFGIR'])) & (df['selector'] == '') & (df['serial'] == 1)),
         ((df['project_name'].isin(['Backbones', 'CALBackbones', 'ParamEfficientBackbones', 'PEFGIR'])) & (df['selector'] == 'cal') & (df['serial'] == 1)),
         ((df['project_name'].isin(['Backbones', 'CALBackbones', 'ParamEfficientBackbones', 'PEFGIR'])) & (df['serial'] == 15)),

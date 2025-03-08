@@ -39,10 +39,11 @@ def aggregate_results_main(df, fp=None, serials=None,
 def compute_diffs(df, diff_vit=False, diff_lrrn=False):
     if diff_vit:
         ours_list = [m for m in df.index if 'vitfs' in m]
-        methods = [m for m in df.index if 'vit_t16' in m]
+        methods = [m for m in df.index if 'vitfs' not in m]
     elif diff_lrrn:
         ours_list = [m for m in df.index if 'lrresnet' in m]
-        methods = [m for m in df.index if m.startswith('resnet')]
+        methods = [m for m in df.index if 'lrresnet' not in m]
+        # methods = [m for m in df.index if m.startswith('resnet')]
     else:
         return df
 
@@ -144,7 +145,7 @@ def parse_args():
 
     # input
     parser.add_argument('--input_file', type=str, 
-                        default=os.path.join('data', 'kd_da_tgda_backbones_stage2.csv'),
+                        default=os.path.join('data', 'kd_da_tgda_backbones_prev.csv'),
                         help='filename for input .csv file from wandb')
 
     parser.add_argument('--main_serials', nargs='+', type=int,

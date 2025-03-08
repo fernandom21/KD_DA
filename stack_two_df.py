@@ -4,8 +4,10 @@ import pandas as pd
 
 
 def stack_two_df(df_1, df_2, fp):
+    print('Original lengths: ', len(df_1), len(df_2))
     df = pd.concat([df_1, df_2], ignore_index=True)
     df.to_csv(fp, header=True, index=False)
+    print('Stacked length: ', len(df))
     return df
 
 

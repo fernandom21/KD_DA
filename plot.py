@@ -73,7 +73,7 @@ def parse_args():
 
     # Subset models and datasets
     parser.add_argument('--input_file', type=str,
-                        default=os.path.join('results_all', 'cost', 'cost.csv'),
+                        default=os.path.join('results_all', 'acc', 'acc_tgda_main.csv'),
                         help='filename for input .csv file')
 
     parser.add_argument('--keep_datasets', nargs='+', type=str, default=None)
