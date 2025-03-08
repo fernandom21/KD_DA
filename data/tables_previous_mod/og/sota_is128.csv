@@ -1,0 +1,13 @@
+Method,Aircraft,Cars,CUB
+PCA-Net [72],79.92,68.16,64.87
+PMG [73],61.87,65.13,61.01
+API-Net [74],64.51,73.97,69.05
+MGN-CNN [10],68.21,70.59,62.95
+ResNet-50,59.24,69.13,65.84
+ResNet-101,65.28,71.85,68.25
+Res-50+DSSD,71.89,87.32,78.29
+Res-101+DSSD,79.08,87.96,80.29
+TGDA,serial51,serial51,serial51
+TGDA,serial52,serial52,serial52
+TGDA,serial53,serial53,serial53
+TGDA,serial54,serial54,serial54

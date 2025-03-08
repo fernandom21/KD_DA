@@ -40,7 +40,7 @@ def parse_args():
     parser = argparse.ArgumentParser()
 
     # input
-    parser.add_argument('--input_pdf', type=str,
+    parser.add_argument('--input_file', type=str,
                         default=os.path.join('papers', 's3mix.pdf'),
                         help='paper pdf title')
     parser.add_argument('--pdf_page_number', type=int, default=8,
@@ -59,11 +59,11 @@ def parse_args():
 def main():
     args = parse_args()
     os.makedirs(args.results_dir, exist_ok=True)
-    fn = os.path.splitext(os.path.split(args.input_pdf)[-1])[0]
+    fn = os.path.splitext(os.path.split(args.input_file)[-1])[0]
     output_file = f'{fn}_{args.pdf_page_number}'
     args.output_file = os.path.join(args.results_dir, output_file)
 
-    text = read_pdf_page(args.input_pdf, args.pdf_page_number,
+    text = read_pdf_page(args.input_file, args.pdf_page_number,
                          f'{args.output_file}.txt', args.pdfminer)
 
     save_pdf_as_csv(text, f'{args.output_file}.csv')

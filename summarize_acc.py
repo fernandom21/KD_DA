@@ -36,13 +36,15 @@ def aggregate_results_main(df, fp=None, serials=None,
 
 
 
-def compute_diffs(df, vits_diff=False, lrresnets_diff=False):
-    if vits_diff:
+def compute_diffs(df, diff_vit=False, diff_lrrn=False):
+    if diff_vit:
         ours_list = [m for m in df.index if 'vitfs' in m]
-        methods = [m for m in df.index if 'vit_t16' not in m]
-    elif lrresnets_diff:
+        methods = [m for m in df.index if 'vit_t16' in m]
+    elif diff_lrrn:
         ours_list = [m for m in df.index if 'lrresnet' in m]
-        methods = [m for m in df.index if m.startswith('resnet')]        
+        methods = [m for m in df.index if m.startswith('resnet')]
+    else:
+        return df
 
     for ours in ours_list:
         for i, (index, row) in enumerate(df.iterrows()):
@@ -52,7 +54,8 @@ def compute_diffs(df, vits_diff=False, lrresnets_diff=False):
     return df
 
 
-def pivot_table(df, serial=1, fp=None, var='acc', save_diff=False, rename=True):
+def pivot_table(df, serial=1, fp=None, var='acc',
+                save_diff_vit=False, save_diff_lrrn=False, rename=True):
     df = df[df['serial'] == serial].copy(deep=False)
 
 
@@ -68,8 +71,8 @@ def pivot_table(df, serial=1, fp=None, var='acc', save_diff=False, rename=True):
     df = df.drop(columns=['method_order'])
 
 
-    if save_diff:
-        df = compute_diffs(df)
+    if save_diff_vit or save_diff_lrrn:
+        df = compute_diffs(df, save_diff_vit, save_diff_lrrn)
 
 
     if rename:
@@ -94,12 +97,17 @@ def summarize_acc(args):
     df = preprocess_df(
         df,
         'acc',
+
         getattr(args, 'keep_datasets', None),
         getattr(args, 'keep_methods', None),
         getattr(args, 'keep_serials', None),
+
         getattr(args, 'filter_datasets', None),
         getattr(args, 'filter_methods', None),
         getattr(args, 'filter_serials', None),
+
+        getattr(args, 'keep_settings', None),
+        getattr(args, 'filter_settings', None),
     )
 
 
@@ -110,12 +118,22 @@ def summarize_acc(args):
 
 
     for serial in args.main_serials:
+
+        if serial in [24, 25]:
+            save_diff_vit, save_diff_lrrn = True, False
+        elif serial in [51, 52, 53, 54]:
+            save_diff_vit, save_diff_lrrn = False, True
+        else:
+            save_diff_vit, save_diff_lrrn = False, False
+
         df_pivoted = pivot_table(df_main, serial, f'{fp}_{serial}_pivoted.csv',
-                                 var='acc', save_diff=True)
-        pivot_table(df_main, serial, f'{fp}_{serial}_pivoted_mean_std.csv',
-                                 var='acc_mean_std')
-        pivot_table(df_main, serial, f'{fp}_{serial}_pivoted_mean_std_latex.csv',
-                                 var='acc_mean_std_latex')
+                                 'acc', save_diff_vit, save_diff_lrrn)
+
+        if args.save_mean_std_tables:
+            pivot_table(df_main, serial, f'{fp}_{serial}_pivoted_mean_std.csv',
+                                    var='acc_mean_std')
+            pivot_table(df_main, serial, f'{fp}_{serial}_pivoted_mean_std_latex.csv',
+                                    var='acc_mean_std_latex')
 
 
     return df, df_main
@@ -129,8 +147,6 @@ def parse_args():
                         default=os.path.join('data', 'kd_da_tgda_backbones_stage2.csv'),
                         help='filename for input .csv file from wandb')
 
-    parser.add_argument('--keep_datasets', nargs='+', type=str, default=DATASETS_DIC.keys())
-    parser.add_argument('--keep_methods', nargs='+', type=str, default=METHODS_DIC.keys())
     parser.add_argument('--main_serials', nargs='+', type=int,
                         default=[0, 1, 2, 3, 4, 5, 6,
                                  20, 21, 22, 23,
@@ -139,12 +155,24 @@ def parse_args():
                                  51, 52, 53, 54,
                                  61])
 
+    parser.add_argument('--keep_datasets', nargs='+', type=str, default=DATASETS_DIC.keys())
+    parser.add_argument('--keep_methods', nargs='+', type=str, default=None)
+    parser.add_argument('--keep_serials', nargs='+', type=int, default=None)
+
+    parser.add_argument('--filter_datasets', nargs='+', type=str, default=None)
+    parser.add_argument('--filter_methods', nargs='+', type=str, default=None)
+    parser.add_argument('--filter_serials', nargs='+', type=int, default=None)
+
+    parser.add_argument('--keep_settings', nargs='+', type=str, default=None)
+    parser.add_argument('--filter_settings', nargs='+', type=str, default=None)
+
     # output
     parser.add_argument('--output_file', type=str, default='acc',
                         help='filename for output .csv file')
     parser.add_argument('--results_dir', type=str,
                         default=os.path.join('results_all', 'acc'),
                         help='The directory where results will be stored')
+    parser.add_argument('--save_mean_std_tables', action='store_true')
 
     args= parser.parse_args()
     return args

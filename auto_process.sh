@@ -1,3 +1,7 @@
+# extract tables from pdf
+python extract_table_from_pdf.py --input_pdf papers/idmm.pdf --pdf_page_number 9
+
+
 # reassign serials from wandb
 # python update_wandb_project_serialx_to_serialy --project_name nycu_pcs/KD_TGDA --serial_x 33 --serial_y 53
 # python update_wandb_project_serialx_to_serialy --project_name nycu_pcs/KD_TGDA --serial_x 34 --serial_y 54
@@ -24,16 +28,18 @@ python compute_seen_images.py
 python preprocess_raw_wandb_data.py
 
 
+# summarize acc
+python summarize_acc.py --main_serials 1 15 --keep_settings teacher_ft_224 teacher_cal_224 teacher_cal_448 --output_file acc_teachers
+python summarize_acc.py --main_serials 0 1 2 3 4 5 --keep_settings ce_noaug ce_re ce_ta ce_cm ce_mu ce_cmmu kd_noaug kd_re kd_ta kd_cm kd_mu kd_cmmu sod_noaug sod_re sod_ta sod_cm sod_mu sod_cmmu tgda_noaug tgda_re tgda_ta tgda_cm tgda_mu tgda_cmmu --output_file acc_dataaug
+python summarize_acc.py --main_serials 20 21 22 23 24 25 26 27 28 29 31 32 51 52 53 54 61 --output_file acc_tgda
+
+
 
 
 # tgda improves with longer training: plot acc vs epochs
 # can make many plots for this
 python download_plot_acc_vs_epoch.py --project_name nycu_pcs/KD_DA --serials 0 --keep_datasets cub --keep_methods vit_t16_ce_noaug vit_t16_resnet101_kd_noaug vit_t16_resnet101_kdct_noaug vit_t16_resnet101_tgda_noaug --output_file acc_vs_epoch_serial0_cub_vit_rn
 python download_plot_acc_vs_epoch.py --project_name nycu_pcs/KD_DA --serials 0 --keep_datasets cub --keep_methods resnet18_ce_noaug resnet18_resnet101_kd_noaug resnet18_resnet101_kdct_noaug resnet18_resnet101_tgda_noaug --output_file acc_vs_epoch_serial0_cub_rn
-
-
-
-
 
 
 
@@ -60,9 +66,6 @@ python vis_attention.py --number_images_per_ds 8 --subfolder cars_8 --vis_all_ma
 # test images
 python vis_attention.py --vis_all_masks --test_images --save_name attention_all_cub_test
 
-
-# extract tables from pdf
-python extract_table_from_pdf.py --input_pdf papers/s3mix.pdf --pdf_page_number 8
 
 
 

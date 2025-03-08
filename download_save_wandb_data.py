@@ -22,7 +22,7 @@ SUMMARY_COLS = [
 ]
 
 SORT_COLS = [
-    'dataset_name', 'serial', 'model_name',
+    'serial', 'dataset_name', 'model_name',
 ]
 
 

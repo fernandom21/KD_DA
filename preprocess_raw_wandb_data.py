@@ -29,9 +29,29 @@ def preprocess_save_df(args):
 
     df = pd.read_csv(args.input_file)
 
+    # df = preprocess_df(
+    #     df,
+    #     'all',
+    #     getattr(args, 'keep_datasets', None),
+    #     getattr(args, 'keep_methods', None),
+    #     getattr(args, 'keep_serials', None),
+        
+    #     getattr(args, 'filter_datasets', None),
+    #     getattr(args, 'filter_methods', None),
+    #     getattr(args, 'filter_serials', None),
+
+    #     getattr(args, 'keep_lr', None),
+    #     # getattr(args, 'keep_epochs', None),
+
+    #     getattr(args, 'square_resize_random_crop', True),
+    #     getattr(args, 'pretrained', False),
+    #     getattr(args, 'cont_loss', False),
+    # )
+
     df = preprocess_df(
         df,
         'all',
+
         getattr(args, 'keep_datasets', None),
         getattr(args, 'keep_methods', None),
         getattr(args, 'keep_serials', None),
@@ -40,12 +60,9 @@ def preprocess_save_df(args):
         getattr(args, 'filter_methods', None),
         getattr(args, 'filter_serials', None),
 
-        getattr(args, 'keep_lr', None),
-        # getattr(args, 'keep_epochs', None),
+        getattr(args, 'keep_settings', None),
+        getattr(args, 'filter_settings', None),
 
-        getattr(args, 'square_resize_random_crop', True),
-        getattr(args, 'pretrained', False),
-        getattr(args, 'cont_loss', False),
     )
 
     # aggregate and save main results
@@ -66,22 +83,24 @@ def parse_args():
     parser.add_argument('--keep_datasets', nargs='+', type=str, default=None)
     parser.add_argument('--keep_methods', nargs='+', type=str, default=None)
     parser.add_argument('--keep_serials', nargs='+', type=int, default=None)
-    # parser.add_argument('--keep_lr', nargs='+', type=float, default=None)
-    # parser.add_argument('--keep_epochs', nargs='+', type=int, default=None)
 
     parser.add_argument('--filter_datasets', nargs='+', type=str, default=None)
     parser.add_argument('--filter_methods', nargs='+', type=str, default=None)
     parser.add_argument('--filter_serials', nargs='+', type=int, default=None)
+
+    parser.add_argument('--keep_settings', nargs='+', type=str, default=None)
+    # parser.add_argument('--keep_lr', nargs='+', type=float, default=None)
+    # parser.add_argument('--keep_epochs', nargs='+', type=int, default=None)
+    parser.add_argument('--filter_settings', nargs='+', type=str, default=None)
     # parser.add_argument('--filter_lr', nargs='+', type=float, default=None)
     # parser.add_argument('--filter_epochs', nargs='+', type=int, default=None)
 
+    # parser.add_argument('--keep_lr', nargs='+', type=float, default=None)
+    # # parser.add_argument('--keep_epochs', nargs='+', type=int, default=None)
 
-    parser.add_argument('--keep_lr', nargs='+', type=float, default=None)
-    # parser.add_argument('--keep_epochs', nargs='+', type=int, default=None)
-
-    parser.add_argument('--square_resize_random_crop', action='store_false')
-    parser.add_argument('--pretrained', action='store_true')
-    parser.add_argument('--cont_loss', action='store_true')
+    # parser.add_argument('--square_resize_random_crop', action='store_false')
+    # parser.add_argument('--pretrained', action='store_true')
+    # parser.add_argument('--cont_loss', action='store_true')
 
     # output
     parser.add_argument('--output_file', type=str, default='kd_da_tgda_backbones_preprocessed.csv',

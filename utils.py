@@ -24,13 +24,13 @@ SERIALS_EXPLANATIONS = [
     'kd_mu',
     'kd_cmmu',
 
-    # 'kdst',
-    'kdst_noaug',
-    'kdst_re',
-    'kdst_ta',
-    'kdst_cm',
-    'kdst_mu',
-    'kdst_cmmu',
+    # 'sod',
+    'sod_noaug',
+    'sod_re',
+    'sod_ta',
+    'sod_cm',
+    'sod_mu',
+    'sod_cmmu',
 
     # 'tgda',
     'tgda_noaug',
@@ -42,7 +42,7 @@ SERIALS_EXPLANATIONS = [
 
     # high-resolution no pt
     'hr_ce_200',
-    'hr_kdst_200',
+    'hr_sod_200',
     'hr_tgda_200',
     'hr_tgda_800',
 
@@ -54,7 +54,7 @@ SERIALS_EXPLANATIONS = [
     'hr_vitfs_ce',
 
     # high-resolution with pt
-    'hr_kdst_pt_200',
+    'hr_sod_pt_200',
     'hr_tgda_pt_200',
 
     # cost metrics (time, vram/memory, flops, params)
@@ -94,7 +94,7 @@ SERIALS_EXPLANATIONS = [
 # SETTING_EXPLANATIONS = [
 #     'ce', 
 #     'kd', 
-#     'kdst', 
+#     'sod', 
 #     'tgda',
 # ]
 
@@ -108,20 +108,20 @@ SETTINGS_DIC = {
     'ce_cmmu': 'CE (CutMix+Mixup)',
 
     'kd': 'KD',
-    'kd_noaug': 'TGDA (No Aug.)',
+    'kd_noaug': 'KD (No Aug.)',
     'kd_re': 'KD (Random Erasing)',
     'kd_ta': 'KD (Trivial Aug.)',
     'kd_cm': 'KD (CutMix)',
     'kd_mu': 'KD (Mixup)',
     'kd_cmmu': 'KD (CutMix+Mixup)',
 
-    'kdst': 'KDST',
-    'kdst_noaug': 'TGDA (No Aug.)',
-    'kdst_re': 'KDST (Random Erasing)',
-    'kdst_ta': 'KDST (Trivial Aug.)',
-    'kdst_cm': 'KDST (CutMix)',
-    'kdst_mu': 'KDST (Mixup)',
-    'kdst_cmmu': 'KDST (CutMix+Mixup)',
+    'sod': 'SOD',
+    'sod_noaug': 'SOD (No Aug.)',
+    'sod_re': 'SOD (Random Erasing)',
+    'sod_ta': 'SOD (Trivial Aug.)',
+    'sod_cm': 'SOD (CutMix)',
+    'sod_mu': 'SOD (Mixup)',
+    'sod_cmmu': 'SOD (CutMix+Mixup)',
 
     'tgda': 'TGDA',
     'tgda_noaug': 'TGDA (No Aug.)',
@@ -133,7 +133,7 @@ SETTINGS_DIC = {
 
     # high-resolution no pt
     'hr_ce_200': 'CE',
-    'hr_kdst_200': 'KDST',
+    'hr_sod_200': 'SOD',
     'hr_tgda_200': 'TGDA',
     'hr_tgda_800': 'TGDA',
 
@@ -143,7 +143,7 @@ SETTINGS_DIC = {
     'sr_vits_tgdahr_ta_ls_sd_800': 'TGDA',
 
     # high-resolution with pt
-    'hr_kdst_pt_200': 'TGDA',
+    'hr_sod_pt_200': 'TGDA',
     'hr_tgda_pt_200': 'TGDA',
 
     # cost metrics (time, vram/memory, flops, params)
@@ -176,20 +176,118 @@ DATASETS_DIC = {
 
 METHODS_DIC = {
     # KD DA project
-    'resnet18_resnet101_tgda': 'RN18-RN101 (TGDA)',
-    'vit_t16_resnet101_tgda': 'ViT T/16-RN101 (TGDA)',
-    'vit_t16_vit_b16_tgda': 'ViT T/16-ViT B/16 (TGDA)',
+    # 'resnet18_resnet101_tgda': 'RN18-RN101 (TGDA)',
+    # 'vit_t16_resnet101_tgda': 'ViT T/16-RN101 (TGDA)',
+    # 'vit_t16_vit_b16_tgda': 'ViT T/16-ViT B/16 (TGDA)',
 
-    'resnet18_resnet101_kdst': 'RN18-RN101 (KDST)',
-    'vit_t16_resnet101_kdst': 'ViT T/16-RN101 (KDST)',
-    'vit_t16_vit_b16_kdst': 'ViT T/16-ViT B/16 (KDST)',
+    # 'resnet18_resnet101_sod': 'RN18-RN101 (SOD)',
+    # 'vit_t16_resnet101_sod': 'ViT T/16-RN101 (SOD)',
+    # 'vit_t16_vit_b16_sod': 'ViT T/16-ViT B/16 (SOD)',
 
-    'resnet18_resnet101_kd': 'RN18-RN101 (KD)',
-    'vit_t16_resnet101_kd': 'ViT T/16-RN101 (KD)',
-    'vit_t16_vit_b16_kd': 'ViT T/16-ViT B/16 (KD)',
+    # 'resnet18_resnet101_kd': 'RN18-RN101 (KD)',
+    # 'vit_t16_resnet101_kd': 'ViT T/16-RN101 (KD)',
+    # 'vit_t16_vit_b16_kd': 'ViT T/16-ViT B/16 (KD)',
 
-    'resnet18_ce': 'RN18 (CE)',
-    'vit_t16_ce': 'ViT T/16 (CE)',
+    # 'resnet18_ce': 'RN18 (CE)',
+    # 'vit_t16_ce': 'ViT T/16 (CE)',
+
+    'resnet101_teacher_cal_224': 'RN101',
+    'vit_b16_teacher_cal_224': 'ViT-B/16',
+    'resnet101_teacher_cal_448': 'RN101',
+    'vit_b16_teacher_cal_448': 'ViT-B/16',
+
+    'resnet18_ce_noaug': 'RN18 (CE, HF)',
+    'resnet18_resnet101_kd_noaug': 'RN18 (CE, HF)',
+    'resnet18_resnet101_sod_noaug': 'RN18 (STKD, HF)',
+    'resnet18_resnet101_tgda_noaug': 'RN18 (TGDA, HF)',
+
+    'resnet18_ce_re': 'RN18 (CE, RE)',
+    'resnet18_resnet101_kd_re': 'RN18 (CE, RE)',
+    'resnet18_resnet101_sod_re': 'RN18 (STKD, RE)',
+    'resnet18_resnet101_tgda_re': 'RN18 (TGDA, RE)',
+
+    'resnet18_ce_ta': 'RN18 (CE, TA)',
+    'resnet18_resnet101_kd_ta': 'RN18 (CE, TA)',
+    'resnet18_resnet101_sod_ta': 'RN18 (STKD, TA)',
+    'resnet18_resnet101_tgda_ta': 'RN18 (TGDA, TA)',
+
+    'resnet18_ce_cm': 'RN18 (CE, CM)',
+    'resnet18_resnet101_kd_cm': 'RN18 (CE, CM)',
+    'resnet18_resnet101_sod_cm': 'RN18 (STKD, CM)',
+    'resnet18_resnet101_tgda_cm': 'RN18 (TGDA, CM)',
+
+    'resnet18_ce_mu': 'RN18 (CE, MU)',
+    'resnet18_resnet101_kd_mu': 'RN18 (CE, MU)',
+    'resnet18_resnet101_sod_mu': 'RN18 (STKD, MU)',
+    'resnet18_resnet101_tgda_mu': 'RN18 (TGDA, MU)',
+
+    'resnet18_ce_cmmu': 'RN18 (CE, CM+MU)',
+    'resnet18_resnet101_kd_cmmu': 'RN18 (CE, CM+MU)',
+    'resnet18_resnet101_sod_cmmu': 'RN18 (STKD, CM+MU)',
+    'resnet18_resnet101_tgda_cmmu': 'RN18 (TGDA, CM+MU)',
+
+    'vit_t16_ce_noaug': 'ViT-T/16 (CE, HF)',
+    'vit_t16_resnet101_kd_noaug': 'ViT-T/16 (CE, HF)',
+    'vit_t16_resnet101_sod_noaug': 'ViT-T/16 (STKD, HF)',
+    'vit_t16_resnet101_tgda_noaug': 'ViT-T/16 (TGDA, HF)',
+
+    'vit_t16_ce_re': 'ViT-T/16 (CE, RE)',
+    'vit_t16_resnet101_kd_re': 'ViT-T/16 (CE, RE)',
+    'vit_t16_resnet101_sod_re': 'ViT-T/16 (STKD, RE)',
+    'vit_t16_resnet101_tgda_re': 'ViT-T/16 (TGDA, RE)',
+
+    'vit_t16_ce_ta': 'ViT-T/16 (CE, TA)',
+    'vit_t16_resnet101_kd_ta': 'ViT-T/16 (CE, TA)',
+    'vit_t16_resnet101_sod_ta': 'ViT-T/16 (STKD, TA)',
+    'vit_t16_resnet101_tgda_ta': 'ViT-T/16 (TGDA, TA)',
+
+    'vit_t16_ce_cm': 'ViT-T/16 (CE, CM)',
+    'vit_t16_resnet101_kd_cm': 'ViT-T/16 (CE, CM)',
+    'vit_t16_resnet101_sod_cm': 'ViT-T/16 (STKD, CM)',
+    'vit_t16_resnet101_tgda_cm': 'ViT-T/16 (TGDA, CM)',
+
+    'vit_t16_ce_mu': 'ViT-T/16 (CE, MU)',
+    'vit_t16_resnet101_kd_mu': 'ViT-T/16 (CE, MU)',
+    'vit_t16_resnet101_sod_mu': 'ViT-T/16 (STKD, MU)',
+    'vit_t16_resnet101_tgda_mu': 'ViT-T/16 (TGDA, MU)',
+
+    'vit_t16_ce_cmmu': 'ViT-T/16 (CE, CM+MU)',
+    'vit_t16_resnet101_kd_cmmu': 'ViT-T/16 (CE, CM+MU)',
+    'vit_t16_resnet101_sod_cmmu': 'ViT-T/16 (STKD, CM+MU)',
+    'vit_t16_resnet101_tgda_cmmu': 'ViT-T/16 (TGDA, CM+MU)',
+
+
+    'vit_t16_ce_noaug': 'ViT-T/16 (ViT-B/16 CE, HF)',
+    'vit_t16_vit_b16_kd_noaug': 'ViT-T/16 (ViT-B/16 CE, HF)',
+    'vit_t16_vit_b16_sod_noaug': 'ViT-T/16 (ViT-B/16 STKD, HF)',
+    'vit_t16_vit_b16_tgda_noaug': 'ViT-T/16 (ViT-B/16 TGDA, HF)',
+
+    'vit_t16_ce_re': 'ViT-T/16 (ViT-B/16 CE, RE)',
+    'vit_t16_vit_b16_kd_re': 'ViT-T/16 (ViT-B/16 CE, RE)',
+    'vit_t16_vit_b16_sod_re': 'ViT-T/16 (ViT-B/16 STKD, RE)',
+    'vit_t16_vit_b16_tgda_re': 'ViT-T/16 (ViT-B/16 TGDA, RE)',
+
+    'vit_t16_ce_ta': 'ViT-T/16 (ViT-B/16 CE, TA)',
+    'vit_t16_vit_b16_kd_ta': 'ViT-T/16 (ViT-B/16 CE, TA)',
+    'vit_t16_vit_b16_sod_ta': 'ViT-T/16 (ViT-B/16 STKD, TA)',
+    'vit_t16_vit_b16_tgda_ta': 'ViT-T/16 (ViT-B/16 TGDA, TA)',
+
+    'vit_t16_ce_cm': 'ViT-T/16 (ViT-B/16 CE, CM)',
+    'vit_t16_vit_b16_kd_cm': 'ViT-T/16 (ViT-B/16 CE, CM)',
+    'vit_t16_vit_b16_sod_cm': 'ViT-T/16 (ViT-B/16 STKD, CM)',
+    'vit_t16_vit_b16_tgda_cm': 'ViT-T/16 (ViT-B/16 TGDA, CM)',
+
+    'vit_t16_ce_mu': 'ViT-T/16 (ViT-B/16 CE, MU)',
+    'vit_t16_vit_b16_kd_mu': 'ViT-T/16 (ViT-B/16 CE, MU)',
+    'vit_t16_vit_b16_sod_mu': 'ViT-T/16 (ViT-B/16 STKD, MU)',
+    'vit_t16_vit_b16_tgda_mu': 'ViT-T/16 (ViT-B/16 TGDA, MU)',
+
+    'vit_t16_ce_cmmu': 'ViT-T/16 (ViT-B/16 CE, CM+MU)',
+    'vit_t16_vit_b16_kd_cmmu': 'ViT-T/16 (ViT-B/16 CE, CM+MU)',
+    'vit_t16_vit_b16_sod_cmmu': 'ViT-T/16 (ViT-B/16 STKD, CM+MU)',
+    'vit_t16_vit_b16_tgda_cmmu': 'ViT-T/16 (ViT-B/16 TGDA, CM+MU)',
+
+
 }
 
 
@@ -219,6 +317,10 @@ VAR_DIC = {
     'vram_batched': 'Batched VRAM (GB)',
 }
 
+
+INCONSISTENT_MODELS = {
+    'tv_resnet101': 'resnet101.tv_in1k',
+}
 
 # def reassign_serial(df):
 #     df['serial'] = df['serial'].apply(lambda x: SERIAL_REASSIGN.get(x, x))
@@ -374,6 +476,9 @@ def standardize_df(df):
     #                 'model_name_teacher': '', 'base_lr': '', 'throughput': ''})
     df = df.fillna({'model_name_teacher': '', 'selector': '',  'tgda': False,})
 
+    # rename timm teachers based on previous naming scheme
+    df['model_name'] = df['model_name'].apply(lambda x: INCONSISTENT_MODELS.get(x, x))
+
     df = add_setting(df)
     # df = add_data_aug(df)
 
@@ -398,7 +503,7 @@ def standardize_df(df):
     # df['method'] = df['model_name'] + df['model_name_teacher_str'] + df['setting_str'] + df['data_aug_str']
     df['method'] = df['model_name'] + df['model_name_teacher_str'] + df['setting_str']
 
-    df.rename(columns={'val_acc': 'acc'}, inplace=True)
+    df.rename(columns={'val_acc': 'acc', 'test_acc': 'acc'}, inplace=True)
     return df
 
 
@@ -451,7 +556,8 @@ def filter_bool_df(df, square_resize_random_crop=None, pretrained=None, cont_los
 
 def filter_df(df, keep_datasets=None, keep_methods=None, keep_serials=None,
               filter_datasets=None, filter_methods=None, filter_serials=None,
-              keep_lr=None,):  # keep_epochs=None,):
+              keep_settings=None, filter_settings=None):
+              # keep_lr=None,):  # keep_epochs=None,):
     if keep_datasets:
         df = df[df['dataset_name'].isin(keep_datasets)]
 
@@ -471,8 +577,14 @@ def filter_df(df, keep_datasets=None, keep_methods=None, keep_serials=None,
         df = df[~df['serial'].isin(filter_serials)]
 
     # project specific filters
-    if keep_lr:
-        df = df[df['lr'].isin(keep_lr)]
+    if keep_settings:
+        df = df[df['setting'].isin(keep_settings)]
+
+    if filter_settings:
+        df = df[df['setting'].isin(filter_settings)]
+
+    # if keep_lr:
+    #     df = df[df['lr'].isin(keep_lr)]
 
     # if keep_epochs:
     #     df = df[df['epochs'].isin(keep_epochs)]
@@ -484,11 +596,16 @@ def filter_df(df, keep_datasets=None, keep_methods=None, keep_serials=None,
 #     input_file, type='acc', keep_datasets=None, keep_methods=None, keep_serials=None, keep_lr=None, keep_epochs=None,
 #     filter_datasets=None, filter_methods=None, filter_serials=None, filter_lr=None, filter_epochs=None,
 #     square_resize_random_crop=True, pretrained=False, cont_loss=False):
+# def preprocess_df(
+#     df, type='all', keep_datasets=None, keep_methods=None, keep_serials=None,
+#     filter_datasets=None, filter_methods=None, filter_serials=None,
+#     keep_lr=None, # keep_epochs=None,
+#     square_resize_random_crop=None, pretrained=None, cont_loss=None,
+#     ):
 def preprocess_df(
     df, type='all', keep_datasets=None, keep_methods=None, keep_serials=None,
     filter_datasets=None, filter_methods=None, filter_serials=None,
-    keep_lr=None, # keep_epochs=None,
-    square_resize_random_crop=None, pretrained=None, cont_loss=None,
+    keep_settings=None, filter_settings=None,
     ):
 
     # load dataset and preprocess to include method and setting columns, rename val_acc to acc
@@ -497,14 +614,24 @@ def preprocess_df(
     # filter
     # df = filter_df(df, keep_datasets, keep_methods, keep_serials, keep_lr, keep_epochs,
     #                filter_datasets, filter_methods, filter_serials, filter_lr, filter_epochs)
+    # df = filter_df(
+    #     df, keep_datasets, keep_methods, keep_serials,
+    #     filter_datasets, filter_methods, filter_serials,
+    #     keep_lr, # keep_epochs,
+    # )
+
     df = filter_df(
         df, keep_datasets, keep_methods, keep_serials,
         filter_datasets, filter_methods, filter_serials,
-        keep_lr, # keep_epochs,
+        keep_settings, filter_settings,
     )
 
-    # filter bool
-    df = filter_bool_df(df, square_resize_random_crop, pretrained, cont_loss)
+    # filter bool: backbones and certain projects do not have certain variables
+    # so end up being filtered, also pretrained or cont loss should be mixed
+    # into method description to have a single method that describes the whole
+    # set of important hparams (easier to work later with pivot or
+    # the filter method functions)
+    # df = filter_bool_df(df, square_resize_random_crop, pretrained, cont_loss)
 
     # drop columns
     df = keep_columns(df, type=type)
