@@ -1,5 +1,5 @@
 model_name,aircraft,cars,cub
-Baseline,88.27,91.51,82.45
+RN18FT,88.27,91.51,82.45
 Mixup,87.82,91.56,83.21
 CutMix,88.78,92.24,83.4
 Cutout,88.03,91.46,81.81
