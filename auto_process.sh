@@ -87,7 +87,12 @@ python preprocess_raw_wandb_data.py
 python summarize_acc.py --main_serials 1 15 --keep_settings teacher_ft_224 teacher_cal_224 teacher_cal_448 --output_file acc_teachers
 python summarize_acc.py --main_serials 0 1 2 3 4 5 --keep_settings ce_noaug ce_re ce_ta ce_cm ce_mu ce_cmmu kd_noaug kd_re kd_ta kd_cm kd_mu kd_cmmu sod_noaug sod_re sod_ta sod_cm sod_mu sod_cmmu tgda_noaug tgda_re tgda_ta tgda_cm tgda_mu tgda_cmmu --output_file acc_dataaug
 python summarize_acc.py --main_serials 20 21 22 23 24 25 26 27 28 29 31 32 51 52 53 54 61 --results_dir results_all/acc_unfiltered --output_file acc_tgda
-python summarize_acc.py --main_serials 20 21 22 23 24 25 26 27 28 29 31 32 51 52 53 54 61 --filter_methods vitfs_tiny_patch16_gap_224_resnet101_hr_vits_tgda_ta_ls_sd_800 vit_t16_resnet101_hr_vits_tgda_ta_ls_sd_800 resnet18d_resnet101_lr_rn18like resnet34d_resnet101_lr_rn34like resnet50d_resnet101_lr_rn50like resnet101d_resnet101_lr_rn101like --output_file acc_tgda
+python summarize_acc.py --main_serials 20 21 22 23 24 25 26 27 28 29 31 32 51 52 53 54 61 --filter_methods vitfs_tiny_patch16_gap_224_resnet101_hr_vits_tgda_ta_ls_sd_800 vit_t16_resnet101_hr_vits_tgda_ta_ls_sd_800 resnet18d_resnet101_lr_rn18like resnet34d_resnet101_lr_rn34like resnet50d_resnet101_lr_rn50like resnet101d_resnet101_lr_rn101like Res-50 Res-101 PCA-Net PMG API-Net MGN-CNN PCA-Net PMG* API-Net* Res-50+DSSD Res-101+DSSD  --output_file acc_tgda
+
+
+
+# summarize cost
+python summarize_cost.py --keep_methods resnet18_resnet101_lr_rn18like resnet18d_resnet101_lr_rn18like lrresnet22_resnet101_lr_rn18like lrresnet22d_resnet101_lr_rn18like lrresnet22dwrk_resnet101_lr_rn18like lrresnet18t2d_resnet101_lr_rn18like lrresnet18t2pdwosrnk_resnet101_lr_rn18like lrresnet18t2pdwsrnk_resnet101_lr_rn18like lrresnet18t4pdwsrnk_resnet101_lr_rn18like resnet34_resnet101_lr_rn34like resnet34d_resnet101_lr_rn34like lrresnet38_resnet101_lr_rn34like lrresnet38d_resnet101_lr_rn34like lrresnet34t2d_resnet101_lr_rn34like lrresnet34t2pdwosrnk_resnet101_lr_rn34like lrresnet34t2pdwsrnk_resnet101_lr_rn34like lrresnet34t4pdwsrnk_resnet101_lr_rn34like resnet50_resnet101_lr_rn50like resnet50d_resnet101_lr_rn50like lrresnet56_resnet101_lr_rn50like lrresnet56d_resnet101_lr_rn50like lrresnet50t2d_resnet101_lr_rn50like lrresnet50t2pdwosrnk_resnet101_lr_rn50like lrresnet50t2pdwsrnk_resnet101_lr_rn50like lrresnet50t4pdwsrnk_resnet101_lr_rn50like resnet101_resnet101_lr_rn101like resnet101d_resnet101_lr_rn101like lrresnet107_resnet101_lr_rn101like lrresnet107d_resnet101_lr_rn101like lrresnet101t2d_resnet101_lr_rn101like lrresnet101t2pdwosrnk_resnet101_lr_rn101like lrresnet101t2pdwsrnk_resnet101_lr_rn101like lrresnet101t4pdwsrnk_resnet101_lr_rn101like
 
 
 
@@ -99,14 +104,21 @@ python download_plot_acc_vs_epoch.py --project_name nycu_pcs/KD_DA --serials 0 -
 
 
 
-
-
 # copy latex table with current format (--no-escape for $ and other special characters)
-python tably.py results/tables/vits_is224.csv 
-python tably.py results/tables/vits_is448.csv 
-# python tably.py results/tables/sota_is448_rn18_rn34.csv
-python tably.py results/tables/sota_is448_rn18_rn34_rn50.csv
-python tably.py results/tables/sota_is128.csv
+python tably.py results/tables/ours_vits_is224.csv 
+python tably.py results/tables/ours_vits_is448.csv 
+# python tably.py results/tables/ours_sota_is448_rn18_rn34.csv
+python tably.py results/tables/ours_sota_is448_rn18_rn34_rn50.csv
+python tably.py results/tables/ours_is128_rn18.csv
+python tably.py results/tables/ours_is128_rn34_rn50_rn101.csv
+
+
+
+
+
+
+
+
 
 
 # python preprocess_acc.py  --input_file data/test12.csv  --keep_serials 1 --keep_epochs 800 --keep_lr 0.0005 --output_file acc1.csv --keep_datasets aircraft --cont_loss

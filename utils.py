@@ -197,9 +197,13 @@ METHODS_DIC = {
     'RN34FT': 'RN34FT',
     'RN50FT': 'RN50FT',
     'RN101FT': 'RN101FT',
+    'RN18FT*': 'RN18FT*',
+    'RN34FT*': 'RN34FT*',
+    'RN50FT*': 'RN50FT*',
+    'RN101FT*': 'RN101FT*',
 
-    'Res-50': 'RN50FT',
-    'Res-101': 'RN50FT',
+    'Res-50': 'RN50FT**',
+    'Res-101': 'RN101FT**',
     'PCA-Net': 'PCA-Net',
     'PMG': 'PMG',
     'API-Net': 'API-Net',
@@ -208,22 +212,22 @@ METHODS_DIC = {
     'PMG*': 'PMG*',
     'API-Net*': 'API-Net*',
     'MGN-CNN*': 'MGN-CNN*',
-    'Res-50+DSSD': 'RN50+DSD',
-    'Res-101+DSSD': 'RN50+DSD',
+    'Res-50+DSSD': 'RN50+DSSD',
+    'Res-101+DSSD': 'RN101+DSSD',
 
     'Baseline': 'Baseline',
-    'SnapMix': 'SnapMix (DADKD)',
     'KD': 'KD (DADKD)',
     'DKD': 'DKD (DADKD)',
+    'SnapMix': 'SnapMix (DADKD)',
     'DADKD': 'DADKD',
 
-    'SnapMix*': 'SnapMix (DSSD)',
     'KD*': 'KD (DSSD)',
     'RKD*': 'RKD (DSSD)',
     'CRD*': 'CRD (DSSD)',
     'OFD*': 'OFD (DSSD)',
     'ReviewKD*': 'ReviewKD (DSSD)',
     'DKD*': 'DKD (DSSD)',
+    'SnapMix*': 'SnapMix (DSSD)',
     'DSSD': 'DSSD',
 
     'random init.': 'Scratch',
@@ -833,40 +837,42 @@ def sort_df(df, method_only=False):
 
 
 def group_by_family(x):
-    classifiers = ('vit_b16_cls_fz', 'vit_b16_lrblp_fz', 'vit_b16_mpncov_fz',
-                   'vit_b16_ifacls_fz', 'pedeit_base_patch16_224.fb_in1k_cls_fz',
-                   'pedeit3_base_patch16_224.fb_in1k_cls_fz')
+    # create families based on the settings and use these as filters
 
-    pefgir = ('vit_b16_cls_psm_fz', 'vit_b16_cls_maws_fz', 'vit_b16_cal_fz',
-              'vit_b16_avg_cls_rollout_fz', 'vit_b16_cls_glsim_fz')
+    # classifiers = ('vit_b16_cls_fz', 'vit_b16_lrblp_fz', 'vit_b16_mpncov_fz',
+    #                'vit_b16_ifacls_fz', 'pedeit_base_patch16_224.fb_in1k_cls_fz',
+    #                'pedeit3_base_patch16_224.fb_in1k_cls_fz')
 
-    petl = ('vit_b16_cls_vqt_fz', 'vit_b16_cls_vpt_shallow_fz', 'vit_b16_cls_vpt_deep_fz',
-            'vit_b16_cls_convpass_fz', 'vit_b16_cls_adapter_fz',
-            'pedeit_base_patch16_224.fb_in1k_cls_adapter_fz',
-            'pedeit3_base_patch16_224.fb_in1k_cls_adapter_fz')
+    # pefgir = ('vit_b16_cls_psm_fz', 'vit_b16_cls_maws_fz', 'vit_b16_cal_fz',
+    #           'vit_b16_avg_cls_rollout_fz', 'vit_b16_cls_glsim_fz')
 
-    ufgir = ('clevit_fz', 'csdnet_fz', 'mixvit_fz', 'vit_b16_sil_fz')
+    # petl = ('vit_b16_cls_vqt_fz', 'vit_b16_cls_vpt_shallow_fz', 'vit_b16_cls_vpt_deep_fz',
+    #         'vit_b16_cls_convpass_fz', 'vit_b16_cls_adapter_fz',
+    #         'pedeit_base_patch16_224.fb_in1k_cls_adapter_fz',
+    #         'pedeit3_base_patch16_224.fb_in1k_cls_adapter_fz')
 
-    ila = ('vit_b16_ila_dso_cls_fz', 'vit_b16_ila_cls_fz', 'vit_b16_ila_dso_cls_adapter_fz',
-           'vit_b16_ila_dso_cls_convpass_fz', 'vit_b16_ila_cls_adapter_fz',
-           'vit_b16_ila_dso_cls_adapter_vpt_shallow_fz', 'vit_b16_ila_cls_adapter_vpt_shallow_fz',
-           'pedeit_base_patch16_224.fb_in1k_ila_dso_cls_adapter_fz',
-           'pedeit3_base_patch16_224.fb_in1k_ila_dso_cls_adapter_fz')
+    # ufgir = ('clevit_fz', 'csdnet_fz', 'mixvit_fz', 'vit_b16_sil_fz')
 
-    saw = ['vit_b16_ila_dso_cls_adapter_saw_fz',
-           'pedeit_base_patch16_224.fb_in1k_ila_dso_cls_adapter_saw_fz',
-           'pedeit3_base_patch16_224.fb_in1k_ila_dso_cls_adapter_saw_fz']
+    # ila = ('vit_b16_ila_dso_cls_fz', 'vit_b16_ila_cls_fz', 'vit_b16_ila_dso_cls_adapter_fz',
+    #        'vit_b16_ila_dso_cls_convpass_fz', 'vit_b16_ila_cls_adapter_fz',
+    #        'vit_b16_ila_dso_cls_adapter_vpt_shallow_fz', 'vit_b16_ila_cls_adapter_vpt_shallow_fz',
+    #        'pedeit_base_patch16_224.fb_in1k_ila_dso_cls_adapter_fz',
+    #        'pedeit3_base_patch16_224.fb_in1k_ila_dso_cls_adapter_fz')
 
-    if x in ila:
-        return 'ila'
-    elif x in petl:
-        return 'petl'
-    elif x in pefgir:
-        return 'pefgir'
-    elif x in ufgir:
-        return 'ufgir'
-    elif x in saw:
-        return 'saw'
-    elif x in classifiers:
-        return 'peclassifier'
+    # saw = ['vit_b16_ila_dso_cls_adapter_saw_fz',
+    #        'pedeit_base_patch16_224.fb_in1k_ila_dso_cls_adapter_saw_fz',
+    #        'pedeit3_base_patch16_224.fb_in1k_ila_dso_cls_adapter_saw_fz']
+
+    # if x in ila:
+    #     return 'ila'
+    # elif x in petl:
+    #     return 'petl'
+    # elif x in pefgir:
+    #     return 'pefgir'
+    # elif x in ufgir:
+    #     return 'ufgir'
+    # elif x in saw:
+    #     return 'saw'
+    # elif x in classifiers:
+    #     return 'peclassifier'
     return x
