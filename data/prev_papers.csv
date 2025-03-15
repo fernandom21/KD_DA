@@ -20,453 +20,351 @@ MoCov2,cub,31.6,previous,25
 MoCov3,cub,20.5,previous,25
 DINO,cub,41.8,previous,25
 IDMM,cub,43.1,previous,25
-DeiT-T (IN1k PT),aircraft,78.7,previous,24
+DeiT-T (IN1k PT),aircraft,84.7,previous,24
 DeiT-T (IDMM),aircraft,48.6,previous,24
-DeiT-B (IN1k PT),aircraft,82.8,previous,24
+DeiT-B (IN1k PT),aircraft,90.3,previous,24
 DeiT-B (IDMM),aircraft,46.6,previous,24
-PVTv2-B0 (IN1k PT),aircraft,88.3,previous,24
 PVTv2-B0 (IDMM),aircraft,83.3,previous,24
-T2T-ViT-7 (IN1k PT),aircraft,83.8,previous,24
+PVTv2-B3 (IDMM),aircraft,91.8,previous,24
 T2T-ViT-7 (IDMM),aircraft,72.9,previous,24
-DeiT-T (IN1k PT),cars,90.3,previous,24
+DeiT-T (IN1k PT),cars,87.2,previous,24
 DeiT-T (IDMM),cars,77.8,previous,24
-DeiT-B (IN1k PT),cars,92.6,previous,24
+DeiT-B (IN1k PT),cars,92.9,previous,24
 DeiT-B (IDMM),cars,70.7,previous,24
-PVTv2-B0 (IN1k PT),cars,92.6,previous,24
 PVTv2-B0 (IDMM),cars,92.0,previous,24
-T2T-ViT-7 (IN1k PT),cars,92.8,previous,24
+PVTv2-B3 (IDMM),cars,94.3,previous,24
 T2T-ViT-7 (IDMM),cars,91.2,previous,24
-DeiT-T (IN1k PT),cub,76.8,previous,24
+DeiT-T (IN1k PT),cub,82.1,previous,24
 DeiT-T (IDMM),cub,50.9,previous,24
-DeiT-B (IN1k PT),cub,81.9,previous,24
+DeiT-B (IN1k PT),cub,88.0,previous,24
 DeiT-B (IDMM),cub,54.3,previous,24
-PVTv2-B0 (IN1k PT),cub,81.4,previous,24
 PVTv2-B0 (IDMM),cub,77.6,previous,24
-T2T-ViT-7 (IN1k PT),cub,79.0,previous,24
+PVTv2-B3 (IDMM),cub,82.8,previous,24
 T2T-ViT-7 (IDMM),cub,63.2,previous,24
-DeiT-T (IN1k PT),aircraft,78.7,previous,24
+DeiT-T (IN1k PT),aircraft,84.7,previous,24
 DeiT-T (IDMM),aircraft,48.6,previous,24
-DeiT-B (IN1k PT),aircraft,82.8,previous,24
+DeiT-B (IN1k PT),aircraft,90.3,previous,24
 DeiT-B (IDMM),aircraft,46.6,previous,24
-PVTv2-B0 (IN1k PT),aircraft,88.3,previous,24
 PVTv2-B0 (IDMM),aircraft,83.3,previous,24
-T2T-ViT-7 (IN1k PT),aircraft,83.8,previous,24
+PVTv2-B3 (IDMM),aircraft,91.8,previous,24
 T2T-ViT-7 (IDMM),aircraft,72.9,previous,24
-DeiT-T (IN1k PT),cars,90.3,previous,24
+DeiT-T (IN1k PT),cars,87.2,previous,24
 DeiT-T (IDMM),cars,77.8,previous,24
-DeiT-B (IN1k PT),cars,92.6,previous,24
+DeiT-B (IN1k PT),cars,92.9,previous,24
 DeiT-B (IDMM),cars,70.7,previous,24
-PVTv2-B0 (IN1k PT),cars,92.6,previous,24
 PVTv2-B0 (IDMM),cars,92.0,previous,24
-T2T-ViT-7 (IN1k PT),cars,92.8,previous,24
+PVTv2-B3 (IDMM),cars,94.3,previous,24
 T2T-ViT-7 (IDMM),cars,91.2,previous,24
-DeiT-T (IN1k PT),cub,76.8,previous,24
+DeiT-T (IN1k PT),cub,82.1,previous,24
 DeiT-T (IDMM),cub,50.9,previous,24
-DeiT-B (IN1k PT),cub,81.9,previous,24
+DeiT-B (IN1k PT),cub,88.0,previous,24
 DeiT-B (IDMM),cub,54.3,previous,24
-PVTv2-B0 (IN1k PT),cub,81.4,previous,24
 PVTv2-B0 (IDMM),cub,77.6,previous,24
-T2T-ViT-7 (IN1k PT),cub,79.0,previous,24
+PVTv2-B3 (IDMM),cub,82.8,previous,24
 T2T-ViT-7 (IDMM),cub,63.2,previous,24
-PCA-Net,aircraft,79.92,previous,53
-PMG,aircraft,61.87,previous,53
-API-Net,aircraft,64.51,previous,53
-MGN-CNN,aircraft,68.21,previous,53
-Res-50,aircraft,59.24,previous,53
-Res-101,aircraft,65.28,previous,53
-Res-50+DSSD,aircraft,71.89,previous,53
-Res-101+DSSD,aircraft,79.08,previous,53
-PCA-Net,cars,68.16,previous,53
-PMG,cars,65.13,previous,53
-API-Net,cars,73.97,previous,53
-MGN-CNN,cars,70.59,previous,53
-Res-50,cars,69.13,previous,53
-Res-101,cars,71.85,previous,53
-Res-50+DSSD,cars,87.32,previous,53
-Res-101+DSSD,cars,87.96,previous,53
-PCA-Net,cub,64.87,previous,53
-PMG,cub,61.01,previous,53
-API-Net,cub,69.05,previous,53
-MGN-CNN,cub,62.95,previous,53
-Res-50,cub,65.84,previous,53
-Res-101,cub,68.25,previous,53
-Res-50+DSSD,cub,78.29,previous,53
-Res-101+DSSD,cub,80.29,previous,53
-RA-CNN,aircraft,88.1,previous,23
-MA-CNN,aircraft,89.9,previous,23
-NTS,aircraft,91.4,previous,23
-API-Net,aircraft,93.0,previous,23
-Cross-X,aircraft,92.6,previous,23
-DCL,aircraft,93.0,previous,23
-DTB-Net,aircraft,91.2,previous,23
-CIN,aircraft,92.6,previous,23
-LIO,aircraft,92.7,previous,23
-DTB-Net*,aircraft,91.6,previous,23
-CIN*,aircraft,92.8,previous,23
-API-Net*,aircraft,93.4,previous,23
-SnapMix**,aircraft,92.8,previous,23
-CEKD,aircraft,93.48,previous,23
-RA-CNN,cars,92.5,previous,23
-MA-CNN,cars,92.8,previous,23
-NTS,cars,93.3,previous,23
-API-Net,cars,94.8,previous,23
-Cross-X,cars,94.5,previous,23
-DCL,cars,94.5,previous,23
-DTB-Net,cars,94.1,previous,23
-CIN,cars,94.1,previous,23
-LIO,cars,94.5,previous,23
-DTB-Net*,cars,94.5,previous,23
-CIN*,cars,94.5,previous,23
-API-Net*,cars,94.9,previous,23
-SnapMix**,cars,94.3,previous,23
-CEKD,cars,95.65,previous,23
-RA-CNN,cub,85.3,previous,23
-MA-CNN,cub,86.5,previous,23
-NTS,cub,87.5,previous,23
-API-Net,cub,87.7,previous,23
-Cross-X,cub,87.7,previous,23
-DCL,cub,87.8,previous,23
-DTB-Net,cub,87.5,previous,23
-CIN,cub,87.5,previous,23
-LIO,cub,88.0,previous,23
-DTB-Net*,cub,88.1,previous,23
-CIN*,cub,88.1,previous,23
-API-Net*,cub,88.6,previous,23
-SnapMix**,cub,87.75,previous,23
-CEKD,cub,88.41,previous,23
-PCA-Net,aircraft,79.92,previous,53
-PMG,aircraft,61.87,previous,53
-API-Net,aircraft,64.51,previous,53
-MGN-CNN,aircraft,68.21,previous,53
-Res-50,aircraft,59.24,previous,53
-Res-101,aircraft,65.28,previous,53
-Res-50+DSSD,aircraft,71.89,previous,53
-Res-101+DSSD,aircraft,79.08,previous,53
-PCA-Net,cars,68.16,previous,53
-PMG,cars,65.13,previous,53
-API-Net,cars,73.97,previous,53
-MGN-CNN,cars,70.59,previous,53
-Res-50,cars,69.13,previous,53
-Res-101,cars,71.85,previous,53
-Res-50+DSSD,cars,87.32,previous,53
-Res-101+DSSD,cars,87.96,previous,53
-PCA-Net,cub,64.87,previous,53
-PMG,cub,61.01,previous,53
-API-Net,cub,69.05,previous,53
-MGN-CNN,cub,62.95,previous,53
-Res-50,cub,65.84,previous,53
-Res-101,cub,68.25,previous,53
-Res-50+DSSD,cub,78.29,previous,53
-Res-101+DSSD,cub,80.29,previous,53
-RN18FT*,aircraft,50.67,previous,51
-SnapMix*,aircraft,58.67,previous,51
-KD*,aircraft,53.47,previous,51
-RKD*,aircraft,53.35,previous,51
-CRD*,aircraft,54.31,previous,51
-OFD*,aircraft,54.69,previous,51
-ReviewKD*,aircraft,58.54,previous,51
-DKD*,aircraft,58.04,previous,51
-DSSD,aircraft,66.32,previous,51
-RN18FT,aircraft,50.22,previous,51
-SnapMix,aircraft,59.71,previous,51
-KD,aircraft,53.67,previous,51
-DKD,aircraft,58.63,previous,51
-DADKD,aircraft,65.61,previous,51
-RN18FT*,cars,61.68,previous,51
-SnapMix*,cars,72.14,previous,51
-KD*,cars,60.58,previous,51
-RKD*,cars,60.87,previous,51
-CRD*,cars,61.72,previous,51
-OFD*,cars,61.37,previous,51
-ReviewKD*,cars,71.02,previous,51
-DKD*,cars,75.43,previous,51
-DSSD,cars,81.52,previous,51
-RN18FT,cars,60.58,previous,51
-SnapMix,cars,71.68,previous,51
-KD,cars,61.02,previous,51
-DKD,cars,75.97,previous,51
-DADKD,cars,80.61,previous,51
-RN18FT*,cub,58.98,previous,51
-SnapMix*,cub,64.98,previous,51
-KD*,cub,63.15,previous,51
-RKD*,cub,61.84,previous,51
-CRD*,cub,64.11,previous,51
-OFD*,cub,63.91,previous,51
-ReviewKD*,cub,67.89,previous,51
-DKD*,cub,70.97,previous,51
-DSSD,cub,74.13,previous,51
-RN18FT,cub,59.44,previous,51
-SnapMix,cub,65.41,previous,51
-KD,cub,62.81,previous,51
-DKD,cub,71.31,previous,51
-DADKD,cub,73.31,previous,51
-RN34FT*,aircraft,51.83,previous,52
-SnapMix*,aircraft,61.79,previous,52
-KD*,aircraft,56.04,previous,52
-RKD*,aircraft,55.18,previous,52
-CRD*,aircraft,56.23,previous,52
-OFD*,aircraft,55.67,previous,52
-ReviewKD*,aircraft,58.79,previous,52
-DKD*,aircraft,60.12,previous,52
-DSSD,aircraft,70.01,previous,52
-RN34FT,aircraft,52.41,previous,52
-SnapMix,aircraft,61.32,previous,52
-KD,aircraft,55.89,previous,52
-DKD,aircraft,59.67,previous,52
-DADKD,aircraft,68.52,previous,52
-RN34FT*,cars,63.78,previous,52
-SnapMix*,cars,76.84,previous,52
-KD*,cars,64.83,previous,52
-RKD*,cars,64.38,previous,52
-CRD*,cars,65.79,previous,52
-OFD*,cars,65.63,previous,52
-ReviewKD*,cars,73.12,previous,52
-DKD*,cars,78.96,previous,52
-DSSD,cars,86.24,previous,52
-RN34FT,cars,64.73,previous,52
-SnapMix,cars,77.45,previous,52
-KD,cars,65.12,previous,52
-DKD,cars,79.63,previous,52
-DADKD,cars,85.34,previous,52
-RN34FT*,cub,63.01,previous,52
-SnapMix*,cub,67.13,previous,52
-KD*,cub,64.88,previous,52
-RKD*,cub,64.78,previous,52
-CRD*,cub,66.12,previous,52
-OFD*,cub,65.83,previous,52
-ReviewKD*,cub,67.62,previous,52
-DKD*,cub,68.13,previous,52
-DSSD,cub,70.21,previous,52
-RN34FT,cub,62.79,previous,52
-SnapMix,cub,66.63,previous,52
-KD,cub,65.52,previous,52
-DKD,cub,67.83,previous,52
-DADKD,cub,69.9,previous,52
-RN50FT*,aircraft,57.96,previous,53
-SnapMix*,aircraft,64.07,previous,53
-KD*,aircraft,58.76,previous,53
-RKD*,aircraft,57.63,previous,53
-CRD*,aircraft,58.77,previous,53
-OFD*,aircraft,58.63,previous,53
-ReviewKD*,aircraft,67.65,previous,53
-DKD*,aircraft,61.89,previous,53
-DSSD,aircraft,73.01,previous,53
-RN50FT,aircraft,58.44,previous,53
-SnapMix,aircraft,63.87,previous,53
-KD,aircraft,58.22,previous,53
-DKD,aircraft,62.13,previous,53
-DADKD,aircraft,72.63,previous,53
-RN50FT*,cars,68.85,previous,53
-SnapMix*,cars,82.13,previous,53
-KD*,cars,71.83,previous,53
-RKD*,cars,71.87,previous,53
-CRD*,cars,72.02,previous,53
-OFD*,cars,71.97,previous,53
-ReviewKD*,cars,84.82,previous,53
-DKD*,cars,85.04,previous,53
-DSSD,cars,88.12,previous,53
-RN50FT,cars,69.25,previous,53
-SnapMix,cars,81.54,previous,53
-KD,cars,72.33,previous,53
-DKD,cars,84.94,previous,53
-DADKD,cars,87.74,previous,53
-RN50FT*,cub,65.87,previous,53
-SnapMix*,cub,70.78,previous,53
-KD*,cub,70.84,previous,53
-RKD*,cub,70.09,previous,53
-CRD*,cub,72.83,previous,53
-OFD*,cub,72.71,previous,53
-ReviewKD*,cub,73.81,previous,53
-DKD*,cub,76.02,previous,53
-DSSD,cub,79.13,previous,53
-RN50FT,cub,66.4,previous,53
-SnapMix,cub,71.32,previous,53
-KD,cub,71.14,previous,53
-DKD,cub,75.92,previous,53
-DADKD,cub,78.22,previous,53
-RN101FT*,aircraft,65.14,previous,54
-SnapMix*,aircraft,68.89,previous,54
-KD*,aircraft,66.11,previous,54
-RKD*,aircraft,64.67,previous,54
-CRD*,aircraft,66.39,previous,54
-OFD*,aircraft,65.67,previous,54
-ReviewKD*,aircraft,68.89,previous,54
-DKD*,aircraft,68.54,previous,54
-DSSD,aircraft,78.99,previous,54
-RN101FT,aircraft,64.91,previous,54
-SnapMix,aircraft,69.29,previous,54
-KD,aircraft,64.68,previous,54
-DKD,aircraft,68.01,previous,54
-DADKD,aircraft,78.98,previous,54
-RN101FT*,cars,71.84,previous,54
-SnapMix*,cars,83.96,previous,54
-KD*,cars,76.12,previous,54
-RKD*,cars,74.63,previous,54
-CRD*,cars,75.32,previous,54
-OFD*,cars,74.83,previous,54
-ReviewKD*,cars,85.72,previous,54
-DKD*,cars,84.89,previous,54
-DSSD,cars,89.13,previous,54
-RN101FT,cars,72.35,previous,54
-SnapMix,cars,83.16,previous,54
-KD,cars,75.42,previous,54
-DKD,cars,85.69,previous,54
-DADKD,cars,88.19,previous,54
-RN101FT*,cub,68.12,previous,54
-SnapMix*,cub,72.59,previous,54
-KD*,cub,71.98,previous,54
-RKD*,cub,71.33,previous,54
-CRD*,cub,72.55,previous,54
-OFD*,cub,71.97,previous,54
-ReviewKD*,cub,75.52,previous,54
-DKD*,cub,75.68,previous,54
-DSSD,cub,81.07,previous,54
-RN101FT,cub,67.67,previous,54
-SnapMix,cub,73.04,previous,54
-KD,cub,72.71,previous,54
-DKD,cub,76.38,previous,54
-DADKD,cub,80.33,previous,54
-RN18FT_rn18,aircraft,88.27,previous,23
-Mixup_rn18,aircraft,87.82,previous,23
-CutMix_rn18,aircraft,88.78,previous,23
-Cutout_rn18,aircraft,88.03,previous,23
-InPS_rn18,aircraft,89.08,previous,23
-SnapMix_rn18,aircraft,89.32,previous,23
-S3Mix_rn18,aircraft,89.53,previous,23
-S3Mix+_rn18,aircraft,89.8,previous,23
-MixUp*_rn18,aircraft,89.82,previous,23
-CutMix*_rn18,aircraft,89.44,previous,23
-SnapMix*_rn18,aircraft,90.17,previous,23
-CEKD*_rn18,aircraft,91.29,previous,23
-RN18FT_rn18,cars,91.51,previous,23
-Mixup_rn18,cars,91.56,previous,23
-CutMix_rn18,cars,92.24,previous,23
-Cutout_rn18,cars,91.46,previous,23
-InPS_rn18,cars,91.98,previous,23
-SnapMix_rn18,cars,92.24,previous,23
-S3Mix_rn18,cars,92.63,previous,23
-S3Mix+_rn18,cars,92.95,previous,23
-MixUp*_rn18,cars,91.57,previous,23
-CutMix*_rn18,cars,92.65,previous,23
-SnapMix*_rn18,cars,93.12,previous,23
-CEKD*_rn18,cars,93.87,previous,23
-RN18FT_rn18,cub,82.45,previous,23
-Mixup_rn18,cub,83.21,previous,23
-CutMix_rn18,cub,83.4,previous,23
-Cutout_rn18,cub,81.81,previous,23
-InPS_rn18,cub,84.55,previous,23
-SnapMix_rn18,cub,83.57,previous,23
-S3Mix_rn18,cub,85.14,previous,23
-S3Mix+_rn18,cub,85.43,previous,23
-MixUp*_rn18,cub,83.17,previous,23
-CutMix*_rn18,cub,80.16,previous,23
-SnapMix*_rn18,cub,84.29,previous,23
-CEKD*_rn18,cub,85.22,previous,23
-RN34FT_rn34,aircraft,89.53,previous,23
-Mixup_rn34,aircraft,89.77,previous,23
-CutMix_rn34,aircraft,90.19,previous,23
-Cutout_rn34,aircraft,89.35,previous,23
-InPS_rn34,aircraft,90.16,previous,23
-SnapMix_rn34,aircraft,90.43,previous,23
-S3Mix_rn34,aircraft,90.46,previous,23
-S3Mix+_rn34,aircraft,90.76,previous,23
-MixUp*_rn34,aircraft,91.02,previous,23
-CutMix*_rn34,aircraft,91.26,previous,23
-SnapMix*_rn34,aircraft,92.36,previous,23
-CEKD*_rn34,aircraft,93.65,previous,23
-RN34FT_rn34,cars,92.33,previous,23
-Mixup_rn34,cars,92.65,previous,23
-CutMix_rn34,cars,93.28,previous,23
-Cutout_rn34,cars,92.65,previous,23
-InPS_rn34,cars,92.08,previous,23
-SnapMix_rn34,cars,93.22,previous,23
-S3Mix_rn34,cars,93.27,previous,23
-S3Mix+_rn34,cars,93.31,previous,23
-MixUp*_rn34,cars,93.28,previous,23
-CutMix*_rn34,cars,93.61,previous,23
-SnapMix*_rn34,cars,93.95,previous,23
-CEKD*_rn34,cars,94.61,previous,23
-RN34FT_rn34,cub,84.86,previous,23
-Mixup_rn34,cub,85.23,previous,23
-CutMix_rn34,cub,85.81,previous,23
-Cutout_rn34,cub,84.69,previous,23
-InPS_rn34,cub,86.07,previous,23
-SnapMix_rn34,cub,86.4,previous,23
-S3Mix_rn34,cub,86.68,previous,23
-S3Mix+_rn34,cub,86.83,previous,23
-MixUp*_rn34,cub,85.22,previous,23
-CutMix*_rn34,cub,85.69,previous,23
-SnapMix*_rn34,cub,87.06,previous,23
-CEKD*_rn34,cub,88.32,previous,23
-RN50FT_rn50,aircraft,90.31,previous,23
-Mixup_rn50,aircraft,90.1,previous,23
-CutMix_rn50,aircraft,91.12,previous,23
-Cutout_rn50,aircraft,89.62,previous,23
-InPS_rn50,aircraft,91.48,previous,23
-SnapMix_rn50,aircraft,91.27,previous,23
-S3Mix_rn50,aircraft,91.51,previous,23
-S3Mix+_rn50,aircraft,91.6,previous,23
-MixUp*_rn50,aircraft,92.24,previous,23
-CutMix*_rn50,aircraft,92.23,previous,23
-SnapMix*_rn50,aircraft,92.8,previous,23
-CEKD*_rn50,aircraft,93.48,previous,23
-RN50FT_rn50,cars,92.94,previous,23
-Mixup_rn50,cars,92.74,previous,23
-CutMix_rn50,cars,93.42,previous,23
-Cutout_rn50,cars,92.8,previous,23
-InPS_rn50,cars,93.26,previous,23
-SnapMix_rn50,cars,93.22,previous,23
-S3Mix_rn50,cars,93.61,previous,23
-S3Mix+_rn50,cars,93.75,previous,23
-MixUp*_rn50,cars,93.96,previous,23
-CutMix*_rn50,cars,94.18,previous,23
-SnapMix*_rn50,cars,94.3,previous,23
-CEKD*_rn50,cars,95.65,previous,23
-RN50FT_rn50,cub,85.72,previous,23
-Mixup_rn50,cub,86.26,previous,23
-CutMix_rn50,cub,86.78,previous,23
-Cutout_rn50,cub,84.43,previous,23
-InPS_rn50,cub,86.83,previous,23
-SnapMix_rn50,cub,87.02,previous,23
-S3Mix_rn50,cub,87.5,previous,23
-S3Mix+_rn50,cub,87.52,previous,23
-MixUp*_rn50,cub,86.23,previous,23
-CutMix*_rn50,cub,86.15,previous,23
-SnapMix*_rn50,cub,87.75,previous,23
-CEKD*_rn50,cub,88.41,previous,23
-RN101_rn101,aircraft,90.46,previous,23
-Mixup_rn101,aircraft,90.31,previous,23
-CutMix_rn101,aircraft,91.18,previous,23
-Cutout_rn101,aircraft,90.07,previous,23
-InPS_rn101,aircraft,90.46,previous,23
-SnapMix_rn101,aircraft,91.6,previous,23
-S3Mix_rn101,aircraft,91.54,previous,23
-S3Mix+_rn101,aircraft,91.81,previous,23
-MixUp*_rn101,aircraft,92.89,previous,23
-CutMix*_rn101,aircraft,92.29,previous,23
-SnapMix*_rn101,aircraft,93.74,previous,23
-CEKD*_rn101,aircraft,94.56,previous,23
-RN101_rn101,cars,93.06,previous,23
-Mixup_rn101,cars,93.05,previous,23
-CutMix_rn101,cars,93.25,previous,23
-Cutout_rn101,cars,93.02,previous,23
-InPS_rn101,cars,92.66,previous,23
-SnapMix_rn101,cars,93.51,previous,23
-S3Mix_rn101,cars,93.65,previous,23
-S3Mix+_rn101,cars,93.92,previous,23
-MixUp*_rn101,cars,94.22,previous,23
-CutMix*_rn101,cars,94.27,previous,23
-SnapMix*_rn101,cars,94.44,previous,23
-CEKD*_rn101,cars,95.96,previous,23
-RN101_rn101,cub,86.24,previous,23
-Mixup_rn101,cub,87.42,previous,23
-CutMix_rn101,cub,87.5,previous,23
-Cutout_rn101,cub,86.12,previous,23
-InPS_rn101,cub,87.57,previous,23
-SnapMix_rn101,cub,87.54,previous,23
-S3Mix_rn101,cub,87.71,previous,23
-S3Mix+_rn101,cub,87.97,previous,23
-MixUp*_rn101,cub,87.72,previous,23
-CutMix*_rn101,cub,87.92,previous,23
-SnapMix*_rn101,cub,88.45,previous,23
-CEKD*_rn101,cub,89.59,previous,23
+PCA-Net (IS=128 SotA),aircraft,79.92,previous,54
+PMG (IS=128 SotA),aircraft,61.87,previous,54
+API-Net (IS=128 SotA),aircraft,64.51,previous,54
+MGN-CNN (IS=128 SotA),aircraft,68.21,previous,54
+DSSD (IS=128 SotA),aircraft,79.08,previous,54
+PCA-Net (IS=128 SotA),cars,68.16,previous,54
+PMG (IS=128 SotA),cars,65.13,previous,54
+API-Net (IS=128 SotA),cars,73.97,previous,54
+MGN-CNN (IS=128 SotA),cars,70.59,previous,54
+DSSD (IS=128 SotA),cars,87.96,previous,54
+PCA-Net (IS=128 SotA),cub,64.87,previous,54
+PMG (IS=128 SotA),cub,61.01,previous,54
+API-Net (IS=128 SotA),cub,69.05,previous,54
+MGN-CNN (IS=128 SotA),cub,62.95,previous,54
+DSSD (IS=128 SotA),cub,80.29,previous,54
+RA-CNN (VGG) (IS=448 SotA),aircraft,88.1,previous,23
+MA-CNN (VGG) (IS=448 SotA),aircraft,89.9,previous,23
+NTS (Res-50) (IS=448 SotA),aircraft,91.4,previous,23
+API-Net (Res-50) (IS=448 SotA),aircraft,93.0,previous,23
+Cross-X (Res-50) (IS=448 SotA),aircraft,92.6,previous,23
+DCL (Res-50) (IS=448 SotA),aircraft,93.0,previous,23
+DTB-Net (Res-50) (IS=448 SotA),aircraft,91.2,previous,23
+CIN (Res-50) (IS=448 SotA),aircraft,92.6,previous,23
+LIO (Res-50) (IS=448 SotA),aircraft,92.7,previous,23
+DTB-Net (Res-101) (IS=448 SotA),aircraft,91.6,previous,23
+CIN (Res-101) (IS=448 SotA),aircraft,92.8,previous,23
+API-Net (Res-101) (IS=448 SotA),aircraft,93.4,previous,23
+Snapmix (Res-50) (IS=448 SotA),aircraft,92.8,previous,23
+Snapmix + CEKD (Res-50) (IS=448 SotA),aircraft,93.48,previous,23
+Snapmix (Res-101) (IS=448 SotA),aircraft,93.74,previous,23
+Snapmix + CEKD (Res-101) (IS=448 SotA),aircraft,94.56,previous,23
+RA-CNN (VGG) (IS=448 SotA),cars,92.5,previous,23
+MA-CNN (VGG) (IS=448 SotA),cars,92.8,previous,23
+NTS (Res-50) (IS=448 SotA),cars,93.3,previous,23
+API-Net (Res-50) (IS=448 SotA),cars,94.8,previous,23
+Cross-X (Res-50) (IS=448 SotA),cars,94.5,previous,23
+DCL (Res-50) (IS=448 SotA),cars,94.5,previous,23
+DTB-Net (Res-50) (IS=448 SotA),cars,94.1,previous,23
+CIN (Res-50) (IS=448 SotA),cars,94.1,previous,23
+LIO (Res-50) (IS=448 SotA),cars,94.5,previous,23
+DTB-Net (Res-101) (IS=448 SotA),cars,94.5,previous,23
+CIN (Res-101) (IS=448 SotA),cars,94.5,previous,23
+API-Net (Res-101) (IS=448 SotA),cars,94.9,previous,23
+Snapmix (Res-50) (IS=448 SotA),cars,94.3,previous,23
+Snapmix + CEKD (Res-50) (IS=448 SotA),cars,95.65,previous,23
+Snapmix (Res-101) (IS=448 SotA),cars,94.44,previous,23
+Snapmix + CEKD (Res-101) (IS=448 SotA),cars,95.96,previous,23
+RA-CNN (VGG) (IS=448 SotA),cub,85.3,previous,23
+MA-CNN (VGG) (IS=448 SotA),cub,86.5,previous,23
+NTS (Res-50) (IS=448 SotA),cub,87.5,previous,23
+API-Net (Res-50) (IS=448 SotA),cub,87.7,previous,23
+Cross-X (Res-50) (IS=448 SotA),cub,87.7,previous,23
+DCL (Res-50) (IS=448 SotA),cub,87.8,previous,23
+DTB-Net (Res-50) (IS=448 SotA),cub,87.5,previous,23
+CIN (Res-50) (IS=448 SotA),cub,87.5,previous,23
+LIO (Res-50) (IS=448 SotA),cub,88.0,previous,23
+DTB-Net (Res-101) (IS=448 SotA),cub,88.1,previous,23
+CIN (Res-101) (IS=448 SotA),cub,88.1,previous,23
+API-Net (Res-101) (IS=448 SotA),cub,88.6,previous,23
+Snapmix (Res-50) (IS=448 SotA),cub,87.75,previous,23
+Snapmix + CEKD (Res-50) (IS=448 SotA),cub,88.41,previous,23
+Snapmix (Res-101) (IS=448 SotA),cub,88.45,previous,23
+Snapmix + CEKD (Res-101) (IS=448 SotA),cub,89.59,previous,23
+PCA-Net (IS=128 SotA),aircraft,79.92,previous,54
+PMG (IS=128 SotA),aircraft,61.87,previous,54
+API-Net (IS=128 SotA),aircraft,64.51,previous,54
+MGN-CNN (IS=128 SotA),aircraft,68.21,previous,54
+DSSD (IS=128 SotA),aircraft,79.08,previous,54
+PCA-Net (IS=128 SotA),cars,68.16,previous,54
+PMG (IS=128 SotA),cars,65.13,previous,54
+API-Net (IS=128 SotA),cars,73.97,previous,54
+MGN-CNN (IS=128 SotA),cars,70.59,previous,54
+DSSD (IS=128 SotA),cars,87.96,previous,54
+PCA-Net (IS=128 SotA),cub,64.87,previous,54
+PMG (IS=128 SotA),cub,61.01,previous,54
+API-Net (IS=128 SotA),cub,69.05,previous,54
+MGN-CNN (IS=128 SotA),cub,62.95,previous,54
+DSSD (IS=128 SotA),cub,80.29,previous,54
+Baseline (Res-18),aircraft,50.67,previous,51
+SnapMix (Res-18),aircraft,58.67,previous,51
+KD (Res-18),aircraft,53.47,previous,51
+RKD (Res-18),aircraft,53.35,previous,51
+CRD (Res-18),aircraft,54.31,previous,51
+OFD (Res-18),aircraft,54.69,previous,51
+ReviewKD (Res-18),aircraft,58.54,previous,51
+DKD (Res-18),aircraft,58.04,previous,51
+DSSD (Res-18),aircraft,66.32,previous,51
+DADKD (Res-18),aircraft,65.61,previous,51
+Baseline (Res-18),cars,61.68,previous,51
+SnapMix (Res-18),cars,72.14,previous,51
+KD (Res-18),cars,60.58,previous,51
+RKD (Res-18),cars,60.87,previous,51
+CRD (Res-18),cars,61.72,previous,51
+OFD (Res-18),cars,61.37,previous,51
+ReviewKD (Res-18),cars,71.02,previous,51
+DKD (Res-18),cars,75.43,previous,51
+DSSD (Res-18),cars,81.52,previous,51
+DADKD (Res-18),cars,80.61,previous,51
+Baseline (Res-18),cub,58.98,previous,51
+SnapMix (Res-18),cub,64.98,previous,51
+KD (Res-18),cub,63.15,previous,51
+RKD (Res-18),cub,61.84,previous,51
+CRD (Res-18),cub,64.11,previous,51
+OFD (Res-18),cub,63.91,previous,51
+ReviewKD (Res-18),cub,67.89,previous,51
+DKD (Res-18),cub,70.97,previous,51
+DSSD (Res-18),cub,74.13,previous,51
+DADKD (Res-18),cub,73.31,previous,51
+Baseline (Res-34),aircraft,51.83,previous,52
+SnapMix (Res-34),aircraft,61.79,previous,52
+KD (Res-34),aircraft,56.04,previous,52
+RKD (Res-34),aircraft,55.18,previous,52
+CRD (Res-34),aircraft,56.23,previous,52
+OFD (Res-34),aircraft,55.67,previous,52
+ReviewKD (Res-34),aircraft,58.79,previous,52
+DKD (Res-34),aircraft,60.12,previous,52
+DSSD (Res-34),aircraft,70.01,previous,52
+DADKD (Res-34),aircraft,68.52,previous,52
+Baseline (Res-34),cars,63.78,previous,52
+SnapMix (Res-34),cars,76.84,previous,52
+KD (Res-34),cars,64.83,previous,52
+RKD (Res-34),cars,64.38,previous,52
+CRD (Res-34),cars,65.79,previous,52
+OFD (Res-34),cars,65.63,previous,52
+ReviewKD (Res-34),cars,73.12,previous,52
+DKD (Res-34),cars,78.96,previous,52
+DSSD (Res-34),cars,86.24,previous,52
+DADKD (Res-34),cars,85.34,previous,52
+Baseline (Res-34),cub,63.01,previous,52
+SnapMix (Res-34),cub,67.13,previous,52
+KD (Res-34),cub,64.88,previous,52
+RKD (Res-34),cub,64.78,previous,52
+CRD (Res-34),cub,66.12,previous,52
+OFD (Res-34),cub,65.83,previous,52
+ReviewKD (Res-34),cub,67.62,previous,52
+DKD (Res-34),cub,68.13,previous,52
+DSSD (Res-34),cub,70.21,previous,52
+DADKD (Res-34),cub,69.9,previous,52
+Baseline (Res-50),aircraft,57.96,previous,53
+SnapMix (Res-50),aircraft,64.07,previous,53
+KD (Res-50),aircraft,58.76,previous,53
+RKD (Res-50),aircraft,57.63,previous,53
+CRD (Res-50),aircraft,58.77,previous,53
+OFD (Res-50),aircraft,58.63,previous,53
+ReviewKD (Res-50),aircraft,67.65,previous,53
+DKD (Res-50),aircraft,61.89,previous,53
+DSSD (Res-50),aircraft,73.01,previous,53
+DADKD (Res-50),aircraft,72.63,previous,53
+Baseline (Res-50),cars,68.85,previous,53
+SnapMix (Res-50),cars,82.13,previous,53
+KD (Res-50),cars,71.83,previous,53
+RKD (Res-50),cars,71.87,previous,53
+CRD (Res-50),cars,72.02,previous,53
+OFD (Res-50),cars,71.97,previous,53
+ReviewKD (Res-50),cars,84.82,previous,53
+DKD (Res-50),cars,85.04,previous,53
+DSSD (Res-50),cars,88.12,previous,53
+DADKD (Res-50),cars,87.74,previous,53
+Baseline (Res-50),cub,65.87,previous,53
+SnapMix (Res-50),cub,70.78,previous,53
+KD (Res-50),cub,70.84,previous,53
+RKD (Res-50),cub,70.09,previous,53
+CRD (Res-50),cub,72.83,previous,53
+OFD (Res-50),cub,72.71,previous,53
+ReviewKD (Res-50),cub,73.81,previous,53
+DKD (Res-50),cub,76.02,previous,53
+DSSD (Res-50),cub,79.13,previous,53
+DADKD (Res-50),cub,78.22,previous,53
+Baseline (Res-101),aircraft,65.14,previous,54
+SnapMix (Res-101),aircraft,68.89,previous,54
+KD (Res-101),aircraft,66.11,previous,54
+RKD (Res-101),aircraft,64.67,previous,54
+CRD (Res-101),aircraft,66.39,previous,54
+OFD (Res-101),aircraft,65.67,previous,54
+ReviewKD (Res-101),aircraft,68.89,previous,54
+DKD (Res-101),aircraft,68.54,previous,54
+DSSD (Res-101),aircraft,78.99,previous,54
+DADKD (Res-101),aircraft,78.98,previous,54
+Baseline (Res-101),cars,71.84,previous,54
+SnapMix (Res-101),cars,83.96,previous,54
+KD (Res-101),cars,76.12,previous,54
+RKD (Res-101),cars,74.63,previous,54
+CRD (Res-101),cars,75.32,previous,54
+OFD (Res-101),cars,74.83,previous,54
+ReviewKD (Res-101),cars,85.72,previous,54
+DKD (Res-101),cars,84.89,previous,54
+DSSD (Res-101),cars,89.13,previous,54
+DADKD (Res-101),cars,88.19,previous,54
+Baseline (Res-101),cub,68.12,previous,54
+SnapMix (Res-101),cub,72.59,previous,54
+KD (Res-101),cub,71.98,previous,54
+RKD (Res-101),cub,71.33,previous,54
+CRD (Res-101),cub,72.55,previous,54
+OFD (Res-101),cub,71.97,previous,54
+ReviewKD (Res-101),cub,75.52,previous,54
+DKD (Res-101),cub,75.68,previous,54
+DSSD (Res-101),cub,81.07,previous,54
+DADKD (Res-101),cub,80.33,previous,54
+Baseline (Res-18),aircraft,88.27,previous,23
+Mixup (Res-18),aircraft,87.82,previous,23
+CutMix (Res-18),aircraft,88.78,previous,23
+Cutout (Res-18),aircraft,88.03,previous,23
+InPS (Res-18),aircraft,89.08,previous,23
+SnapMix (Res-18),aircraft,89.32,previous,23
+S3Mix (Res-18),aircraft,89.53,previous,23
+S3Mix+ (Res-18),aircraft,89.8,previous,23
+CEKD (Res-18),aircraft,91.29,previous,23
+Baseline (Res-18),cars,91.51,previous,23
+Mixup (Res-18),cars,91.56,previous,23
+CutMix (Res-18),cars,92.24,previous,23
+Cutout (Res-18),cars,91.46,previous,23
+InPS (Res-18),cars,91.98,previous,23
+SnapMix (Res-18),cars,92.24,previous,23
+S3Mix (Res-18),cars,92.63,previous,23
+S3Mix+ (Res-18),cars,92.95,previous,23
+CEKD (Res-18),cars,93.87,previous,23
+Baseline (Res-18),cub,82.45,previous,23
+Mixup (Res-18),cub,83.21,previous,23
+CutMix (Res-18),cub,83.4,previous,23
+Cutout (Res-18),cub,81.81,previous,23
+InPS (Res-18),cub,84.55,previous,23
+SnapMix (Res-18),cub,83.57,previous,23
+S3Mix (Res-18),cub,85.14,previous,23
+S3Mix+ (Res-18),cub,85.43,previous,23
+CEKD (Res-18),cub,85.22,previous,23
+Baseline (Res-34),aircraft,89.53,previous,23
+Mixup (Res-34),aircraft,89.77,previous,23
+CutMix (Res-34),aircraft,90.19,previous,23
+Cutout (Res-34),aircraft,89.35,previous,23
+InPS (Res-34),aircraft,90.16,previous,23
+SnapMix (Res-34),aircraft,90.43,previous,23
+S3Mix (Res-34),aircraft,90.46,previous,23
+S3Mix+ (Res-34),aircraft,90.76,previous,23
+CEKD (Res-34),aircraft,93.65,previous,23
+Baseline (Res-34),cars,92.33,previous,23
+Mixup (Res-34),cars,92.65,previous,23
+CutMix (Res-34),cars,93.28,previous,23
+Cutout (Res-34),cars,92.65,previous,23
+InPS (Res-34),cars,92.08,previous,23
+SnapMix (Res-34),cars,93.22,previous,23
+S3Mix (Res-34),cars,93.27,previous,23
+S3Mix+ (Res-34),cars,93.31,previous,23
+CEKD (Res-34),cars,94.61,previous,23
+Baseline (Res-34),cub,84.86,previous,23
+Mixup (Res-34),cub,85.23,previous,23
+CutMix (Res-34),cub,85.81,previous,23
+Cutout (Res-34),cub,84.69,previous,23
+InPS (Res-34),cub,86.07,previous,23
+SnapMix (Res-34),cub,86.4,previous,23
+S3Mix (Res-34),cub,86.68,previous,23
+S3Mix+ (Res-34),cub,86.83,previous,23
+CEKD (Res-34),cub,88.32,previous,23
+Baseline (Res-50),aircraft,90.31,previous,23
+Mixup (Res-50),aircraft,90.1,previous,23
+CutMix (Res-50),aircraft,91.12,previous,23
+Cutout (Res-50),aircraft,89.62,previous,23
+InPS (Res-50),aircraft,91.48,previous,23
+SnapMix (Res-50),aircraft,91.27,previous,23
+S3Mix (Res-50),aircraft,91.51,previous,23
+S3Mix+ (Res-50),aircraft,91.6,previous,23
+CEKD (Res-50),aircraft,93.48,previous,23
+Baseline (Res-50),cars,92.94,previous,23
+Mixup (Res-50),cars,92.74,previous,23
+CutMix (Res-50),cars,93.42,previous,23
+Cutout (Res-50),cars,92.8,previous,23
+InPS (Res-50),cars,93.26,previous,23
+SnapMix (Res-50),cars,93.22,previous,23
+S3Mix (Res-50),cars,93.61,previous,23
+S3Mix+ (Res-50),cars,93.75,previous,23
+CEKD (Res-50),cars,95.65,previous,23
+Baseline (Res-50),cub,85.72,previous,23
+Mixup (Res-50),cub,86.26,previous,23
+CutMix (Res-50),cub,86.78,previous,23
+Cutout (Res-50),cub,84.43,previous,23
+InPS (Res-50),cub,86.83,previous,23
+SnapMix (Res-50),cub,87.02,previous,23
+S3Mix (Res-50),cub,87.5,previous,23
+S3Mix+ (Res-50),cub,87.52,previous,23
+CEKD (Res-50),cub,88.41,previous,23
+Baseline (Res-101),aircraft,90.46,previous,23
+Mixup (Res-101),aircraft,90.31,previous,23
+CutMix (Res-101),aircraft,91.18,previous,23
+Cutout (Res-101),aircraft,90.07,previous,23
+InPS (Res-101),aircraft,90.46,previous,23
+SnapMix (Res-101),aircraft,91.6,previous,23
+S3Mix (Res-101),aircraft,91.54,previous,23
+S3Mix+ (Res-101),aircraft,91.81,previous,23
+CEKD (Res-101),aircraft,94.56,previous,23
+Baseline (Res-101),cars,93.06,previous,23
+Mixup (Res-101),cars,93.05,previous,23
+CutMix (Res-101),cars,93.25,previous,23
+Cutout (Res-101),cars,93.02,previous,23
+InPS (Res-101),cars,92.66,previous,23
+SnapMix (Res-101),cars,93.51,previous,23
+S3Mix (Res-101),cars,93.65,previous,23
+S3Mix+ (Res-101),cars,93.92,previous,23
+CEKD (Res-101),cars,95.96,previous,23
+Baseline (Res-101),cub,86.24,previous,23
+Mixup (Res-101),cub,87.42,previous,23
+CutMix (Res-101),cub,87.5,previous,23
+Cutout (Res-101),cub,86.12,previous,23
+InPS (Res-101),cub,87.57,previous,23
+SnapMix (Res-101),cub,87.54,previous,23
+S3Mix (Res-101),cub,87.71,previous,23
+S3Mix+ (Res-101),cub,87.97,previous,23
+CEKD (Res-101),cub,89.59,previous,23

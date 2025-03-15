@@ -1,4 +1,6 @@
-# motivation: pt+ft train data (and cost) >> directly train on target datasets
+#!/bin/bash
+
+#motivation: pt+ft train data (and cost) >> directly train on target datasets
 # also allows to train custom architectures for task / resource constraints
 python compute_seen_images.py
 
@@ -30,21 +32,27 @@ python vis_attention.py --vis_all_masks --test_images --save_name attention_all_
 
 
 # extract tables from pdf
-python extract_table_from_pdf.py --input_file papers/idmm.pdf --pdf_page_number 9
+# python extract_table_from_pdf.py --input_pdf papers\s3mix.pdf --pdf_page_number 8
+# python extract_table_from_pdf.py --input_pdf papers\idmm.pdf --pdf_page_number 9
+# # fails for this as it not really a pdf but a printed page / image
+# # python extract_table_from_pdf.py --input_pdf papers\dssd_liang_2024.pdf --pdf_page_number 5
+# python extract_table_from_pdf.py --input_pdf papers\sit.pdf --pdf_page_number 7
+# python extract_table_from_pdf.py --input_pdf papers\gmml.pdf --pdf_page_number 4
+
 
 # make tables from previous papers into our format
 python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/vits_is224_scratch_vs_ssl.csv --serial 25
 python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/vits_is448_scratch_vs_pt.csv --serial 24
-python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/sota_is128.csv --serial 53
-python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/sota_is448.csv --serial 23
-python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/fgir_is128_rn18.csv --serial 51
-python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/fgir_is128_rn34.csv --serial 52
-python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/fgir_is128_rn50.csv --serial 53
-python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/fgir_is128_rn101.csv --serial 54
-python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/fgir_is448_rn18.csv --serial 23 --suffix "_rn18"
-python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/fgir_is448_rn34.csv --serial 23 --suffix "_rn34"
-python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/fgir_is448_rn50.csv --serial 23 --suffix "_rn50"
-python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/fgir_is448_rn101.csv --serial 23 --suffix "_rn101"
+python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/sota_is128.csv --serial 54 --suffix " (IS=128 SotA)"
+python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/sota_is448.csv --serial 23 --suffix " (IS=448 SotA)"
+python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/fgir_is128_rn18.csv --serial 51 --suffix " (Res-18)"
+python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/fgir_is128_rn34.csv --serial 52 --suffix " (Res-34)"
+python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/fgir_is128_rn50.csv --serial 53 --suffix " (Res-50)"
+python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/fgir_is128_rn101.csv --serial 54 --suffix " (Res-101)"
+python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/fgir_is448_rn18.csv --serial 23 --suffix " (Res-18)"
+python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/fgir_is448_rn34.csv --serial 23 --suffix " (Res-34)"
+python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/fgir_is448_rn50.csv --serial 23 --suffix " (Res-50)"
+python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/fgir_is448_rn101.csv --serial 23 --suffix " (Res-101)"
 
 python stack_two_df.py --input_df_1 results_all/melted_tables/vits_is224_scratch_vs_ssl.csv --input_df_2 results_all/melted_tables/vits_is448_scratch_vs_pt.csv --output_file prev_papers.csv
 python stack_two_df.py --input_df_1 data/prev_papers.csv --input_df_2 results_all/melted_tables/vits_is448_scratch_vs_pt.csv --output_file prev_papers.csv
@@ -99,8 +107,14 @@ python summarize_cost.py --keep_methods resnet18_resnet101_lr_rn18like resnet18d
 
 # tgda improves with longer training: plot acc vs epochs
 # can make many plots for this
-python download_plot_acc_vs_epoch.py --project_name nycu_pcs/KD_DA --serials 0 --keep_datasets cub --keep_methods vit_t16_ce_noaug vit_t16_resnet101_kd_noaug vit_t16_resnet101_kdct_noaug vit_t16_resnet101_tgda_noaug --output_file acc_vs_epoch_serial0_cub_vit_rn
-python download_plot_acc_vs_epoch.py --project_name nycu_pcs/KD_DA --serials 0 --keep_datasets cub --keep_methods resnet18_ce_noaug resnet18_resnet101_kd_noaug resnet18_resnet101_kdct_noaug resnet18_resnet101_tgda_noaug --output_file acc_vs_epoch_serial0_cub_rn
+dataset_array=("aircraft" "cars")
+
+for ds in ${dataset_array[@]}; do
+    python download_plot_acc_vs_epoch.py --project_name nycu_pcs/KD_DA --serials 0 --keep_datasets ${ds} --keep_methods resnet18_ce_noaug resnet18_resnet101_kd_noaug resnet18_resnet101_sod_noaug resnet18_resnet101_tgda_noaug --output_file acc_vs_epoch_serial0_${ds}_rn
+    python download_plot_acc_vs_epoch.py --project_name nycu_pcs/KD_DA --serials 0 --keep_datasets ${ds} --keep_methods resnet18_ce_noaug resnet18_resnet101_kd_noaug resnet18_resnet101_sod_noaug resnet18_resnet101_tgda_noaug --output_file acc_vs_epoch_serial0_${ds}_rn
+done
+# python download_plot_acc_vs_epoch.py --project_name nycu_pcs/KD_DA --serials 0 --keep_datasets cub --keep_methods vit_t16_ce_noaug vit_t16_resnet101_kd_noaug vit_t16_resnet101_sod_noaug vit_t16_resnet101_tgda_noaug --output_file acc_vs_epoch_serial0_cub_vit_rn
+# python download_plot_acc_vs_epoch.py --project_name nycu_pcs/KD_DA --serials 0 --keep_datasets cub --keep_methods resnet18_ce_noaug resnet18_resnet101_kd_noaug resnet18_resnet101_sod_noaug resnet18_resnet101_tgda_noaug --output_file acc_vs_epoch_serial0_cub_rn
 
 
 

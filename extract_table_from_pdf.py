@@ -3,7 +3,7 @@ import argparse
 
 import pandas as pd
 from pypdf import PdfReader
-from pdfminer import high_level
+#from pdfminer import high_level
 
 
 def read_pdf_page(fp, page_number, output_file, pdfminer=False):

@@ -30,7 +30,7 @@ def get_train_progress_df(runs, samples=10000):
     run = runs[0]
     # history_cols = [c for c in run.history().columns if 'val' in c] + ['_step']
     history_cols = ['val_acc', 'epoch']
-    cfg_cols = ['serial', 'dataset_name', 'model_name',
+    cfg_cols = ['serial', 'dataset_name', 'model_name', 'project_name',
                 'model_name_teacher', 'selector', 'tgda', 'pretrained']
 
     df = []
