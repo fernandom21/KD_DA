@@ -7,6 +7,21 @@ import matplotlib.pyplot as plt
 from utils import filter_df, rename_vars, drop_na
 
 
+    # # parser.add_argument('--keep_lr', nargs='+', type=float, default=None)
+    # # parser.add_argument('--keep_epochs', nargs='+', type=int, default=None)
+    # # parser.add_argument('--filter_lr', nargs='+', type=float, default=None)
+    # # parser.add_argument('--filter_epochs', nargs='+', type=int, default=None)
+    # # parser.add_argument('--keep_epochs', nargs='+', type=int, default=None)
+    # # parser.add_argument('--keep_lr', nargs='+', type=float, default=None)
+
+    # parser.add_argument('--square_resize_random_crop', action='store_false')
+    # parser.add_argument('--pretrained', action='store_true')
+    # parser.add_argument('--cont_loss', action='store_true')
+
+        # getattr(args, 'keep_lr', None),
+        # # getattr(args, 'keep_epochs', None),
+
+
 def make_plot(args, df):
     # Seaborn Style Settings
     sns.set_theme(
@@ -79,21 +94,10 @@ def parse_args():
     parser.add_argument('--keep_datasets', nargs='+', type=str, default=None)
     parser.add_argument('--keep_methods', nargs='+', type=str, default=None)
     parser.add_argument('--keep_serials', nargs='+', type=int, default=None)
-    # parser.add_argument('--keep_lr', nargs='+', type=float, default=None)
-    # parser.add_argument('--keep_epochs', nargs='+', type=int, default=None)
 
     parser.add_argument('--filter_datasets', nargs='+', type=str, default=None)
     parser.add_argument('--filter_methods', nargs='+', type=str, default=None)
     parser.add_argument('--filter_serials', nargs='+', type=int, default=None)
-    # parser.add_argument('--filter_lr', nargs='+', type=float, default=None)
-    # parser.add_argument('--filter_epochs', nargs='+', type=int, default=None)
-
-    parser.add_argument('--keep_lr', nargs='+', type=float, default=None)
-    # parser.add_argument('--keep_epochs', nargs='+', type=int, default=None)
-
-    parser.add_argument('--square_resize_random_crop', action='store_false')
-    parser.add_argument('--pretrained', action='store_true')
-    parser.add_argument('--cont_loss', action='store_true')
 
     # output
     parser.add_argument('--output_file', default='acc_vs_method', type=str,
@@ -195,9 +199,6 @@ def read_filter_clean(args):
         getattr(args, 'filter_datasets', None),
         getattr(args, 'filter_methods', None),
         getattr(args, 'filter_serials', None),
-
-        getattr(args, 'keep_lr', None),
-        # getattr(args, 'keep_epochs', None),
     )
 
     df = drop_na(df, args)

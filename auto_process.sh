@@ -31,6 +31,20 @@ python vis_attention.py --vis_all_masks --test_images --save_name attention_all_
 
 
 
+# reassign serials from wandb
+# python update_wandb_project_serialx_to_serialy --project_name nycu_pcs/KD_TGDA --serial_x 33 --serial_y 53
+# python update_wandb_project_serialx_to_serialy --project_name nycu_pcs/KD_TGDA --serial_x 34 --serial_y 54
+# python update_wandb_project_serialx_to_serialy_based_on_substr_in_field.py
+
+
+# download raw data from wandb
+# stage2 focused on accuracy since stage1 usually focuses on hparam search (if exists)
+python download_save_wandb_data.py --project_name nycu_pcs/Backbones --serials 1 15 --teachers_data --output_file backbones_stage2.csv
+python download_save_wandb_data.py --project_name nycu_pcs/KD_DA --serials 0 1 2 3 4 5 --da_data --output_file kd_da_stage2.csv
+python download_save_wandb_data.py --project_name nycu_pcs/KD_TGDA --serials 20 21 22 23 24 25 26 27 28 29 31 32 41 42 43 44 45 46 51 52 53 54 61 --output_file kd_tgda_stage2.csv
+
+
+
 # extract tables from pdf
 # python extract_table_from_pdf.py --input_pdf papers\s3mix.pdf --pdf_page_number 8
 # python extract_table_from_pdf.py --input_pdf papers\idmm.pdf --pdf_page_number 9
@@ -43,43 +57,44 @@ python vis_attention.py --vis_all_masks --test_images --save_name attention_all_
 # make tables from previous papers into our format
 python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/vits_is224_scratch_vs_ssl.csv --serial 25
 python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/vits_is448_scratch_vs_pt.csv --serial 24
-python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/sota_is128.csv --serial 54 --suffix " (IS=128 SotA)"
-python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/sota_is448.csv --serial 23 --suffix " (IS=448 SotA)"
-python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/fgir_is128_rn18.csv --serial 51 --suffix " (Res-18)"
-python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/fgir_is128_rn34.csv --serial 52 --suffix " (Res-34)"
-python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/fgir_is128_rn50.csv --serial 53 --suffix " (Res-50)"
-python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/fgir_is128_rn101.csv --serial 54 --suffix " (Res-101)"
-python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/fgir_is448_rn18.csv --serial 23 --suffix " (Res-18)"
-python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/fgir_is448_rn34.csv --serial 23 --suffix " (Res-34)"
-python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/fgir_is448_rn50.csv --serial 23 --suffix " (Res-50)"
-python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/fgir_is448_rn101.csv --serial 23 --suffix " (Res-101)"
 
+python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/fgir_is128_rn18.csv --serial 51 --suffix " (128, Res-18)" --project_name prev_is128_rn18
+python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/fgir_is128_rn34.csv --serial 52 --suffix " (128, Res-34)" --project_name prev_is128_rn34
+python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/fgir_is128_rn50.csv --serial 53 --suffix " (128, Res-50)" --project_name prev_is128_rn50
+python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/fgir_is128_rn101.csv --serial 54 --suffix " (128, Res-101)" --project_name prev_is128_rn101
+
+python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/fgir_is448_rn18.csv --serial 23 --suffix " (448, Res-18)" --project_name prev_is448_rn18
+python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/fgir_is448_rn34.csv --serial 23 --suffix " (448, Res-34)" --project_name prev_is448_rn34
+python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/fgir_is448_rn50.csv --serial 23 --suffix " (448, Res-50)" --project_name prev_is448_rn50
+python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/fgir_is448_rn101.csv --serial 23 --suffix " (448, Res-101)" --project_name prev_is448_rn101
+
+python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/sota_is128_rn101.csv --serial 54 --suffix " (IS=128 SotA)" --project_name prev_is128_sota
+
+python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/sota_is448_rn50.csv --serial 23 --suffix " (IS=448 SotA)" --project_name prev_is448_sota_rn50
+python adapt_paper_tables_to_our_format.py --input_file data/tables_previous_mod/sota_is448_rn101.csv --serial 23 --suffix " (IS=448 SotA)" --project_name prev_is448_sota_rn101
+
+
+
+# stack results from previous papers into a single table
 python stack_two_df.py --input_df_1 results_all/melted_tables/vits_is224_scratch_vs_ssl.csv --input_df_2 results_all/melted_tables/vits_is448_scratch_vs_pt.csv --output_file prev_papers.csv
 python stack_two_df.py --input_df_1 data/prev_papers.csv --input_df_2 results_all/melted_tables/vits_is448_scratch_vs_pt.csv --output_file prev_papers.csv
-python stack_two_df.py --input_df_1 data/prev_papers.csv --input_df_2 results_all/melted_tables/sota_is128.csv --output_file prev_papers.csv
-python stack_two_df.py --input_df_1 data/prev_papers.csv --input_df_2 results_all/melted_tables/sota_is448.csv --output_file prev_papers.csv
-python stack_two_df.py --input_df_1 data/prev_papers.csv --input_df_2 results_all/melted_tables/sota_is128.csv --output_file prev_papers.csv
+
 python stack_two_df.py --input_df_1 data/prev_papers.csv --input_df_2 results_all/melted_tables/fgir_is128_rn18.csv --output_file prev_papers.csv
 python stack_two_df.py --input_df_1 data/prev_papers.csv --input_df_2 results_all/melted_tables/fgir_is128_rn34.csv --output_file prev_papers.csv
 python stack_two_df.py --input_df_1 data/prev_papers.csv --input_df_2 results_all/melted_tables/fgir_is128_rn50.csv --output_file prev_papers.csv
 python stack_two_df.py --input_df_1 data/prev_papers.csv --input_df_2 results_all/melted_tables/fgir_is128_rn101.csv --output_file prev_papers.csv
+
 python stack_two_df.py --input_df_1 data/prev_papers.csv --input_df_2 results_all/melted_tables/fgir_is448_rn18.csv --output_file prev_papers.csv
 python stack_two_df.py --input_df_1 data/prev_papers.csv --input_df_2 results_all/melted_tables/fgir_is448_rn34.csv --output_file prev_papers.csv
 python stack_two_df.py --input_df_1 data/prev_papers.csv --input_df_2 results_all/melted_tables/fgir_is448_rn50.csv --output_file prev_papers.csv
 python stack_two_df.py --input_df_1 data/prev_papers.csv --input_df_2 results_all/melted_tables/fgir_is448_rn101.csv --output_file prev_papers.csv
 
+python stack_two_df.py --input_df_1 data/prev_papers.csv --input_df_2 results_all/melted_tables/sota_is128_rn101.csv --output_file prev_papers.csv
 
-# reassign serials from wandb
-# python update_wandb_project_serialx_to_serialy --project_name nycu_pcs/KD_TGDA --serial_x 33 --serial_y 53
-# python update_wandb_project_serialx_to_serialy --project_name nycu_pcs/KD_TGDA --serial_x 34 --serial_y 54
-# python update_wandb_project_serialx_to_serialy_based_on_substr_in_field.py
+python stack_two_df.py --input_df_1 data/prev_papers.csv --input_df_2 results_all/melted_tables/sota_is448_rn50.csv --output_file prev_papers.csv
+python stack_two_df.py --input_df_1 data/prev_papers.csv --input_df_2 results_all/melted_tables/sota_is448_rn101.csv --output_file prev_papers.csv
 
 
-# download raw data from wandb
-# stage2 focused on accuracy since stage1 usually focuses on hparam search (if exists)
-python download_save_wandb_data.py --project_name nycu_pcs/Backbones --serials 1 15 --teachers_data --output_file backbones_stage2.csv
-python download_save_wandb_data.py --project_name nycu_pcs/KD_DA --serials 0 1 2 3 4 5 --da_data --output_file kd_da_stage2.csv
-python download_save_wandb_data.py --project_name nycu_pcs/KD_TGDA --serials 20 21 22 23 24 25 26 27 28 29 31 32 41 42 43 44 45 46 51 52 53 54 61 --output_file kd_tgda_stage2.csv
 
 # combine into one single dataframe with all data
 python stack_two_df.py --input_df_1 data/kd_da_stage2.csv --input_df_2 data/kd_tgda_stage2.csv --output_file kd_da_tgda_stage2.csv
@@ -95,7 +110,7 @@ python preprocess_raw_wandb_data.py
 python summarize_acc.py --main_serials 1 15 --keep_settings teacher_ft_224 teacher_cal_224 teacher_cal_448 --output_file acc_teachers
 python summarize_acc.py --main_serials 0 1 2 3 4 5 --keep_settings ce_noaug ce_re ce_ta ce_cm ce_mu ce_cmmu kd_noaug kd_re kd_ta kd_cm kd_mu kd_cmmu sod_noaug sod_re sod_ta sod_cm sod_mu sod_cmmu tgda_noaug tgda_re tgda_ta tgda_cm tgda_mu tgda_cmmu --output_file acc_dataaug
 python summarize_acc.py --main_serials 20 21 22 23 24 25 26 27 28 29 31 32 51 52 53 54 61 --results_dir results_all/acc_unfiltered --output_file acc_tgda
-python summarize_acc.py --main_serials 20 21 22 23 24 25 26 27 28 29 31 32 51 52 53 54 61 --filter_methods vitfs_tiny_patch16_gap_224_resnet101_hr_vits_tgda_ta_ls_sd_800 vit_t16_resnet101_hr_vits_tgda_ta_ls_sd_800 resnet18d_resnet101_lr_rn18like resnet34d_resnet101_lr_rn34like resnet50d_resnet101_lr_rn50like resnet101d_resnet101_lr_rn101like Res-50 Res-101 PCA-Net PMG API-Net MGN-CNN PCA-Net PMG* API-Net* Res-50+DSSD Res-101+DSSD  --output_file acc_tgda
+python summarize_acc.py --main_serials 23 24 25 51 52 53 54 --filter_methods vitfs_tiny_patch16_gap_224_resnet101_hr_vits_tgda_ta_ls_sd_800 vit_t16_resnet101_hr_vits_tgda_ta_ls_sd_800 resnet18d_resnet101_lr_rn18like resnet34d_resnet101_lr_rn34like resnet50d_resnet101_lr_rn50like resnet101d_resnet101_lr_rn101like --output_file acc_tgda
 
 
 
@@ -119,12 +134,12 @@ done
 
 
 # copy latex table with current format (--no-escape for $ and other special characters)
-python tably.py results/tables/ours_vits_is224.csv 
-python tably.py results/tables/ours_vits_is448.csv 
+# python tably.py results/tables/ours_vits_is224.csv 
+# python tably.py results/tables/ours_vits_is448.csv 
 # python tably.py results/tables/ours_sota_is448_rn18_rn34.csv
-python tably.py results/tables/ours_sota_is448_rn18_rn34_rn50.csv
-python tably.py results/tables/ours_is128_rn18.csv
-python tably.py results/tables/ours_is128_rn34_rn50_rn101.csv
+# python tably.py results/tables/ours_sota_is448_rn18_rn34_rn50.csv
+# python tably.py results/tables/ours_is128_rn18.csv
+# python tably.py results/tables/ours_is128_rn34_rn50_rn101.csv
 
 
 
@@ -145,41 +160,41 @@ python tably.py results/tables/ours_is128_rn34_rn50_rn101.csv
 
 
 # ---------------------------------------------
-python preprocess_acc.py --input_file data/DA_all.csv --keep_epochs 800 --keep_lr 0.0005 --keep_methods resnet18_resnet101_tgda --output_file tgda_resnet18-resnet101.csv
+# python preprocess_acc.py --input_file data/DA_all.csv --keep_epochs 800 --keep_lr 0.0005 --keep_methods resnet18_resnet101_tgda --output_file tgda_resnet18-resnet101.csv
 
-python preprocess_acc.py --input_file data/DA_all.csv --keep_epochs 800 --keep_lr 0.0005 --keep_methods vit_t16_resnet101_tgda --output_file tgda_vit_t16-resnet101.csv
+# python preprocess_acc.py --input_file data/DA_all.csv --keep_epochs 800 --keep_lr 0.0005 --keep_methods vit_t16_resnet101_tgda --output_file tgda_vit_t16-resnet101.csv
 
-python preprocess_acc.py --input_file data/DA_all.csv --keep_epochs 800 --keep_lr 0.0005 --keep_methods vit_t16_vit_b16_tgda --output_file tgda_vit_t16-vit_b16.csv
+# python preprocess_acc.py --input_file data/DA_all.csv --keep_epochs 800 --keep_lr 0.0005 --keep_methods vit_t16_vit_b16_tgda --output_file tgda_vit_t16-vit_b16.csv
 
-python plot.py  --input_file results_all/acc/tgda_resnet18-resnet101.csv --x_var_name serial --hue_var_name dataset_name --output_file testplot --type_plot bar --x_rotation 45 --title 'Different Data Augmentation on Different Dataset Using TGDA (ResNet18-ResNet101)' --fig_size 9 5
+# python plot.py  --input_file results_all/acc/tgda_resnet18-resnet101.csv --x_var_name serial --hue_var_name dataset_name --output_file testplot --type_plot bar --x_rotation 45 --title 'Different Data Augmentation on Different Dataset Using TGDA (ResNet18-ResNet101)' --fig_size 9 5
 
 
-python preprocess_acc.py --input_file data/DA_all.csv --keep_epochs 800 --keep_lr 0.0005 --keep_methods resnet18_resnet101_tgda --output_file tgda_resnet18-resnet101.csv
-python preprocess_acc.py --input_file data/DA_all.csv --keep_epochs 800 --keep_lr 0.0005 --keep_methods vit_t16_resnet101_tgda --output_file tgda_vit_t16-resnet101.csv
-python preprocess_acc.py --input_file data/DA_all.csv --keep_epochs 800 --keep_lr 0.0005 --keep_methods vit_t16_vit_b16_tgda --output_file tgda_vit_t16-vit_b16.csv
+# python preprocess_acc.py --input_file data/DA_all.csv --keep_epochs 800 --keep_lr 0.0005 --keep_methods resnet18_resnet101_tgda --output_file tgda_resnet18-resnet101.csv
+# python preprocess_acc.py --input_file data/DA_all.csv --keep_epochs 800 --keep_lr 0.0005 --keep_methods vit_t16_resnet101_tgda --output_file tgda_vit_t16-resnet101.csv
+# python preprocess_acc.py --input_file data/DA_all.csv --keep_epochs 800 --keep_lr 0.0005 --keep_methods vit_t16_vit_b16_tgda --output_file tgda_vit_t16-vit_b16.csv
 
-python preprocess_acc.py --input_file data/DA_all.csv --keep_epochs 800 --keep_lr 0.0005 --keep_methods resnet18_resnet101_cal --output_file cal_resnet18-resnet101.csv
-python preprocess_acc.py --input_file data/DA_all.csv --keep_epochs 800 --keep_lr 0.0005 --keep_methods vit_t16_resnet101_cal --output_file cal_vit_t16-resnet101.csv
-python preprocess_acc.py --input_file data/DA_all.csv --keep_epochs 800 --keep_lr 0.0005 --keep_methods vit_t16_vit_b16_cal --output_file cal_vit_t16-vit_b16.csv
+# python preprocess_acc.py --input_file data/DA_all.csv --keep_epochs 800 --keep_lr 0.0005 --keep_methods resnet18_resnet101_cal --output_file cal_resnet18-resnet101.csv
+# python preprocess_acc.py --input_file data/DA_all.csv --keep_epochs 800 --keep_lr 0.0005 --keep_methods vit_t16_resnet101_cal --output_file cal_vit_t16-resnet101.csv
+# python preprocess_acc.py --input_file data/DA_all.csv --keep_epochs 800 --keep_lr 0.0005 --keep_methods vit_t16_vit_b16_cal --output_file cal_vit_t16-vit_b16.csv
 
-python preprocess_acc.py --input_file data/DA_all.csv --keep_epochs 800 --keep_lr 0.0005 --keep_methods resnet18_resnet101_kd --output_file kd_resnet18-resnet101.csv
-python preprocess_acc.py --input_file data/DA_all.csv --keep_epochs 800 --keep_lr 0.0005 --keep_methods vit_t16_resnet101_kd --output_file kd_vit_t16-resnet101.csv
-python preprocess_acc.py --input_file data/DA_all.csv --keep_epochs 800 --keep_lr 0.0005 --keep_methods vit_t16_vit_b16_kd --output_file kd_vit_t16-vit_b16.csv
+# python preprocess_acc.py --input_file data/DA_all.csv --keep_epochs 800 --keep_lr 0.0005 --keep_methods resnet18_resnet101_kd --output_file kd_resnet18-resnet101.csv
+# python preprocess_acc.py --input_file data/DA_all.csv --keep_epochs 800 --keep_lr 0.0005 --keep_methods vit_t16_resnet101_kd --output_file kd_vit_t16-resnet101.csv
+# python preprocess_acc.py --input_file data/DA_all.csv --keep_epochs 800 --keep_lr 0.0005 --keep_methods vit_t16_vit_b16_kd --output_file kd_vit_t16-vit_b16.csv
 
-python preprocess_acc.py --input_file data/DA_all.csv --keep_epochs 800 --keep_lr 0.0005 --keep_methods resnet18_ce --output_file ce_resnet18.csv
-python preprocess_acc.py --input_file data/DA_all.csv --keep_epochs 800 --keep_lr 0.0005 --keep_methods vit_t16_ce --output_file ce_vit_t16.csv
+# python preprocess_acc.py --input_file data/DA_all.csv --keep_epochs 800 --keep_lr 0.0005 --keep_methods resnet18_ce --output_file ce_resnet18.csv
+# python preprocess_acc.py --input_file data/DA_all.csv --keep_epochs 800 --keep_lr 0.0005 --keep_methods vit_t16_ce --output_file ce_vit_t16.csv
 
-python plot.py  --input_file results_all/acc/tgda_resnet18-resnet101.csv --x_var_name serial --hue_var_name dataset_name --output_file "TGDA (ResNet18-ResNet101)" --type_plot bar --x_rotation 45 --fig_size 9 5 --title "Different Data Augmentation on Different Dataset Using TGDA (ResNet18-ResNet101)"
-python plot.py  --input_file results_all/acc/tgda_vit_t16-resnet101.csv --x_var_name serial --hue_var_name dataset_name --output_file "TGDA (ViT_t16-ResNet101)" --type_plot bar --x_rotation 45 --fig_size 9 5 --title "Different Data Augmentation on Different Dataset Using TGDA (ViT_t16-ResNet101)"
-python plot.py  --input_file results_all/acc/tgda_vit_t16-vit_b16.csv --x_var_name serial --hue_var_name dataset_name --output_file "TGDA (ViT_t16-ViT_b16)" --type_plot bar --x_rotation 45 --fig_size 9 5 --title "Different Data Augmentation on Different Dataset Using TGDA (ViT_t16-ViT_b16)"
+# python plot.py  --input_file results_all/acc/tgda_resnet18-resnet101.csv --x_var_name serial --hue_var_name dataset_name --output_file "TGDA (ResNet18-ResNet101)" --type_plot bar --x_rotation 45 --fig_size 9 5 --title "Different Data Augmentation on Different Dataset Using TGDA (ResNet18-ResNet101)"
+# python plot.py  --input_file results_all/acc/tgda_vit_t16-resnet101.csv --x_var_name serial --hue_var_name dataset_name --output_file "TGDA (ViT_t16-ResNet101)" --type_plot bar --x_rotation 45 --fig_size 9 5 --title "Different Data Augmentation on Different Dataset Using TGDA (ViT_t16-ResNet101)"
+# python plot.py  --input_file results_all/acc/tgda_vit_t16-vit_b16.csv --x_var_name serial --hue_var_name dataset_name --output_file "TGDA (ViT_t16-ViT_b16)" --type_plot bar --x_rotation 45 --fig_size 9 5 --title "Different Data Augmentation on Different Dataset Using TGDA (ViT_t16-ViT_b16)"
 
-python plot.py  --input_file results_all/acc/cal_resnet18-resnet101.csv --x_var_name serial --hue_var_name dataset_name --output_file "CAL (ResNet18-ResNet101)" --type_plot bar --x_rotation 45 --fig_size 9 5 --title "Different Data Augmentation on Different Dataset Using CAL (ResNet18-ResNet101)"
-python plot.py  --input_file results_all/acc/cal_vit_t16-resnet101.csv --x_var_name serial --hue_var_name dataset_name --output_file "CAL (ViT_t16-ResNet101)" --type_plot bar --x_rotation 45 --fig_size 9 5 --title "Different Data Augmentation on Different Dataset Using CAL (ViT_t16-ResNet101)"
-python plot.py  --input_file results_all/acc/cal_vit_t16-vit_b16.csv --x_var_name serial --hue_var_name dataset_name --output_file "CAL (ViT_t16-ViT_b16)" --type_plot bar --x_rotation 45 --fig_size 9 5 --title "Different Data Augmentation on Different Dataset Using CAL (ViT_t16-ViT_b16)"
+# python plot.py  --input_file results_all/acc/cal_resnet18-resnet101.csv --x_var_name serial --hue_var_name dataset_name --output_file "CAL (ResNet18-ResNet101)" --type_plot bar --x_rotation 45 --fig_size 9 5 --title "Different Data Augmentation on Different Dataset Using CAL (ResNet18-ResNet101)"
+# python plot.py  --input_file results_all/acc/cal_vit_t16-resnet101.csv --x_var_name serial --hue_var_name dataset_name --output_file "CAL (ViT_t16-ResNet101)" --type_plot bar --x_rotation 45 --fig_size 9 5 --title "Different Data Augmentation on Different Dataset Using CAL (ViT_t16-ResNet101)"
+# python plot.py  --input_file results_all/acc/cal_vit_t16-vit_b16.csv --x_var_name serial --hue_var_name dataset_name --output_file "CAL (ViT_t16-ViT_b16)" --type_plot bar --x_rotation 45 --fig_size 9 5 --title "Different Data Augmentation on Different Dataset Using CAL (ViT_t16-ViT_b16)"
 
-python plot.py  --input_file results_all/acc/kd_resnet18-resnet101.csv --x_var_name serial --hue_var_name dataset_name --output_file "KD (ResNet18-ResNet101)" --type_plot bar --x_rotation 45 --fig_size 9 5 --title "Different Data Augmentation on Different Dataset Using KD (ResNet18-ResNet101)"
-python plot.py  --input_file results_all/acc/kd_vit_t16-resnet101.csv --x_var_name serial --hue_var_name dataset_name --output_file "KD (ViT_t16-ResNet101)" --type_plot bar --x_rotation 45 --fig_size 9 5 --title "Different Data Augmentation on Different Dataset Using KD (ViT_t16-ResNet101)"
-python plot.py  --input_file results_all/acc/kd_vit_t16-vit_b16.csv --x_var_name serial --hue_var_name dataset_name --output_file "KD (ViT_t16-ViT_b16)" --type_plot bar --x_rotation 45 --fig_size 9 5 --title "Different Data Augmentation on Different Dataset Using KD (ViT_t16-ViT_b16)"
+# python plot.py  --input_file results_all/acc/kd_resnet18-resnet101.csv --x_var_name serial --hue_var_name dataset_name --output_file "KD (ResNet18-ResNet101)" --type_plot bar --x_rotation 45 --fig_size 9 5 --title "Different Data Augmentation on Different Dataset Using KD (ResNet18-ResNet101)"
+# python plot.py  --input_file results_all/acc/kd_vit_t16-resnet101.csv --x_var_name serial --hue_var_name dataset_name --output_file "KD (ViT_t16-ResNet101)" --type_plot bar --x_rotation 45 --fig_size 9 5 --title "Different Data Augmentation on Different Dataset Using KD (ViT_t16-ResNet101)"
+# python plot.py  --input_file results_all/acc/kd_vit_t16-vit_b16.csv --x_var_name serial --hue_var_name dataset_name --output_file "KD (ViT_t16-ViT_b16)" --type_plot bar --x_rotation 45 --fig_size 9 5 --title "Different Data Augmentation on Different Dataset Using KD (ViT_t16-ViT_b16)"
 
-python plot.py  --input_file results_all/acc/ce_resnet18.csv --x_var_name serial --hue_var_name dataset_name --output_file "CE (ResNet18)" --type_plot bar --x_rotation 45 --fig_size 9 5 --title "Different Data Augmentation on Different Dataset Using CE (ResNet18)"
-python plot.py  --input_file results_all/acc/ce_vit_t16.csv --x_var_name serial --hue_var_name dataset_name --output_file "CE (ViT_t16)" --type_plot bar --x_rotation 45 --fig_size 9 5 --title "Different Data Augmentation on Different Dataset Using CE (ViT_t16)"
+# python plot.py  --input_file results_all/acc/ce_resnet18.csv --x_var_name serial --hue_var_name dataset_name --output_file "CE (ResNet18)" --type_plot bar --x_rotation 45 --fig_size 9 5 --title "Different Data Augmentation on Different Dataset Using CE (ResNet18)"
+# python plot.py  --input_file results_all/acc/ce_vit_t16.csv --x_var_name serial --hue_var_name dataset_name --output_file "CE (ViT_t16)" --type_plot bar --x_rotation 45 --fig_size 9 5 --title "Different Data Augmentation on Different Dataset Using CE (ViT_t16)"

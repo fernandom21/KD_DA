@@ -62,7 +62,6 @@ def pivot_table(df, serial=1, fp=None, var='acc',
 
     df = df.pivot(index='method', columns='dataset_name')[var]
 
-
     datasets = [ds for ds in DATASETS_DIC.keys() if ds in df.columns]
     df = df[datasets]
 
@@ -102,12 +101,11 @@ def summarize_acc(args):
         getattr(args, 'keep_datasets', None),
         getattr(args, 'keep_methods', None),
         getattr(args, 'keep_serials', None),
+        getattr(args, 'keep_settings', None),
 
         getattr(args, 'filter_datasets', None),
         getattr(args, 'filter_methods', None),
         getattr(args, 'filter_serials', None),
-
-        getattr(args, 'keep_settings', None),
         getattr(args, 'filter_settings', None),
     )
 
@@ -159,12 +157,11 @@ def parse_args():
     parser.add_argument('--keep_datasets', nargs='+', type=str, default=DATASETS_DIC.keys())
     parser.add_argument('--keep_methods', nargs='+', type=str, default=None)
     parser.add_argument('--keep_serials', nargs='+', type=int, default=None)
+    parser.add_argument('--keep_settings', nargs='+', type=str, default=None)
 
     parser.add_argument('--filter_datasets', nargs='+', type=str, default=None)
     parser.add_argument('--filter_methods', nargs='+', type=str, default=None)
     parser.add_argument('--filter_serials', nargs='+', type=int, default=None)
-
-    parser.add_argument('--keep_settings', nargs='+', type=str, default=None)
     parser.add_argument('--filter_settings', nargs='+', type=str, default=None)
 
     # output

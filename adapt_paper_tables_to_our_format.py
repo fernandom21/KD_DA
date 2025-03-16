@@ -25,7 +25,7 @@ def parse_args():
                                              'vits_is224_scratch_vs_ssl.csv'),
                         help='.csv with datasets info')
 
-    parser.add_argument('--project_name', type=str, default='previous')
+    parser.add_argument('--project_name', type=str, default='prev')
     parser.add_argument('--serial', type=str, default=25)
     parser.add_argument('--suffix', type=str, default='')
 

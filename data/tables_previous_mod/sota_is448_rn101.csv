@@ -1,0 +1,6 @@
+model_name,aircraft,cars,cub
+DTB-Net (Res-101),91.6,94.5,88.1
+CIN (Res-101),92.8,94.5,88.1
+API-Net (Res-101),93.4,94.9,88.6
+SnapMix (Res-101),93.74,94.44,88.45
+SnapMix + CEKD (Res-101),94.56,95.96,89.59

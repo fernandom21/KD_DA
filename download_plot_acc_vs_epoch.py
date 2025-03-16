@@ -5,7 +5,6 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-# from utils import standarize_df, rename_vars
 from utils import preprocess_df, drop_na, rename_vars
 
 
@@ -73,13 +72,16 @@ def modify_df(df, args):
     df = preprocess_df(
         df,
         'all',
+
         getattr(args, 'keep_datasets', None),
         getattr(args, 'keep_methods', None),
         getattr(args, 'keep_serials', None),
+        getattr(args, 'keep_settings', None),
         
         getattr(args, 'filter_datasets', None),
         getattr(args, 'filter_methods', None),
         getattr(args, 'filter_serials', None),
+        getattr(args, 'filter_settings', None),
     )
 
     df = drop_na(df, args)
@@ -155,10 +157,12 @@ def parse_args():
     parser.add_argument('--keep_datasets', nargs='+', type=str, default=None)
     parser.add_argument('--keep_methods', nargs='+', type=str, default=None)
     parser.add_argument('--keep_serials', nargs='+', type=int, default=None)
+    parser.add_argument('--keep_settings', nargs='+', type=str, default=None)
 
     parser.add_argument('--filter_datasets', nargs='+', type=str, default=None)
     parser.add_argument('--filter_methods', nargs='+', type=str, default=None)
     parser.add_argument('--filter_serials', nargs='+', type=int, default=None)
+    parser.add_argument('--filter_settings', nargs='+', type=str, default=None)
 
     # output
     parser.add_argument('--output_file', default='acc_vs_epoch', type=str,

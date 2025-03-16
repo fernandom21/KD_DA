@@ -17,12 +17,11 @@ def summarize_test_cost(args, host='server-3090', keep_serials=[45],):
         getattr(args, 'keep_datasets', None),
         getattr(args, 'keep_methods', None),
         keep_serials,
+        getattr(args, 'keep_settings', None),
 
         getattr(args, 'filter_datasets', None),
         getattr(args, 'filter_methods', None),
         getattr(args, 'filter_serials', None),
-
-        getattr(args, 'keep_settings', None),
         getattr(args, 'filter_settings', None),
     )
 
@@ -102,12 +101,11 @@ def summarize_train_cost(args, keep_serials=[41, 42, 43, 44]):
         getattr(args, 'keep_datasets', None),
         getattr(args, 'keep_methods', None),
         keep_serials,
+        getattr(args, 'keep_settings', None),
 
         getattr(args, 'filter_datasets', None),
         getattr(args, 'filter_methods', None),
         getattr(args, 'filter_serials', None),
-
-        getattr(args, 'keep_settings', None),
         getattr(args, 'filter_settings', None),
     )
 
@@ -153,12 +151,11 @@ def summarize_train_flops(args, keep_serials=[41, 42, 43, 44]):
         getattr(args, 'keep_datasets', None),
         getattr(args, 'keep_methods', None),
         keep_serials,
+        getattr(args, 'keep_settings', None),
 
         getattr(args, 'filter_datasets', None),
         getattr(args, 'filter_methods', None),
         getattr(args, 'filter_serials', None),
-
-        getattr(args, 'keep_settings', None),
         getattr(args, 'filter_settings', None),
     )
 
@@ -236,12 +233,11 @@ def summarize_parameters(args, keep_serials=[24, 51, 52, 53, 54]):
         getattr(args, 'keep_datasets', None),
         getattr(args, 'keep_methods', None),
         keep_serials,
+        getattr(args, 'keep_settings', None),
 
         getattr(args, 'filter_datasets', None),
         getattr(args, 'filter_methods', None),
         getattr(args, 'filter_serials', None),
-
-        getattr(args, 'keep_settings', None),
         getattr(args, 'filter_settings', None),
     )
 
@@ -267,12 +263,11 @@ def summarize_acc(args):
         getattr(args, 'keep_datasets', None),
         getattr(args, 'keep_methods', None),
         getattr(args, 'keep_serials', None),
+        getattr(args, 'keep_settings', None),
 
         getattr(args, 'filter_datasets', None),
         getattr(args, 'filter_methods', None),
         getattr(args, 'filter_serials', None),
-
-        getattr(args, 'keep_settings', None),
         getattr(args, 'filter_settings', None),
     )
 
@@ -336,12 +331,11 @@ def parse_args():
     parser.add_argument('--keep_datasets', nargs='+', type=str, default=DATASETS_DIC.keys())
     parser.add_argument('--keep_methods', nargs='+', type=str, default=METHODS_DIC.keys())
     parser.add_argument('--keep_serials', nargs='+', type=int, default=None)
+    parser.add_argument('--keep_settings', nargs='+', type=str, default=None)
 
     parser.add_argument('--filter_datasets', nargs='+', type=str, default=None)
     parser.add_argument('--filter_methods', nargs='+', type=str, default=None)
     parser.add_argument('--filter_serials', nargs='+', type=int, default=None)
-
-    parser.add_argument('--keep_settings', nargs='+', type=str, default=None)
     parser.add_argument('--filter_settings', nargs='+', type=str, default=None)
 
     # output
