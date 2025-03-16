@@ -128,6 +128,7 @@ for ds in ${dataset_array[@]}; do
     python download_plot_acc_vs_epoch.py --project_name nycu_pcs/KD_DA --serials 0 --keep_datasets ${ds} --keep_methods resnet18_ce_noaug resnet18_resnet101_kd_noaug resnet18_resnet101_sod_noaug resnet18_resnet101_tgda_noaug --output_file acc_vs_epoch_serial0_${ds}_rn
     python download_plot_acc_vs_epoch.py --project_name nycu_pcs/KD_DA --serials 0 --keep_datasets ${ds} --keep_methods resnet18_ce_noaug resnet18_resnet101_kd_noaug resnet18_resnet101_sod_noaug resnet18_resnet101_tgda_noaug --output_file acc_vs_epoch_serial0_${ds}_rn
 done
+
 # python download_plot_acc_vs_epoch.py --project_name nycu_pcs/KD_DA --serials 0 --keep_datasets cub --keep_methods vit_t16_ce_noaug vit_t16_resnet101_kd_noaug vit_t16_resnet101_sod_noaug vit_t16_resnet101_tgda_noaug --output_file acc_vs_epoch_serial0_cub_vit_rn
 # python download_plot_acc_vs_epoch.py --project_name nycu_pcs/KD_DA --serials 0 --keep_datasets cub --keep_methods resnet18_ce_noaug resnet18_resnet101_kd_noaug resnet18_resnet101_sod_noaug resnet18_resnet101_tgda_noaug --output_file acc_vs_epoch_serial0_cub_rn
 

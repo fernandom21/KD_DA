@@ -94,13 +94,15 @@ def parse_args():
     parser.add_argument('--keep_datasets', nargs='+', type=str, default=None)
     parser.add_argument('--keep_methods', nargs='+', type=str, default=None)
     parser.add_argument('--keep_serials', nargs='+', type=int, default=None)
+    parser.add_argument('--keep_settings', nargs='+', type=str, default=None)
 
     parser.add_argument('--filter_datasets', nargs='+', type=str, default=None)
     parser.add_argument('--filter_methods', nargs='+', type=str, default=None)
     parser.add_argument('--filter_serials', nargs='+', type=int, default=None)
+    parser.add_argument('--filter_settings', nargs='+', type=str, default=None)
 
     # output
-    parser.add_argument('--output_file', default='acc_vs_method', type=str,
+    parser.add_argument('--output_file', default='acc_vs_params', type=str,
                         help='File path')
     parser.add_argument('--results_dir', type=str,
                         default=os.path.join('results_all', 'plots'),
@@ -110,9 +112,9 @@ def parse_args():
 
     # Make a plot
     parser.add_argument('--type_plot', choices=['bar', 'line', 'box', 'violin', 'scatter'],
-                        default='bar', help='the type of plot (line, bar)')
+                        default='line', help='the type of plot (line, bar)')
 
-    parser.add_argument('--x_var_name', type=str, default='method',
+    parser.add_argument('--x_var_name', type=str, default='num_params',
                         help='name of the variable for x')
     parser.add_argument('--y_var_name', type=str, default='acc',
                         help='name of the variable for y')
@@ -192,13 +194,16 @@ def read_filter_clean(args):
 
     df = filter_df(
         df,
+
         getattr(args, 'keep_datasets', None),
         getattr(args, 'keep_methods', None),
         getattr(args, 'keep_serials', None),
+        getattr(args, 'keep_settings', None),
         
         getattr(args, 'filter_datasets', None),
         getattr(args, 'filter_methods', None),
         getattr(args, 'filter_serials', None),
+        getattr(args, 'filter_settings', None),
     )
 
     df = drop_na(df, args)

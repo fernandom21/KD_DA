@@ -157,7 +157,13 @@ def parse_args():
     parser.add_argument('--keep_datasets', nargs='+', type=str, default=DATASETS_DIC.keys())
     parser.add_argument('--keep_methods', nargs='+', type=str, default=None)
     parser.add_argument('--keep_serials', nargs='+', type=int, default=None)
-    parser.add_argument('--keep_settings', nargs='+', type=str, default=None)
+    parser.add_argument('--keep_settings', nargs='+', type=str,
+                        default=[0, 1, 2, 3, 4, 5, 6,
+                                 20, 21, 22, 23,
+                                 24, 25, 26, 27, 28, 29,
+                                 31, 32,
+                                 51, 52, 53, 54,
+                                 61])
 
     parser.add_argument('--filter_datasets', nargs='+', type=str, default=None)
     parser.add_argument('--filter_methods', nargs='+', type=str, default=None)
