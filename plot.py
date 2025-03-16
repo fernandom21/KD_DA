@@ -102,7 +102,7 @@ def parse_args():
     parser.add_argument('--filter_settings', nargs='+', type=str, default=None)
 
     # output
-    parser.add_argument('--output_file', default='acc_vs_params', type=str,
+    parser.add_argument('--output_file', default='acc_vs_flops', type=str,
                         help='File path')
     parser.add_argument('--results_dir', type=str,
                         default=os.path.join('results_all', 'plots'),
@@ -114,11 +114,11 @@ def parse_args():
     parser.add_argument('--type_plot', choices=['bar', 'line', 'box', 'violin', 'scatter'],
                         default='line', help='the type of plot (line, bar)')
 
-    parser.add_argument('--x_var_name', type=str, default='num_params',
+    parser.add_argument('--x_var_name', type=str, default='flops',
                         help='name of the variable for x')
     parser.add_argument('--y_var_name', type=str, default='acc',
                         help='name of the variable for y')
-    parser.add_argument('--hue_var_name', type=str, default=None,
+    parser.add_argument('--hue_var_name', type=str, default='setting',
                         help='legend of this bar plot')
     parser.add_argument('--style_var_name', type=str, default=None,
                         help='legend of this bar plot')
@@ -144,11 +144,11 @@ def parse_args():
     parser.add_argument('--color', type=str, default=None)
     parser.add_argument('--font_family', type=str, default='serif',
                         help='font family (sans-serif or serif)')
-    parser.add_argument('--font_scale', type=int, default=1.0,
+    parser.add_argument('--font_scale', type=float, default=1.0,
                         help='adjust the scale of the fonts')
-    parser.add_argument('--bg_line_width', type=int, default=0.25,
+    parser.add_argument('--bg_line_width', type=float, default=0.25,
                         help='adjust the scale of the line widths')
-    parser.add_argument('--line_width', type=int, default=0.75,
+    parser.add_argument('--line_width', type=float, default=0.75,
                         help='adjust the scale of the line widths')
     parser.add_argument('--fig_size', nargs='+', type=float, default=[6, 4],
                         help='size of the plot')
@@ -165,9 +165,9 @@ def parse_args():
 
     # Set title, labels and ticks
     parser.add_argument('--title', type=str,
-                        default='Accuracy for Different Methods',
+                        default='Accuracy vs FLOPs for Ours vs Previous SotA',
                         help='title of the plot')
-    parser.add_argument('--x_label', type=str, default='Data Augmentation',
+    parser.add_argument('--x_label', type=str, default='FLOPs (10^9)',
                         help='x label of the plot')
     parser.add_argument('--y_label', type=str, default='Accuracy (%)',
                         help='y label of the plot')
@@ -182,7 +182,7 @@ def parse_args():
                         help='rotation of y-axis lables')
 
     # Change location of legend
-    parser.add_argument('--loc_legend', type=str, default='upper right',
+    parser.add_argument('--loc_legend', type=str, default='lower right',
                         help='location of legend options are upper, lower, left right, center')
 
     args= parser.parse_args()

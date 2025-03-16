@@ -290,10 +290,11 @@ SERIALS_EXPLANATIONS = [
     'hr_tgda_pt_200',
 
     # cost metrics (time, vram/memory, flops, params)
-    'lr_rn18like_train_cost',
-    'lr_rn34like_train_cost',
-    'lr_rn50like_train_cost',
-    'lr_rn101like_train_cost',
+    'lr_rn18like',
+    'lr_rn34like',
+    'lr_rn50like',
+    'lr_rn101like',
+
     'lr_inference_cost_gpu',
     'lr_inference_cost_cpu',    
 
@@ -371,10 +372,13 @@ SETTINGS_DIC = {
     'hr_tgda_pt_200': 'TGDA',
 
     # cost metrics (time, vram/memory, flops, params)
-    'lr_rn18like_cost': 'TGDA',
-    'lr_rn34like_cost': 'TGDA',
-    'lr_rn50like_cost': 'TGDA',
-    'lr_rn101like_cost': 'TGDA',
+    'lr_rn18like': 'TGDA',
+    'lr_rn34like': 'TGDA',
+    'lr_rn50like': 'TGDA',
+    'lr_rn101like': 'TGDA',
+
+    'lr_inference_cost_gpu': 'TGDA',
+    'lr_inference_cost_cpu': 'TGDA',
 
     # low-resolution with no pt
     'lr_rn18like': 'TGDA',

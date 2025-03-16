@@ -7,6 +7,24 @@ from utils import preprocess_df, sort_df, group_by_family, \
     DATASETS_DIC, METHODS_DIC
 
 
+def update_prev_flops_params(df):
+    for rn in ['18', '34', '50', '101']:
+        # Find the target values from the matching row
+        match_row = df[
+            (df['setting'] == f'lr_rn{rn}like') &
+            (df['method'] == f'resnet{rn}_resnet101_lr_rn{rn}like')
+        ]
+
+        if not match_row.empty:
+            flops = match_row['flops'].values[0]
+            no_params = match_row['no_params_trainable'].values[0]
+            
+            # Update the corresponding rows
+            df.loc[df['setting'] == f'prev_is128_rn{rn}', ['flops', 'no_params_trainable']] = [flops, no_params]
+
+    return df
+
+
 def summarize_test_cost(args, host='server-3090', keep_serials=[45],):
     df = pd.read_csv(args.input_file_inference_cost)
 
@@ -114,7 +132,8 @@ def summarize_train_cost(args, keep_serials=[41, 42, 43, 44]):
 
 
     # keep relevant columns
-    cols_keep = ['serial', 'method', 'time_train', 'tp_train', 'vram_train']
+    # cols_keep = ['serial', 'method', 'time_train', 'tp_train', 'vram_train']
+    cols_keep = ['method', 'time_train', 'tp_train', 'vram_train']
     df = df[cols_keep]
 
 
@@ -141,7 +160,7 @@ def agg_train_flops(df, ds='cub', modify_serials=[]):
     return df
 
 
-def summarize_train_flops(args, keep_serials=[41, 42, 43, 44]):
+def summarize_train_flops(args, keep_serials=[24, 51, 52, 53, 54]):
     df = pd.read_csv(args.input_file_acc)
 
     df = preprocess_df(
@@ -288,15 +307,20 @@ def summarize_acc_cost(args):
 
     df_train_cost = summarize_train_cost(args)
 
-    df_test_cost = summarize_test_cost(args, args.host)
+    # df_test_cost = summarize_test_cost(args, args.host)
 
 
     # combine acc, train and test cost and sort based on method
     # outer if want to keep even if not all match
     df = pd.merge(df_acc, df_parameters, how='left', on=['serial', 'method'])
     df = pd.merge(df, df_train_flops, how='left', on=['serial', 'method'])
-    df = pd.merge(df, df_train_cost, how='left', on=['serial', 'method'])
+    # df = pd.merge(df, df_train_cost, how='left', on=['serial', 'method'])
+    df = pd.merge(df, df_train_cost, how='left', on=['method'])
     # df = pd.merge(df, df_test_cost, how='left', on=['serial', 'method'])
+    # df = pd.merge(df, df_test_cost, how='left', on=['method'])
+
+    df = update_prev_flops_params(df)
+
     df = sort_df(df, method_only=True)
 
 
@@ -334,7 +358,7 @@ def parse_args():
                         default=[0, 1, 2, 3, 4, 5, 6, 15,
                                  20, 21, 22, 23,
                                  24, 25, 26, 27, 28, 29,
-                                 31, 32, 41, 42, 43, 44, 45, 46,
+                                 31, 32, # 41, 42, 43, 44, 45, 46,
                                  51, 52, 53, 54,
                                  61])
     parser.add_argument('--keep_settings', nargs='+', type=str, default=None)
