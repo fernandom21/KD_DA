@@ -147,6 +147,7 @@ done
 # python tably.py results/tables/ours_sota_is448_rn18_rn34_rn50.csv
 # python tably.py results/tables/ours_is128_rn18.csv
 # python tably.py results/tables/ours_is128_rn34_rn50_rn101.csv
+# python tably.py results/tables/ours_acc_vs_cost_128.csv --no-escape
 
 
 

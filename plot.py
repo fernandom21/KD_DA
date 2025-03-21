@@ -48,6 +48,23 @@ def make_plot(args, df):
     else:
         raise NotImplementedError
 
+    # if args.add_text_methods:
+    #     for i, row in df.iterrows():
+
+    #         method = row['Method']
+    #         if args.add_text_ours_only and (('ILA' not in method) and ('DAMAS' not in method)):
+    #             continue
+
+    #         image_size = row['Setting']
+
+    #         match = re.search(r'\d+', image_size)  # Finds the first sequence of digits
+    #         if match:
+    #             image_size = match.group()
+
+    #         leg = f"{method} ({image_size})"
+    #         ax.text(row[args.x_var_name], row[args.y_var_name], leg,
+    #                 color='black', ha='center', va='bottom', fontsize=args.font_size)
+
     if args.despine_top_right:
     # Remove top, right border
         sns.despine(top=False, right=True, left=False, bottom=False)
