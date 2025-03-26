@@ -143,6 +143,7 @@ def parse_args():
     parser.add_argument('--size_var_name', type=str, default=None,)
 
     parser.add_argument('--add_text_methods', action='store_true')
+    parser.add_argument('--font_size', type=int, default=12)
 
     # style related
     parser.add_argument('--context', type=str, default='notebook',
