@@ -45,6 +45,8 @@ def make_plot(args, df):
         ax = sns.scatterplot(x=args.x_var_name, y=args.y_var_name, hue=args.hue_var_name,
                              style=args.style_var_name, size=args.size_var_name,
                              sizes=tuple(args.sizes), legend='brief', data=df)
+    elif args.type_plot == 'reg':
+        ax = sns.regplot(x=args.x_var_name, y=args.y_var_name, data=df)
     else:
         raise NotImplementedError
 
@@ -52,8 +54,6 @@ def make_plot(args, df):
     #     for i, row in df.iterrows():
 
     #         method = row['Method']
-    #         if args.add_text_ours_only and (('ILA' not in method) and ('DAMAS' not in method)):
-    #             continue
 
     #         image_size = row['Setting']
 
@@ -128,7 +128,8 @@ def parse_args():
                         help='Print stats on word level if use this command')
 
     # Make a plot
-    parser.add_argument('--type_plot', choices=['bar', 'line', 'box', 'violin', 'scatter'],
+    parser.add_argument('--type_plot',
+                        choices=['bar', 'line', 'box', 'violin', 'scatter', 'reg'],
                         default='line', help='the type of plot (line, bar)')
 
     parser.add_argument('--x_var_name', type=str, default='flops',
@@ -140,6 +141,8 @@ def parse_args():
     parser.add_argument('--style_var_name', type=str, default=None,
                         help='legend of this bar plot')
     parser.add_argument('--size_var_name', type=str, default=None,)
+
+    parser.add_argument('--add_text_methods', action='store_true')
 
     # style related
     parser.add_argument('--context', type=str, default='notebook',
