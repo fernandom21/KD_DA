@@ -1,0 +1,13 @@
+Method,Backbone,Accuracy,(%),
+,,AIR,CAR,CUB
+CAL,ResNet101,94.2,95.5,90.6
+Baseline,DeiT-Tiny,84.7,87.2,82.1
+DCAL,DeiT-Tiny,87.4,89.4,84.6
+Baseline,DeiT-Small,88.1,90.7,85.8
+DCAL,DeiT-Small,90,92.3,87.6
+Baseline,DeiT-Base,90.3,92.9,88
+DCAL,DeiT-Base,92.6,93.8,88.8
+Baseline,ViT-Base,90,92.5,90.8
+DCAL,ViT-Base,91.5,93.4,91.4
+Baseline,R50-ViT-Base,92.4,94,91.3
+DCAL,R50-ViT-Base,93.3,95.3,92

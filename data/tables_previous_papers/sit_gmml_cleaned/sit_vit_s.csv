@@ -1,0 +1,6 @@
+Method,Aircraft,Cars,CUB
+Random init.,31.1,27.4,25.3
+MoCo-v3,62.5,84,53.1
+Dino,49.3,73,43.6
+MAE,69,91,59.4
+SiT,77.8,92.1,71.2

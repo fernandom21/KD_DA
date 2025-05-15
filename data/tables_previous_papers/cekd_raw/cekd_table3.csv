@@ -1,0 +1,22 @@
+Method,Backbone,Accuracy,,
+,,CUB,Cars,Aircraft
+DeepLAC [29],VGG,80.3,-,-
+Part-RCNN [30],VGG,81.6,-,-
+RA-CNN [31],VGG,85.3,92.5,88.1
+MA-CNN [32],VGG,86.5,92.8,89.9
+MAMC [33],Res-50,86.2,92.8,-
+NTS [34],Res-50,87.5,93.3,91.4
+API-Net [35],Res-50,87.7,94.8,93
+Cross-X [36],Res-50,87.7,94.5,92.6
+DCL [37],Res-50,87.8,94.5,93
+DTB-Net [38],Res-50,87.5,94.1,91.2
+CIN [39],Res-50,87.5,94.1,92.6
+LIO [40],Res-50,88,94.5,92.7
+MAMC [33],Res-101,86.5,93,-
+DTB-Net [38],Res-101,88.1,94.5,91.6
+CIN [39],Res-101,88.1,94.5,92.8
+API-Net [35],Res-101,88.6,94.9,93.4
+Snapmix ,Res-50,87.75,94.3,92.8
+Snapmix + CEKD,Res-50,88.41,95.65,93.48
+Snapmix,Res-101,88.45,94.44,93.74
+Snapmix + CEKD,Res-101,89.59,95.96,94.56

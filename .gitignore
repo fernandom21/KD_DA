@@ -19,6 +19,9 @@
 **/flagged/
 **/wandb/
 **/results/*
+**/results_bmvc25/*
+**/results_cvpr25/*
+**/results_all_cvpr25/*
 **/results_all/*
 # exception
 # **/data/*/*
