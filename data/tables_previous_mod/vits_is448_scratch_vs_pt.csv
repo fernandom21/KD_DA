@@ -1,7 +1,10 @@
 model_name,aircraft,cars,cub
 DeiT-T (IN1k PT),84.7,87.2,82.1
-DeiT-T (IDMM),48.6,77.8,50.9
+DeiT-S (IN1k PT),88.1,90.7,85.8
 DeiT-B (IN1k PT),90.3,92.9,88
+ViT-B (IN1k PT),90,92.5,90.8
+R50-ViT-B (IN21k PT),92.4,94,91.3
+DeiT-T (IDMM),48.6,77.8,50.9
 DeiT-B (IDMM),46.6,70.7,54.3
 PVTv2-B0 (IDMM),83.3,92,77.6
 PVTv2-B3 (IDMM),91.8,94.3,82.8

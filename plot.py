@@ -7,21 +7,6 @@ import matplotlib.pyplot as plt
 from utils import filter_df, rename_vars, drop_na
 
 
-    # # parser.add_argument('--keep_lr', nargs='+', type=float, default=None)
-    # # parser.add_argument('--keep_epochs', nargs='+', type=int, default=None)
-    # # parser.add_argument('--filter_lr', nargs='+', type=float, default=None)
-    # # parser.add_argument('--filter_epochs', nargs='+', type=int, default=None)
-    # # parser.add_argument('--keep_epochs', nargs='+', type=int, default=None)
-    # # parser.add_argument('--keep_lr', nargs='+', type=float, default=None)
-
-    # parser.add_argument('--square_resize_random_crop', action='store_false')
-    # parser.add_argument('--pretrained', action='store_true')
-    # parser.add_argument('--cont_loss', action='store_true')
-
-        # getattr(args, 'keep_lr', None),
-        # # getattr(args, 'keep_epochs', None),
-
-
 def make_plot(args, df):
     # Seaborn Style Settings
     sns.set_theme(
@@ -44,26 +29,20 @@ def make_plot(args, df):
     elif args.type_plot == 'scatter':
         ax = sns.scatterplot(x=args.x_var_name, y=args.y_var_name, hue=args.hue_var_name,
                              style=args.style_var_name, size=args.size_var_name,
-                             sizes=tuple(args.sizes), legend='brief', data=df)
+                             sizes=tuple(args.sizes), legend='auto', data=df)
     elif args.type_plot == 'reg':
         ax = sns.regplot(x=args.x_var_name, y=args.y_var_name, data=df)
     else:
         raise NotImplementedError
 
-    # if args.add_text_methods:
-    #     for i, row in df.iterrows():
+    if args.add_text_methods:
+        for i, row in df.iterrows():
 
-    #         method = row['Method']
+            method = row['Method']
 
-    #         image_size = row['Setting']
-
-    #         match = re.search(r'\d+', image_size)  # Finds the first sequence of digits
-    #         if match:
-    #             image_size = match.group()
-
-    #         leg = f"{method} ({image_size})"
-    #         ax.text(row[args.x_var_name], row[args.y_var_name], leg,
-    #                 color='black', ha='center', va='bottom', fontsize=args.font_size)
+            leg = f"{method}"
+            ax.text(row[args.x_var_name], row[args.y_var_name], leg,
+                    color='black', ha='center', va='bottom', fontsize=args.font_size)
 
     if args.despine_top_right:
     # Remove top, right border
@@ -107,6 +86,7 @@ def parse_args():
     parser.add_argument('--input_file', type=str,
                         default=os.path.join('results_all', 'cost', 'cost.csv'),
                         help='filename for input .csv file')
+    parser.add_argument('--skip_processing', action='store_true')
 
     parser.add_argument('--keep_datasets', nargs='+', type=str, default=None)
     parser.add_argument('--keep_methods', nargs='+', type=str, default=None)
@@ -136,7 +116,7 @@ def parse_args():
                         help='name of the variable for x')
     parser.add_argument('--y_var_name', type=str, default='acc',
                         help='name of the variable for y')
-    parser.add_argument('--hue_var_name', type=str, default='setting',
+    parser.add_argument('--hue_var_name', type=str, default=None,
                         help='legend of this bar plot')
     parser.add_argument('--style_var_name', type=str, default=None,
                         help='legend of this bar plot')
@@ -212,6 +192,9 @@ def parse_args():
 
 def read_filter_clean(args):
     df = pd.read_csv(args.input_file)
+
+    if hasattr(args, 'skip_processing') and args.skip_processing:
+        return df
 
     df = filter_df(
         df,

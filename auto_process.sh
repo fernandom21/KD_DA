@@ -140,69 +140,29 @@ done
 
 
 
+# compute params and flops separately for certain models
+# requires installing torchprofile from source: 
+# https://github.com/zhijian-liu/torchprofile
+# for t2t_vit_7. These numbers do not count einsum which may be a decent chunk
+# FLOPs and Number of Parameters:  6.1256 4.2552
+python compute_params_flops.py --cfg ../../projects/FGIR-KD/configs/cub_weakaugs.yaml --image_size 448 --model_name deit_tiny_patch16_224
+python compute_params_flops.py --cfg ../../projects/FGIR-KD/configs/cub_weakaugs.yaml --image_size 448 --model_name deit_small_patch16_224
+python compute_params_flops.py --cfg ../../projects/FGIR-KD/configs/cub_weakaugs.yaml --image_size 448 --model_name deit_base_patch16_224
+python compute_params_flops.py --cfg ../../projects/FGIR-KD/configs/cub_weakaugs.yaml --image_size 448 --model_name vit_base_patch16_224
+python compute_params_flops.py --cfg ../../projects/FGIR-KD/configs/cub_weakaugs.yaml --image_size 448 --model_name vit_base_r50_s16_224
+python compute_params_flops.py --cfg ../../projects/FGIR-KD/configs/cub_weakaugs.yaml --image_size 448 --model_name pvt_v2_b0
+python compute_params_flops.py --cfg ../../projects/FGIR-KD/configs/cub_weakaugs.yaml --image_size 448 --model_name pvt_v2_b3
+python compute_params_flops.py --cfg ../../projects/FGIR-KD/configs/cub_weakaugs.yaml --image_size 448 --model_name vitfs_tiny_patch16_gap_reg4_dinov2_bn
+
 # copy latex table with current format (--no-escape for $ and other special characters)
-# python tably.py results/tables/ours_vits_is224.csv 
-# python tably.py results/tables/ours_vits_is448.csv 
-# python tably.py results/tables/ours_sota_is448_rn18_rn34.csv
-# python tably.py results/tables/ours_sota_is448_rn18_rn34_rn50.csv
-# python tably.py results/tables/ours_is128_rn18.csv
-# python tably.py results/tables/ours_is128_rn34_rn50_rn101.csv
-# python tably.py results/tables/ours_acc_vs_cost_128.csv --no-escape
+python tably.py results_bmvc25/tables/ours_vits_is448.csv
+python tably.py results_bmvc25/tables/ours_vits_is448.csv
+python tably.py results_bmvc25/tables/ours_vits_is448.csv
+python tably.py results_bmvc25/tables/ours_vits_is448.csv
+python tably.py results_bmvc25/tables/ours_vits_is448.csv
+python tably.py results_bmvc25/tables/ours_vits_is448.csv
+python tably.py results_bmvc25/tables/ours_vits_is448.csv
 
 
-
-
-
-
-
-
-
-
-# python preprocess_acc.py  --input_file data/test12.csv  --keep_serials 1 --keep_epochs 800 --keep_lr 0.0005 --output_file acc1.csv --keep_datasets aircraft --cont_loss
-
-# python preprocess_acc.py  --input_file data/DA_all.csv --keep_epochs 800 --keep_lr 0.0005 --keep_methods resnet18_resnet101 --output_file halo2.csv
-
-# python plot.py  --input_file data/DA_all.csv --keep_epochs 800 --keep_lr 0.0005 --keep_methods resnet18_resnet101_tgda --x_var_name dataset_name --output_file testplot --type_plot line
-
-# python plot.py  --input_file D:/my_main/KD_DA/results_all/acc/TGDA_Resnet18-resnet101.csv --x_var_name serial --hue_var_name dataset_name --output_file testplot --type_plot bar
-
-
-# ---------------------------------------------
-# python preprocess_acc.py --input_file data/DA_all.csv --keep_epochs 800 --keep_lr 0.0005 --keep_methods resnet18_resnet101_tgda --output_file tgda_resnet18-resnet101.csv
-
-# python preprocess_acc.py --input_file data/DA_all.csv --keep_epochs 800 --keep_lr 0.0005 --keep_methods vit_t16_resnet101_tgda --output_file tgda_vit_t16-resnet101.csv
-
-# python preprocess_acc.py --input_file data/DA_all.csv --keep_epochs 800 --keep_lr 0.0005 --keep_methods vit_t16_vit_b16_tgda --output_file tgda_vit_t16-vit_b16.csv
-
-# python plot.py  --input_file results_all/acc/tgda_resnet18-resnet101.csv --x_var_name serial --hue_var_name dataset_name --output_file testplot --type_plot bar --x_rotation 45 --title 'Different Data Augmentation on Different Dataset Using TGDA (ResNet18-ResNet101)' --fig_size 9 5
-
-
-# python preprocess_acc.py --input_file data/DA_all.csv --keep_epochs 800 --keep_lr 0.0005 --keep_methods resnet18_resnet101_tgda --output_file tgda_resnet18-resnet101.csv
-# python preprocess_acc.py --input_file data/DA_all.csv --keep_epochs 800 --keep_lr 0.0005 --keep_methods vit_t16_resnet101_tgda --output_file tgda_vit_t16-resnet101.csv
-# python preprocess_acc.py --input_file data/DA_all.csv --keep_epochs 800 --keep_lr 0.0005 --keep_methods vit_t16_vit_b16_tgda --output_file tgda_vit_t16-vit_b16.csv
-
-# python preprocess_acc.py --input_file data/DA_all.csv --keep_epochs 800 --keep_lr 0.0005 --keep_methods resnet18_resnet101_cal --output_file cal_resnet18-resnet101.csv
-# python preprocess_acc.py --input_file data/DA_all.csv --keep_epochs 800 --keep_lr 0.0005 --keep_methods vit_t16_resnet101_cal --output_file cal_vit_t16-resnet101.csv
-# python preprocess_acc.py --input_file data/DA_all.csv --keep_epochs 800 --keep_lr 0.0005 --keep_methods vit_t16_vit_b16_cal --output_file cal_vit_t16-vit_b16.csv
-
-# python preprocess_acc.py --input_file data/DA_all.csv --keep_epochs 800 --keep_lr 0.0005 --keep_methods resnet18_resnet101_kd --output_file kd_resnet18-resnet101.csv
-# python preprocess_acc.py --input_file data/DA_all.csv --keep_epochs 800 --keep_lr 0.0005 --keep_methods vit_t16_resnet101_kd --output_file kd_vit_t16-resnet101.csv
-# python preprocess_acc.py --input_file data/DA_all.csv --keep_epochs 800 --keep_lr 0.0005 --keep_methods vit_t16_vit_b16_kd --output_file kd_vit_t16-vit_b16.csv
-
-# python preprocess_acc.py --input_file data/DA_all.csv --keep_epochs 800 --keep_lr 0.0005 --keep_methods resnet18_ce --output_file ce_resnet18.csv
-# python preprocess_acc.py --input_file data/DA_all.csv --keep_epochs 800 --keep_lr 0.0005 --keep_methods vit_t16_ce --output_file ce_vit_t16.csv
-
-# python plot.py  --input_file results_all/acc/tgda_resnet18-resnet101.csv --x_var_name serial --hue_var_name dataset_name --output_file "TGDA (ResNet18-ResNet101)" --type_plot bar --x_rotation 45 --fig_size 9 5 --title "Different Data Augmentation on Different Dataset Using TGDA (ResNet18-ResNet101)"
-# python plot.py  --input_file results_all/acc/tgda_vit_t16-resnet101.csv --x_var_name serial --hue_var_name dataset_name --output_file "TGDA (ViT_t16-ResNet101)" --type_plot bar --x_rotation 45 --fig_size 9 5 --title "Different Data Augmentation on Different Dataset Using TGDA (ViT_t16-ResNet101)"
-# python plot.py  --input_file results_all/acc/tgda_vit_t16-vit_b16.csv --x_var_name serial --hue_var_name dataset_name --output_file "TGDA (ViT_t16-ViT_b16)" --type_plot bar --x_rotation 45 --fig_size 9 5 --title "Different Data Augmentation on Different Dataset Using TGDA (ViT_t16-ViT_b16)"
-
-# python plot.py  --input_file results_all/acc/cal_resnet18-resnet101.csv --x_var_name serial --hue_var_name dataset_name --output_file "CAL (ResNet18-ResNet101)" --type_plot bar --x_rotation 45 --fig_size 9 5 --title "Different Data Augmentation on Different Dataset Using CAL (ResNet18-ResNet101)"
-# python plot.py  --input_file results_all/acc/cal_vit_t16-resnet101.csv --x_var_name serial --hue_var_name dataset_name --output_file "CAL (ViT_t16-ResNet101)" --type_plot bar --x_rotation 45 --fig_size 9 5 --title "Different Data Augmentation on Different Dataset Using CAL (ViT_t16-ResNet101)"
-# python plot.py  --input_file results_all/acc/cal_vit_t16-vit_b16.csv --x_var_name serial --hue_var_name dataset_name --output_file "CAL (ViT_t16-ViT_b16)" --type_plot bar --x_rotation 45 --fig_size 9 5 --title "Different Data Augmentation on Different Dataset Using CAL (ViT_t16-ViT_b16)"
-
-# python plot.py  --input_file results_all/acc/kd_resnet18-resnet101.csv --x_var_name serial --hue_var_name dataset_name --output_file "KD (ResNet18-ResNet101)" --type_plot bar --x_rotation 45 --fig_size 9 5 --title "Different Data Augmentation on Different Dataset Using KD (ResNet18-ResNet101)"
-# python plot.py  --input_file results_all/acc/kd_vit_t16-resnet101.csv --x_var_name serial --hue_var_name dataset_name --output_file "KD (ViT_t16-ResNet101)" --type_plot bar --x_rotation 45 --fig_size 9 5 --title "Different Data Augmentation on Different Dataset Using KD (ViT_t16-ResNet101)"
-# python plot.py  --input_file results_all/acc/kd_vit_t16-vit_b16.csv --x_var_name serial --hue_var_name dataset_name --output_file "KD (ViT_t16-ViT_b16)" --type_plot bar --x_rotation 45 --fig_size 9 5 --title "Different Data Augmentation on Different Dataset Using KD (ViT_t16-ViT_b16)"
-
-# python plot.py  --input_file results_all/acc/ce_resnet18.csv --x_var_name serial --hue_var_name dataset_name --output_file "CE (ResNet18)" --type_plot bar --x_rotation 45 --fig_size 9 5 --title "Different Data Augmentation on Different Dataset Using CE (ResNet18)"
-# python plot.py  --input_file results_all/acc/ce_vit_t16.csv --x_var_name serial --hue_var_name dataset_name --output_file "CE (ViT_t16)" --type_plot bar --x_rotation 45 --fig_size 9 5 --title "Different Data Augmentation on Different Dataset Using CE (ViT_t16)"
+python plot.py --input_file results_bmvc25/tables/ours_vits_is448_avg.csv --y_var_name "Accuracy (%)" --x_var_name "Train Images" --size_var_name "Parameters (M)" --type_plot scatter --output_file vit_acc_vs_images_vs_params --title "Accuracy vs Train Images with Parameters as Marker Size" --log_scale_x --sizes 40 400 --hue_var_name Method --x_label "Number of Train Images (Log-scale)" --loc_legend "lower left" --fig_size 6 4
+python plot.py --input_file results_bmvc25/tables/ours_acc_vs_cost_is128.csv --y_var_name "Accuracy (%)" --x_var_name "Parameters (M)" --size_var_name "FLOPs (G)" --type_plot scatter --output_file acc_vs_params_vs_flops --title "Accuracy vs Parameters with FLOPs as Marker Size" --sizes 40 400 --hue_var_name Strategy --x_label "Parameters (M)" --loc_legend "lower left" --fig_size 6 4 --add_text_methods --font_size 11
