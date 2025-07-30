@@ -1,0 +1,67 @@
+device_family,device_name,model_name,image_size,avg_latency_ms,peak_memory_mb
+Pixel,Google Pixel 3,vitfs_tiny_patch16_gap_reg4_dinov2,224,63.54,77.74
+,,vitfs_tiny_patch16_gap_reg4_dinov2_bn,,60.86,74.31
+,,vitfs_tiny_patch16_gap_reg4_dinov2,448,337.39,91.96
+,,vitfs_tiny_patch16_gap_reg4_dinov2_bn,,298.12,103.07
+,,vitfs_tiny_patch16_gap_reg4_dinov2,672,1026.33,140.02
+,,vitfs_tiny_patch16_gap_reg4_dinov2_bn,,1450.79,137.75
+,Google Pixel 5,vitfs_tiny_patch16_gap_reg4_dinov2,224,66.97,179.46
+,,vitfs_tiny_patch16_gap_reg4_dinov2_bn,,67.81,110.17
+,,vitfs_tiny_patch16_gap_reg4_dinov2,448,337.08,128.73
+,,vitfs_tiny_patch16_gap_reg4_dinov2_bn,,312.01,127.97
+,,vitfs_tiny_patch16_gap_reg4_dinov2,672,968.49,175.41
+,,vitfs_tiny_patch16_gap_reg4_dinov2_bn,,928.49,174.74
+,Google Pixel 7,vitfs_tiny_patch16_gap_reg4_dinov2,224,33.61,136.55
+,,vitfs_tiny_patch16_gap_reg4_dinov2_bn,,31.79,136.62
+,,vitfs_tiny_patch16_gap_reg4_dinov2,448,152.48,153.8
+,,vitfs_tiny_patch16_gap_reg4_dinov2_bn,,139.91,147.14
+,,vitfs_tiny_patch16_gap_reg4_dinov2,672,421.17,166.98
+,,vitfs_tiny_patch16_gap_reg4_dinov2_bn,,422.27,209.27
+,Google Pixel 9,vitfs_tiny_patch16_gap_reg4_dinov2,224,37.28,136.56
+,,vitfs_tiny_patch16_gap_reg4_dinov2_bn,,32.13,124.36
+,,vitfs_tiny_patch16_gap_reg4_dinov2,448,147.22,147.89
+,,vitfs_tiny_patch16_gap_reg4_dinov2_bn,,155.35,156.08
+,,vitfs_tiny_patch16_gap_reg4_dinov2,672,496.11,175.63
+,,vitfs_tiny_patch16_gap_reg4_dinov2_bn,,814.79,236
+CPU,Intel(R) Xeon(R) CPU @ 2.20GHz (2 cores),vitfs_tiny_patch16_gap_reg4_dinov2,224,76.18,16.91
+,,vitfs_tiny_patch16_gap_reg4_dinov2_bn,,81.62,0
+,,vitfs_tiny_patch16_gap_reg4_dinov2,448,587.79,23.43
+,,vitfs_tiny_patch16_gap_reg4_dinov2_bn,,436.42,0
+,,vitfs_tiny_patch16_gap_reg4_dinov2,672,2072.95,80.44
+,,vitfs_tiny_patch16_gap_reg4_dinov2_bn,,2038.51,5.55
+Samsung,Samsung Galaxy A53 5G,vitfs_tiny_patch16_gap_reg4_dinov2,224,219.17,141.71
+,,vitfs_tiny_patch16_gap_reg4_dinov2_bn,,82.87,114.09
+,,vitfs_tiny_patch16_gap_reg4_dinov2,448,508.16,172.22
+,,vitfs_tiny_patch16_gap_reg4_dinov2_bn,,421.1,131.11
+,,vitfs_tiny_patch16_gap_reg4_dinov2,672,1274.27,199.02
+,,vitfs_tiny_patch16_gap_reg4_dinov2_bn,,1265.38,165.63
+,Samsung Galaxy S21,vitfs_tiny_patch16_gap_reg4_dinov2,224,36.42,118.32
+,,vitfs_tiny_patch16_gap_reg4_dinov2_bn,,35.55,124.13
+,,vitfs_tiny_patch16_gap_reg4_dinov2,448,189.26,144.11
+,,vitfs_tiny_patch16_gap_reg4_dinov2_bn,,187.72,152.27
+,,vitfs_tiny_patch16_gap_reg4_dinov2,672,596.39,207.55
+,,vitfs_tiny_patch16_gap_reg4_dinov2_bn,,589.38,205.47
+,Samsung Galaxy S23,vitfs_tiny_patch16_gap_reg4_dinov2,224,1.7,181.4
+,,vitfs_tiny_patch16_gap_reg4_dinov2_bn,,3.13,186.09
+,,vitfs_tiny_patch16_gap_reg4_dinov2,448,34.56,714.27
+,,vitfs_tiny_patch16_gap_reg4_dinov2_bn,,33.89,694.96
+,,vitfs_tiny_patch16_gap_reg4_dinov2,672,29.58,789.83
+,,vitfs_tiny_patch16_gap_reg4_dinov2_bn,,46.71,920.88
+,Samsung Galaxy S25,vitfs_tiny_patch16_gap_reg4_dinov2,224,0.94,168.3
+,,vitfs_tiny_patch16_gap_reg4_dinov2_bn,,1.62,198.05
+,,vitfs_tiny_patch16_gap_reg4_dinov2,448,25.38,912.48
+,,vitfs_tiny_patch16_gap_reg4_dinov2_bn,,25.16,883.97
+,,vitfs_tiny_patch16_gap_reg4_dinov2,672,15.16,418.25
+,,vitfs_tiny_patch16_gap_reg4_dinov2_bn,,26.05,893.36
+Snapdragon,Snapdragon 8 Elite QRD,vitfs_tiny_patch16_gap_reg4_dinov2,224,1.14,250.09
+,,vitfs_tiny_patch16_gap_reg4_dinov2_bn,,1.96,250.4
+,,vitfs_tiny_patch16_gap_reg4_dinov2,448,27.31,915.86
+,,vitfs_tiny_patch16_gap_reg4_dinov2_bn,,27.23,963.54
+,,vitfs_tiny_patch16_gap_reg4_dinov2,672,15.12,424.65
+,,vitfs_tiny_patch16_gap_reg4_dinov2_bn,,26.34,929.92
+,Snapdragon X Elite CRD,vitfs_tiny_patch16_gap_reg4_dinov2,224,2.58,33.27
+,,vitfs_tiny_patch16_gap_reg4_dinov2_bn,,5.06,34
+,,vitfs_tiny_patch16_gap_reg4_dinov2,448,29.09,37.9
+,,vitfs_tiny_patch16_gap_reg4_dinov2_bn,,29.13,37.14
+,,vitfs_tiny_patch16_gap_reg4_dinov2,672,42.33,39.71
+,,vitfs_tiny_patch16_gap_reg4_dinov2_bn,,59.56,39.88
