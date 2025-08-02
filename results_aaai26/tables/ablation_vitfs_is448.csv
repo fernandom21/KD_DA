@@ -1,5 +1,5 @@
-ConvStem+GAP+Sin2D,LayerScale+Reg,BN,Aircraft,Cars,CUB
-X,X,X,61.0,60.4,58.7
-O,X,X,82.9,91.2,82.7
-O,O,X,89.3,93.1,83.7
-O,O,O,92.2,94.5,86.3
+﻿ConvStem+GAP+Sin2D,LayerScale+Reg,BatchNorm,Aircraft,Cars,CUB
+-,-,-,61.0,60.4,58.7
+ü,-,-,85.3,91.2,82.7
+ü,ü,-,89.3,93.1,83.7
+ü,ü,ü,92.2,94.5,86.3

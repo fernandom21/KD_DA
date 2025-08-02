@@ -1,0 +1,6 @@
+Method,Aircraft,Cars,CUB
+CE only,83.50,88.32,70.31
+CAL only,86.05,89.34,65.10
+KD only w/ CAL teacher,85.60,90.80,75.84
+KD only w/ FT teacher,84.13,89.34,74.78
+TGDA,89.02,92.74,80.45

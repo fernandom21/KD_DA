@@ -1,0 +1,5 @@
+﻿ConvStem+GAP+Sin2D,LayerScale+Reg,BatchNorm,Aircraft,Cars,CUB
+-,-,-,55.1,51.3,49.5
+ü,-,-,84.0,91.1,77.4
+ü,ü,-,86.4,92.7,77.9
+ü,ü,ü,90.5,93.9,81.2

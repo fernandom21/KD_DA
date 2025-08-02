@@ -1,0 +1,3 @@
+Setting,Params (M),FLOPS (G),Acc (%)
+FT,42.9,31.3,84.7
+CAL,55.7,31.3,89.2
